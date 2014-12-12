@@ -1,0 +1,36 @@
+{
+  "name": "goodposture",
+  "version": "0.0.1",
+  "homepage": "https://github.com/BJK/goodposture",
+  "authors": [
+    "BJK <bernie.kravitz@gmail.com>"
+  ],
+  "description": "Form widgets with 2 way bindings for backbone + marionette + handlebars. Built to test.",
+  "main": "goodposture.js",
+  "keywords": [
+    "form",
+    "widgets",
+    "backbone",
+    "handlebars",
+    "marionette"
+  ],
+  "license": "GNU",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "backbone": "~1.1.2",
+    "marionette": "~2.2.2"
+  },
+  "devDependencies": {
+    "mocha": "~2.0.1",
+    "chai": "~1.10.0",
+    "handlebars": "~2.0.0",
+    "underscore": "~1.7.0"
+  }
+}
