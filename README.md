@@ -1,4 +1,4 @@
-goodposture
+backwax
 ===========
 
 [![Build Status](https://travis-ci.org/BJK/backwax.svg?branch=master)](https://travis-ci.org/BJK/backwax)
