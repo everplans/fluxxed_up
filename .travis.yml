@@ -4,3 +4,7 @@ node_js:
 install:
   - npm install
   - bower install
+cache:
+  directories:
+    - node_modules
+    - bower_components
