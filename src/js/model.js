@@ -1,4 +1,4 @@
-GoodPosture.Model = Backbone.Model.extend({
+Backwax.Model = Backbone.Model.extend({
   //TODO, override constructor so that defaults specified down chain get merged in
   defaults: { errors: [],
     hasErrors: false,

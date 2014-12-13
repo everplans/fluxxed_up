@@ -1,12 +1,12 @@
 {
-  "name": "goodposture",
+  "name": "backwax",
   "version": "0.0.1",
-  "homepage": "https://github.com/BJK/goodposture",
+  "homepage": "https://github.com/BJK/backwax",
   "authors": [
     "BJK <bernie.kravitz@gmail.com>"
   ],
   "description": "Form widgets with 2 way bindings for backbone + marionette + handlebars. Built to test.",
-  "main": "goodposture.js",
+  "main": "backwax.js",
   "keywords": [
     "form",
     "widgets",

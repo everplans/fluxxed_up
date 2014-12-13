@@ -43,7 +43,7 @@ gulp.task('package:src', function() {
   return gulp.src(appSrc)
 //  .pipe(changed('./dist/'))
   .pipe(sourcemaps.init())
-  .pipe(concat('goodposture.js'))
+  .pipe(concat('backwax.js'))
   .pipe(sourcemaps.write())
   .pipe(gulp.dest('./dist/'))
 });

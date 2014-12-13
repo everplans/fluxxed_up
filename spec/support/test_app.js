@@ -1,11 +1,11 @@
 window.TestApp = new Backbone.Marionette.Application();
 
 //find some way to not have global models...
-//TestApp.TestModel = GoodPosture.Model.extend({});
+//TestApp.TestModel = Backwax.Model.extend({});
 
-var model = new GoodPosture.Model()
+var model = new Backwax.Model()
 
-TestApp.FormView = GoodPosture.FormItemView.extend({
+TestApp.FormView = Backwax.FormItemView.extend({
   initialize: function() {
     var _this = this
     this.on('processForm', function() {
@@ -20,7 +20,7 @@ TestApp.FormView = GoodPosture.FormItemView.extend({
   template: 'testForm'
 });
 
-TestApp.SuccessView = GoodPosture.FormItemView.extend({
+TestApp.SuccessView = Backwax.FormItemView.extend({
   template: 'success'
 });
 

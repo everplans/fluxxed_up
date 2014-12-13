@@ -1,6 +1,0 @@
-window.GoodPosture = {}; //create namespace
-
-
-
-
-

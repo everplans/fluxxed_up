@@ -59,7 +59,7 @@ Backbone.Marionette.Renderer.render = function(template, data) {
   return HandlebarsTemplates[template](data);
 }
 
-GoodPosture.FormItemView = Backbone.Marionette.ItemView.extend({
+Backwax.FormItemView = Backbone.Marionette.ItemView.extend({
   events: {
     "change input": "onInputChange",
     "change textarea": "onInputChange"
