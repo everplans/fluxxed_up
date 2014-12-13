@@ -6,40 +6,20 @@
 var callbackQueue = $.Deferred();//new Backbone.Marionette.Callbacks();
 var next = callbackQueue;
 var testDispatcher = _.extend({}, _.clone(Backbone.Events)); 
-var renderCount = 0;
 
 function start() {
-  renderCount = 0;
   callbackQueue = $.Deferred();//new Backbone.Marionette.Callbacks();
   next = callbackQueue;
 }
 
 function finish(cb) {
-  if (!_.isUndefined(cb)) {
-    var renderWatcher = setInterval(function() {
-      if (renderCount < 1) {
-        clearInterval(renderWatcher);
-        queueAction(cb);
-      }
-    }, 20);
-    setTimeout(function() {
-      clearInterval(renderWatcher);
-    }, 1000);
-  }
+  if (!_.isUndefined(cb))
+    queueAction(cb);
   callbackQueue.resolve();
 }
 
 function queueAction(f) {
-  //callbackQueue.add(f);
   next = next.then(f);
-}
-
-function incrementRenderCount() {
-  renderCount += 1;
-}
-
-function decrementRenderCount() {
-  renderCount -= 1;
 }
 
 function findInputByLabel(label) {
@@ -90,11 +70,9 @@ function visit(url) {
 }
 
 function wrapActionInViewDeferred(action) {
-  incrementRenderCount();
   return function() {
     var _def = Backbone.Marionette.Deferred();
     testDispatcher.once('domUpdated', function(){
-      decrementRenderCount();
       _def.resolve();
     });
     action();
