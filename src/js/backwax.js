@@ -1,6 +1,0 @@
-window.Backwax = {}; //create namespace
-
-
-
-
-
