@@ -1,4 +1,4 @@
-import utils from '../../test/support/testUtils'
+import utils from '../../test/support/TestUtils'
 import fetcher from'../../src/lib/jsonFetcher'
 import AjaxAdaptorBase from '../../src/lib/AjaxAdaptorBase'
 
