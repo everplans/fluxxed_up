@@ -1,4 +1,4 @@
-backwax
+Fluxxed_up
 ===========
 
 [![Build Status](https://travis-ci.org/BJK/fluxxed_up.svg?branch=master)](https://travis-ci.org/BJK/fluxxed_up)
