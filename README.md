@@ -1,8 +1,8 @@
 backwax
 ===========
 
-[![Build Status](https://travis-ci.org/BJK/backwax.svg?branch=master)](https://travis-ci.org/BJK/backwax)
-[![Code Climate](https://codeclimate.com/github/BJK/backwax/badges/gpa.svg)](https://codeclimate.com/github/BJK/backwax)
+[![Build Status](https://travis-ci.org/BJK/fluxxed_up.svg?branch=master)](https://travis-ci.org/BJK/fluxxed_up)
+[![Code Climate](https://codeclimate.com/github/BJK/fluxxed_up/badges/gpa.svg)](https://codeclimate.com/github/BJK/fluxxed_up)
 
 React.js & Flux utility belt. Handles simple patterns around the uni-directional dataflow. It's of medium opinionation; you know write less boilerplate, and write the code specific to your domain. But it'll let you write as much by hand as you want.
 
