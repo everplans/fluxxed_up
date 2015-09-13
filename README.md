@@ -4,7 +4,7 @@ Fluxxed_up
 [![Build Status](https://travis-ci.org/BJK/fluxxed_up.svg?branch=master)](https://travis-ci.org/BJK/fluxxed_up)
 [![Code Climate](https://codeclimate.com/github/BJK/fluxxed_up/badges/gpa.svg)](https://codeclimate.com/github/BJK/fluxxed_up)
 
-React.js & Flux utility belt. Handles simple patterns around the uni-directional dataflow. It's of medium opinionation; you write less boilerplate, and write the code specific to your domain. But it'll let you write as much by hand as you want.
+Fluxxed_up is a React.js & Flux utility belt that handles simple patterns around the unidirectional dataflow. It's of medium opinionation; you write less boilerplate, and write the code specific to your domain. But it'll let you write as much by hand as you want.
 
 The basic idea is keep your components as stateless as possible, wrapping them in 'controller' components which handle the async dataflow. The big win is that your components are ultimately more testable, because they're deterministic and synchronous.
 
