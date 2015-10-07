@@ -3,7 +3,9 @@ import StorePrototype from '../../src/lib/StorePrototype'
 import Dispatcher from '../../src/lib/ep-dispatcher'
 import assign from 'object-assign'
 import KeyMirror from 'keymirror'
-
+//import * as FUHelpers from '../support/ComponentHelpers'
+import React from 'react/addons'
+var TestUtils = React.addons.TestUtils;
 
 var TestAction = assign(ActionPrototype, {
   Types: KeyMirror({
@@ -28,12 +30,108 @@ var TestAction = assign(ActionPrototype, {
 
 var TestStore = StorePrototype(TestAction.Types.GOT_THING)
 
-describe("Test Action", function() {
-  it("dispatches to test store", function(done) {
-    expect(TestAction.fetchThing).to.eventually(done).informRegisteredStore(TestStore)
+var TestComponent = React.createClass({
+  getInitialState: function() {
+    return {
+      value: 'initial value'
+    };
+  },
+  handleSubmit: function() {
+    var value = $(this.refs.value.getDOMNode()).val()
+    console.log("hi buddy" + value)
+    this.setState({value: value})
+  },
+  render: function() {
+    return (
+      <div><h1>Test Component</h1>
+        <div className='answer'>Form Value: {this.state.value}</div>
+        <input ref='value' defaultValue={this.state.value}/>
+        <a onClick={this.handleSubmit}>Submit</a>
+      </div>
+    )
+  }
+})
+
+var TestWrapper = React.createClass({
+  contextTypes: {
+    triggerComplete: React.PropTypes.func.isRequired,
+    finish: React.PropTypes.func
+  },
+  getInitialState: function() {
+    return { keyVal : Math.random()};
+  },
+  componentDidUpdate: function(prevProps, prevState) {
+    this.context.finish()
+  },
+  componentDidMount: function() {
+    window.doIt = this.triggerFinalRender
+  },
+  triggerFinalRender: function() {
+    this.setState({keyVal: Math.random()})
+  },
+  render() {
+    return <div key={this.state.keyval}>{this.props.children}</div>
+  }
+})
+
+describe("Fluxxed up test helpers", function() {
+  describe("Action helpers", function() {
+    it("dispatches to test store", function(done) {
+      expect(TestAction.fetchThing).to.eventually(done).informRegisteredStore(TestStore)
+    })
+
+    it("wrong action will not notify the store", function(done) {
+      expect(TestAction.fetchWithWrongDispatch).to.not.eventually(done).informRegisteredStore(TestStore)
+    })
   })
 
-  it("wrong action will not notify the store", function(done) {
-    expect(TestAction.fetchWithWrongDispatch).to.not.eventually(done).informRegisteredStore(TestStore)
+  describe("Component Helpers", function() {
+    var node, domNode, context
+
+
+
+    beforeEach(()=> {
+      var div = document.createElement('div');
+      node = React.render(<TestComponent/>, div)
+      domNode = $(node.getDOMNode())
+    })
+
+    afterEach(()=> {
+      React.unmountComponentAtNode(React.findDOMNode(node).parentNode);
+    })
+
+    it("renders", ()=> {
+      expect(domNode.find('h1').text()).to.equal('Test Component')
+    })
+
+    it("has a value in the text box", ()=> {
+      expect(domNode.find('input').val()).to.equal('initial value')
+    })
+
+    it("has a value in the page", ()=> {
+      expect(domNode.find('.answer').text()).to.match(/initial value$/)
+    })
+
+    it("updates the form", (done)=> {
+
+      var div = document.createElement('div');
+      var holder = {fire: function() {console.log('hi')}}
+      var otherDomNode
+      var childContext = {finish: ()=> {
+        expect(otherDomNode.find('.answer').text()).to.match(/new thing$/) 
+        done()
+      } }
+      React.withContext(childContext, ()=> {
+        otherDomNode = $(React.render(<TestWrapper><TestComponent/></TestWrapper>, div, ()=>{holder.fire()}).getDOMNode())
+      })
+
+      otherDomNode.find('input').val('new thing')
+
+      TestUtils.Simulate.click(otherDomNode.find('a').get(0))
+      window.doIt();
+
+      var button = otherDomNode.find('a')
+    })
   })
 })
+
