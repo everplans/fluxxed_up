@@ -5,6 +5,8 @@ import assign from 'object-assign'
 import KeyMirror from 'keymirror'
 //import * as FUHelpers from '../support/ComponentHelpers'
 import React from 'react/addons'
+import TestRig from '../../src/testUtils/TestRig.react'
+
 var TestUtils = React.addons.TestUtils;
 
 var TestAction = assign(ActionPrototype, {
@@ -13,7 +15,7 @@ var TestAction = assign(ActionPrototype, {
     NOTHING: null
   }),
   fetchThing: function() {
-    //actually fire API 
+    //actually fire API
     Dispatcher.dispatch({
       actionType: TestAction.Types.GOT_THING,
       data: {foo: 'bar'}
@@ -38,7 +40,6 @@ var TestComponent = React.createClass({
   },
   handleSubmit: function() {
     var value = $(this.refs.value.getDOMNode()).val()
-    console.log("hi buddy" + value)
     this.setState({value: value})
   },
   render: function() {
@@ -52,29 +53,8 @@ var TestComponent = React.createClass({
   }
 })
 
-var TestWrapper = React.createClass({
-  contextTypes: {
-    triggerComplete: React.PropTypes.func.isRequired,
-    finish: React.PropTypes.func
-  },
-  getInitialState: function() {
-    return { keyVal : Math.random()};
-  },
-  componentDidUpdate: function(prevProps, prevState) {
-    this.context.finish()
-  },
-  componentDidMount: function() {
-    window.doIt = this.triggerFinalRender
-  },
-  triggerFinalRender: function() {
-    this.setState({keyVal: Math.random()})
-  },
-  render() {
-    return <div key={this.state.keyval}>{this.props.children}</div>
-  }
-})
-
 describe("Fluxxed up test helpers", function() {
+
   describe("Action helpers", function() {
     it("dispatches to test store", function(done) {
       expect(TestAction.fetchThing).to.eventually(done).informRegisteredStore(TestStore)
@@ -87,8 +67,6 @@ describe("Fluxxed up test helpers", function() {
 
   describe("Component Helpers", function() {
     var node, domNode, context
-
-
 
     beforeEach(()=> {
       var div = document.createElement('div');
@@ -122,7 +100,7 @@ describe("Fluxxed up test helpers", function() {
         done()
       } }
       React.withContext(childContext, ()=> {
-        otherDomNode = $(React.render(<TestWrapper><TestComponent/></TestWrapper>, div, ()=>{holder.fire()}).getDOMNode())
+        otherDomNode = $(React.render(<TestRig><TestComponent/></TestRig>, div, ()=>{holder.fire()}).getDOMNode())
       })
 
       otherDomNode.find('input').val('new thing')
