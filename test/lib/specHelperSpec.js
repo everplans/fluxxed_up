@@ -69,6 +69,7 @@ describe("Fluxxed up test helpers", function() {
     var node, domNode, context
 
     beforeEach(()=> {
+      //todo either expose a method for this. OR -- use old school way.
       var div = document.createElement('div');
       node = React.render(<TestComponent/>, div)
       domNode = $(node.getDOMNode())
@@ -92,23 +93,18 @@ describe("Fluxxed up test helpers", function() {
 
     it("updates the form", (done)=> {
 
-      var div = document.createElement('div');
-      var holder = {fire: function() {console.log('hi')}}
-      var otherDomNode
-      var childContext = {finish: ()=> {
-        expect(otherDomNode.find('.answer').text()).to.match(/new thing$/) 
-        done()
-      } }
-      React.withContext(childContext, ()=> {
-        otherDomNode = $(React.render(<TestRig><TestComponent/></TestRig>, div, ()=>{holder.fire()}).getDOMNode())
+      var rig = new TestRig(TestComponent, ()=> {
+        expect(rig.domNode.find('.answer').text()).to.match(/new thing$/)
+        done() // probably need to declaritavely call this
       })
 
-      otherDomNode.find('input').val('new thing')
+      //manipulate the dom
+      rig.domNode.find('input').val('new thing')
+      TestUtils.Simulate.click(rig.domNode.find('a').get(0))
 
-      TestUtils.Simulate.click(otherDomNode.find('a').get(0))
-      window.doIt();
+      //signal test to be finished
+      rig.finish()
 
-      var button = otherDomNode.find('a')
     })
   })
 })
