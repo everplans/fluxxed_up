@@ -1,6 +1,6 @@
 {
-  "name": "backwax",
-  "version": "1.0.0",
+  "name": "fluxxed_up",
+  "version": "0.1.0",
   "description": "A react.js -> Flux  utility belt. Handles some basic patterns to save you from boiler plate code. Medium opinionated. ",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BJK/backwax.git"
+    "url": "https://github.com/BJK/fluxxed_up.git"
   },
   "keywords": [
     "react.js",
@@ -21,9 +21,9 @@
   "author": "BJK",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BJK/backwax/issues"
+    "url": "https://github.com/BJK/fluxxed_up/issues"
   },
-  "homepage": "https://github.com/BJK/backwax",
+  "homepage": "https://github.com/BJK/fluxxed_up",
   "devDependencies": {
     "assets-webpack-plugin": "^2.2.0",
     "babel": "^5.8.23",
