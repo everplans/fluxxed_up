@@ -1,1 +1,1 @@
-import './lib'
+export './dist/index.js'

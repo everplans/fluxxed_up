@@ -4,7 +4,9 @@
   "description": "A react.js -> Flux  utility belt. Handles some basic patterns to save you from boiler plate code. Medium opinionated. ",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
+    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
+    "build": "./node_modules/.bin/webpack dist/index.js",
+    "build-min": "./node_modules/.bin/webpack -p dist/index.min.js"
   },
   "repository": {
     "type": "git",

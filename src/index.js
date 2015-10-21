@@ -1,3 +1,5 @@
-export ActionPrototype from './lib/ActionPrototype'
-export ExtraStorage from './lib/extra_storage'
-export Dispatcher from './lib/ep-dispatcher'
+export { ActionPrototype } from './lib/ActionPrototype'
+export  { ExtraStorage } from './lib/extra_storage'
+export { Dispatcher } from './lib/ep-dispatcher'
+export { JsonFetcher } fom './lib/jsonFetcher'
+export { FeatureFlags } from './lib/FeatureFlags'
