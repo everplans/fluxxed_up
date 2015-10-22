@@ -20,3 +20,48 @@ This is a complete reboot of some earlier ideas that began in a Backbone app. If
 * Tolu 'The Rock' Komolafe;
 * Jesmine 'Ghost Rider' Omonori; and,
 * Bart 'Kick-Ass' Riordan.
+
+
+## Releasing:
+Right now, until we get some gulp scripts in place make sure to run the following before packaging and releasing a version:
+* `npm run build`
+* `npm run build-min`
+
+## What's included: 
+
+* Action Prototype
+Based of off facebook patterns and intended to be used with flux. It works with a loose $.ajax wrapper to fire
+API calls to your server. It supplies a `fireApi` function to the action, so that you can use it when you define your
+own actions. You specific a REST actions (get, post, etc), and endpoint, and optional data payload (for a put or a post). You can optionally supply action types to dispatch based on a success or failure from the server. Here's an example of how to use:
+
+```
+//in MyActions.js
+var TestAction = assign(ActionPrototype, {
+  Types: KeyMirror({
+    GOT_USERS: null
+  }),
+  fetchUsers: function() {
+     this.fireApi('get', 'assessment', null,
+      {successAction: this.Types.GOT_ASK_DOCUMENT_GROUPS, //Note that since no failureAction was specified, it will dispatch this action always. 
+      JSONHead: 'assessment'}) //head of the json coming back from the server. 
+  }
+})
+```
+
+* Dispatcher
+Lightweight wrapper around the flux dispatcher. It will throw an exception if you try to dispatch an action with an undefined type. (You'd be surprised how many bugs you pre-emptively avoid doing this).
+
+* JsonFetcher
+Lightweight wrapper around jQuery's ajax functionality. It assumes a simple RESTful api on the server side. It will fire success/failure callbacks based on server response. I has some extra settings to specific API keys and other auth.
+
+* FeatureFlags
+Little helper class to query if a feature flag is on or off based on some JSON config. We fetch this from the server and turn on/off features for a user based on the config. A flag not specified in the config will auto default to disabled. Example:
+```FeatureFlags.init({[{flag:'new_thing', status: 'ENABLED'}]})
+
+FeatureFlags.isEnabled('new_thing') //true
+```
+
+* ExtraStorage
+This is a little module that wraps default browser local storage behavior. It has a small wrapper to simulate behavior for when a browser is in incognito mode.
+
+

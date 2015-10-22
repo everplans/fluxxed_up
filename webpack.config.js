@@ -5,7 +5,7 @@ var dedup =
 
 module.exports = {
   entry: {
-    app: ['./index.js']
+    app: ['./src/index.js']
   },
   module: {
     preLoaders: [
