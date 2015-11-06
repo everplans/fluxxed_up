@@ -91,9 +91,9 @@ describe("Fluxxed up test helpers", function() {
   })
 
   describe("Test Rig", function() {
-    var rig
+    var rig = new TestRig()
     beforeEach(()=>{
-      rig = new TestRig(TestComponent)
+      rig.boltOn(TestComponent)
     })
     afterEach(()=>{
       rig.boltOff()
