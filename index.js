@@ -1,1 +1,0 @@
-export './dist/index.js'

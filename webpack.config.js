@@ -8,15 +8,8 @@ module.exports = {
     app: ['./src/index.js']
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.js$/,
-        exclude: [ /node_modules/],
-        loader: "jsxhint-loader"
-      }
-    ],
     loaders: [
-      { test: /\.js$/, exclude: [/node_modules/], loader: 'babel' }, //'react-hot',
+      { test: /\.js$/, exclude: [/node_modules/], loader: 'babel-loader' }, //'react-hot',
       { test: /\.scss$/, loader: "style-loader!css-loader!sass-loader"},
       { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader?paths=node_modules/'},
       { test: /\.less$/, loader: "style-loader!css-loader!less-loader" },

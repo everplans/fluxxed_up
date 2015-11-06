@@ -7,8 +7,6 @@ import KeyMirror from 'keymirror'
 import React from 'react/addons'
 import TestRig from '../../src/testUtils/TestRig.react'
 
-var TestUtils = React.addons.TestUtils;
-
 var TestAction = assign(ActionPrototype, {
   Types: KeyMirror({
     GOT_THING: null,
@@ -90,17 +88,28 @@ describe("Fluxxed up test helpers", function() {
     it("has a value in the page", ()=> {
       expect(domNode.find('.answer').text()).to.match(/initial value$/)
     })
+  })
+
+  describe("Test Rig", function() {
+    var rig
+    beforeEach(()=>{
+      rig = new TestRig(TestComponent)
+    })
+    afterEach(()=>{
+      rig.boltOff()
+    })
 
     it("updates the form", (done)=> {
 
-      var rig = new TestRig(TestComponent, ()=> {
-        expect(rig.domNode.find('.answer').text()).to.match(/new thing$/)
-        done() // probably need to declaritavely call this
-      })
-
       //manipulate the dom
-      rig.domNode.find('input').val('new thing')
-      TestUtils.Simulate.click(rig.domNode.find('a').get(0))
+      rig.fillIn('input', 'new thing')
+      rig.clickLink('Submit')
+
+      //set up your expectations (TODO, make these chai dsl)
+      rig.setExpectationCallback(()=> {
+        expect(rig.domNode.find('.answer').text()).to.match(/new thing$/)
+        done()
+      })
 
       //signal test to be finished
       rig.finish()

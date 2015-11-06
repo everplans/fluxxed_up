@@ -1,46 +1,80 @@
-import React from 'react'
+import React from 'react/addons'
+var TestUtils = React.addons.TestUtils
 
-export var TestRigComponent = React.createClass({
-  contextTypes: {
-    triggerComplete: React.PropTypes.func.isRequired,
-    finish: React.PropTypes.func
-  },
-  getInitialState: function() {
-    return { keyVal : Math.random()};
-  },
-  componentDidUpdate: function(prevProps, prevState) {
-    this.context.finish()
-  },
-  triggerFinalRender: function() {
-    this.setState({keyVal: Math.random()})
-  },
+export class TestRigComponent extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { keyVal : Math.random(), testComplete: false }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(this.state.testComplete=== true)
+      this.state.expectationCallback()
+  }
+
+  triggerFinalRender() {
+    this.setState({testComplete: true})
+    //this.setState({keyVal: Math.random()}) -- probably don't need this anymore, but holding onto just in case it's useful again
+  }
+
   render() {
     return <div key={this.state.keyval}>{this.props.children}</div>
   }
-})
+
+  setExpectationCallback(expectationCallback) {
+    this.setState({expectationCallback})
+  }
+}
 
 export default class TestRig {
-  constructor(TestComponent, afterRender) {
-    if (TestComponent) this.boltOn(TestComponent, afterRender)
-    if (!afterRender) this.childContext = { finish: ()=>{console.log("No expectations")} }
+  constructor(TestComponent) {
+    if (TestComponent) this.boltOn(TestComponent)
   }
 
-  boltOn(TestComponent, afterRender) {
+  boltOn(TestComponent) {
     this.div = document.createElement('div');
-    var domNode, component
+    this.component = React.render(<TestRigComponent><TestComponent/></TestRigComponent>, this.div)
+    this.domNode = $(React.findDOMNode(this.component))
+  }
 
-    if (afterRender) this.childContext = {finish: afterRender }
-    //TODO use the parent context thign since this is deprecated
-    React.withContext(this.childContext, ()=> {
-      component = React.render(<TestRigComponent ><TestComponent/></TestRigComponent>, this.div)
-    })
-    this.component = component
-    this.domNode = $(component.getDOMNode())
+  boltOff() {
+    React.unmountComponentAtNode(this.div)
+  }
+
+  setExpectationCallback(expectationCallback) {
+    this.component.setState({expectationCallback})
   }
 
   finish() { this.component.triggerFinalRender() }
+
+  clickButton(label) {
+    var element = this.domNode.find("button:contains('" + label + "')")[0]
+    this.clickElement(element);
+  }
+
+  clickLink(label) {
+    var element = this.domNode.find("a:contains('" + label + "')")[0]
+    this.clickElement(element)
+  }
+  //in the event of a gnarly css selector, just pass the element
+  clickElement(element) {
+    TestUtils.Simulate.click(element)
+  }
+
+  fillIn(selector, value){
+    var element = this.domNode.find(selector)
+    this.fillInElement(element, value)
+  }
+
+  fillInElement(element, value) {
+    element.val(value)
+  }
 }
 
 
-
-
+/*
+//TODOS:
+1--Figure out to fire an error if the expecation callback block is never fired. 
+2--be able to add expecatoins in a chain, and then fire them all at once
+3--make firing the expectations an explicity thing, so that an accidenttal re-render doesn't mess things up
+*/
