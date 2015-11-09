@@ -1,4 +1,4 @@
-var jQuery = ($) ? $ : require('jquery') // funny little hack, sometimes it's in the global scope, sometimes it's maybe not...
+var jQuery = (typeof $ !== 'undefined') ? $ : require('jquery') // funny little hack, sometimes it's in the global scope, sometimes it's maybe not...
 import extra_storage from './extra_storage'
 import defaultAdaptor from './AjaxAdaptorBase';
 
@@ -83,4 +83,4 @@ var fetcher = {
   }
 };
 
-module.exports = fetcher;
+export default fetcher;

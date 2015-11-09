@@ -1,0 +1,10 @@
+{
+  "stage": 0,
+  "loose": "all"
+}
+/* -- for babel 6
+{
+  "plugins": ["syntax-jsx"],
+  "presets": ["es2015", "react"]
+}
+*/
