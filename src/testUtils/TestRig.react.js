@@ -47,8 +47,8 @@ export default class TestRig {
 
   finish() { this.component.triggerFinalRender() }
 
-  clickButton(label) {
-    var element = this.domNode.find("button:contains('" + label + "')")[0]
+  clickButton(buttonText) {
+    var element = this.domNode.find("button:contains('" + buttonText + "')")[0]
     this.clickElement(element);
   }
 
