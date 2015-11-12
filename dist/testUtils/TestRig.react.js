@@ -69,7 +69,7 @@ var TestRig = (function () {
     this.component = _reactAddons2['default'].render(_reactAddons2['default'].createElement(
       TestRigComponent,
       null,
-      _reactAddons2['default'].createElement(TestComponent, null)
+      TestComponent
     ), this.div);
     this.domNode = $(_reactAddons2['default'].findDOMNode(this.component));
   };
@@ -86,8 +86,8 @@ var TestRig = (function () {
     this.component.triggerFinalRender();
   };
 
-  TestRig.prototype.clickButton = function clickButton(label) {
-    var element = this.domNode.find("button:contains('" + label + "')")[0];
+  TestRig.prototype.clickButton = function clickButton(buttonText) {
+    var element = this.domNode.find("button:contains('" + buttonText + "')")[0];
     this.clickElement(element);
   };
 
