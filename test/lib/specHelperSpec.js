@@ -92,14 +92,14 @@ describe("Fluxxed up test helpers", function() {
 
   describe("Test Rig", function() {
     var rig = new TestRig()
-    beforeEach(()=>{
-      rig.boltOn(TestComponent)
+    beforeEach(() => {
+      rig.boltOn(<TestComponent/>)
     })
-    afterEach(()=>{
+    afterEach(() => {
       rig.boltOff()
     })
 
-    it("updates the form", (done)=> {
+    it("updates the form", (done) => {
 
       //manipulate the dom
       rig.fillIn('input', 'new thing')
