@@ -92,21 +92,21 @@ describe("Fluxxed up test helpers", function() {
 
   describe("Test Rig", function() {
     var rig = new TestRig()
-    beforeEach(()=>{
-      rig.boltOn(TestComponent)
+    beforeEach(() => {
+      rig.boltOn(<TestComponent/>)
     })
-    afterEach(()=>{
+    afterEach(() => {
       rig.boltOff()
     })
 
-    it("updates the form", (done)=> {
+    it("updates the form", (done) => {
 
       //manipulate the dom
       rig.fillIn('input', 'new thing')
       rig.clickLink('Submit')
 
       //set up your expectations (TODO, make these chai dsl)
-      rig.setExpectationCallback(()=> {
+      rig.setExpectationCallback(() => {
         expect(rig.domNode.find('.answer').text()).to.match(/new thing$/)
         done()
       })
