@@ -1,5 +1,6 @@
 import React from 'react'
-var StorePrototype = require('./StorePrototype')
+import StorePrototype from './StorePrototype'
+
 //let's say for now, stores is a dictionary of name and object
 export default function bindResources(Component, resourceName) {
 
@@ -10,7 +11,7 @@ export default function bindResources(Component, resourceName) {
   var bootAction = "fetch" + capitalize(resourceName)
 
   //figure out how to pass in actions
-  //var actionClass = require("PATH TO ACTIONS/" + singularize(capitalize(resourceName)) + "Actions")
+  //import actionClass from `PATH TO ACTIONS/${singularize(capitalize(resourceName))}Actions`
 
   var actionType = actionClass.Types["GOT_"+ resourceName.toUpperCase()]
   var resourceStore = StorePrototype(actionType)
