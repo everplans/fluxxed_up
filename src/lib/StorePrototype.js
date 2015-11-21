@@ -13,7 +13,7 @@ import AppDispatcher from '../lib/ep-dispatcher'
 // In general, 95% of functionality can be accomplished using these three options, but you can still register your own
 // callbacks, add your own methods, etc...
 
-var factory = function(registerAction, extendType, registerMessageAction) {
+function factory(registerAction, extendType, registerMessageAction) {
   var StorePrototype = assign(EventEmitter.prototype, {
     _errors: [],
     _msg: null,
