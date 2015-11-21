@@ -15,9 +15,9 @@ import AppDispatcher from '../lib/ep-dispatcher'
 
 function factory(registerAction, extendType, registerMessageAction) {
   var StorePrototype = assign(EventEmitter.prototype, {
-    _errors: [],
+    errors: [],
     message: null,
-    _data: {},
+    data: {},
     emitChange: function() {
       this.emit('CHANGE')
     },
@@ -38,28 +38,28 @@ function factory(registerAction, extendType, registerMessageAction) {
       this.emitChange()
     },
     getErrors: function() {
-      return this._errors
+      return this.errors
     },
     pushError: function(error) {
-      this._errors.push(error)
+      this.errors.push(error)
     },
     setErrors: function(errors) {
-      this._errors = errors
+      this.errors = errors
     },
     clearErrors: function() {
-      this._errors = []
+      this.errors = []
     },
     hasErrors: function() {
-      return (this._errors.length > 0)
+      return (this.errors.length > 0)
     },
     setData: function(data) {
-      this._data = data
+      this.data = data
     },
     getData: function() {
-      return this._data
+      return this.data
     },
     getState: function() {
-      return {data: this._data, errors: this._errors, message: this.message}
+      return {data: this.data, errors: this.errors, message: this.message}
     },
     clearState: function() {
       this.setData({})
