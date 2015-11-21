@@ -1,5 +1,4 @@
 var jQuery = (typeof $ !== 'undefined') ? $ : require('jquery') // funny little hack, sometimes it's in the global scope, sometimes it's maybe not...
-import extra_storage from './extra_storage'
 import defaultAdaptor from './AjaxAdaptorBase'
 
 function cleanSlashes(path) {
