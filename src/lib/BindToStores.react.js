@@ -18,31 +18,30 @@ export default function bindResources(Component, resourceName) {
   stores[resourceName] = resourceStore
 
   const BoundComponent = React.createClass({
-
-      getInitialState() {
-        return { loading: true, processing: false}
-      },
-      componentWillMount() {
-        extractStores().forEach(store =>
-          store.addChangeListener(this.handleStoresChanged)
-        )
-        actionClass[bootAction]()
-      },
-      componentWillUnmount() {
-        extractStores().forEach(store =>
-          store.removeChangeListener(this.handleStoresChanged)
-        )
-      },
-      handleStoresChanged() {
-        var state = {processing: false, loading: false}
-        Object.getOwnPropertyNames(stores).map(function(store) {
-          state[store] = stores[store].getState()
-        })
-        this.setState(state)
-      },
-      render() {
-        return <Component {...this.props} {...this.state}/>
-      }
+    getInitialState() {
+      return {loading: true, processing: false}
+    },
+    componentWillMount() {
+      extractStores().forEach(store =>
+        store.addChangeListener(this.handleStoresChanged)
+      )
+      actionClass[bootAction]()
+    },
+    componentWillUnmount() {
+      extractStores().forEach(store =>
+        store.removeChangeListener(this.handleStoresChanged)
+      )
+    },
+    handleStoresChanged() {
+      var state = {processing: false, loading: false}
+      Object.getOwnPropertyNames(stores).map(function(store) {
+        state[store] = stores[store].getState()
+      })
+      this.setState(state)
+    },
+    render() {
+      return <Component {...this.props} {...this.state} />
+    }
   })
   return BoundComponent
 }
