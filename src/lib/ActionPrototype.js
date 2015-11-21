@@ -38,11 +38,10 @@ var ActionPrototype = {
     var errorAction = options.errorAction ? options.errorAction : options.successAction
     fetcher[method].call(fetcher, url, data)
       .then(function(successData) {
-        var scopedData = options.JSONHead ? successData[options.JSONHead] : successData
         if (options.successAction) {
           AppDispatcher.dispatch({
             actionType: options.successAction,
-            data: scopedData
+            data: (options.JSONHead ? successData[options.JSONHead] : successData)
           })
         }
         if (options.onSuccess) {
