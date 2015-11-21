@@ -93,10 +93,10 @@ describe("Fluxxed up test helpers", function() {
   describe("Test Rig", function() {
     var rig = new TestRig()
     beforeEach(() => {
-      rig.boltOn(<TestComponent/>)
+      rig.screwOn(<TestComponent/>)
     })
     afterEach(() => {
-      rig.boltOff()
+      rig.screwOff()
     })
 
     it("updates the form", (done) => {
