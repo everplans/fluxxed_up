@@ -78,7 +78,7 @@ function factory(registerAction, extendType, registerMessageAction) {
       this.clearErrors()
       this.emitChange()
     },
-    registerRecieveCallback: function(actionType) {
+    registerReceiveCallback: function(actionType) {
       return AppDispatcher.register(function(action) {
         if (action.actionType === actionType)
           this.receiveData(action.data)
@@ -94,7 +94,7 @@ function factory(registerAction, extendType, registerMessageAction) {
 
   var store = Object.create(StorePrototype)
   if (registerAction)
-    store.registerRecieveCallback(registerAction)
+    store.registerReceiveCallback(registerAction)
   if (extendType)
     store = assign(store, extendType)
   if (registerMessageAction)

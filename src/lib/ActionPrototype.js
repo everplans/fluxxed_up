@@ -12,7 +12,7 @@ var ActionPrototype = {
   }),
   originalActions: {},
   stubForTests: function() {
-    this.recievedData = {}
+    this.receivedData = {}
     let actions = Object.getOwnPropertyNames(this).filter((fn) => { return typeof this[fn] === 'function' })
     actions.forEach((action) => {
       if (['fireApi', 'stubForTests', 'stubbedAction', 'saveAction', 'restore'].indexOf(action) < 0) {
@@ -22,7 +22,7 @@ var ActionPrototype = {
     })
   },
   stubbedAction: function(actionName, data) {
-    this.recievedData[actionName] = data
+    this.receivedData[actionName] = data
   },
   saveAction: function(action) {
     this.originalActions[action] = this[action]
