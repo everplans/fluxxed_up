@@ -25,6 +25,7 @@ var fetcher = {
     var headers = {} // TODO grab special header
     var adaptor = this.getAdaptor()
     var opts = {
+      headers: headers,
       url: adaptor.serverBase() + cleanSlashes(adaptor.pathRoot()) + cleanSlashes(path)
     }
     if (method)
@@ -33,7 +34,6 @@ var fetcher = {
       opts.data = data
     if (withCredentials === true)
       opts.xhrFields = {withCredentials: true}
-    opts.headers = headers
     return opts
   },
   sendRequest: function(request) {
