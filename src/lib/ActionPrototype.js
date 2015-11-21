@@ -1,10 +1,10 @@
 import fetcher from '../lib/jsonFetcher'
-import AppDispatcher  from '../lib/ep-dispatcher'
+import AppDispatcher from '../lib/ep-dispatcher'
 import KeyMirror from 'keymirror'
 
-//TODOS: 
-//--turn into a class. 
-//--make it a factory function like we do with store prototype. 
+// TODOS:
+// --turn into a class.
+// --make it a factory function like we do with store prototype.
 
 var ActionPrototype = {
   specialTypes: KeyMirror({
@@ -13,34 +13,35 @@ var ActionPrototype = {
   originalActions: {},
   stubForTests: function() {
     this.recievedData = {}
-    let actions = Object.getOwnPropertyNames(this).filter( (fn)=> {return typeof this[fn] === 'function' } )
-    actions.forEach( (action)=> {
-      if (['fireApi', 'stubForTests', 'stubedAction', 'saveAction', 'restore'].indexOf(action) < 0) {
+    let actions = Object.getOwnPropertyNames(this).filter((fn) => { return typeof this[fn] === 'function' })
+    actions.forEach((action) => {
+      if (['fireApi', 'stubForTests', 'stubbedAction', 'saveAction', 'restore'].indexOf(action) < 0) {
         this.saveAction(action)
-        this[action]=(data)=> {this.stubedAction(action, data)}
+        this[action] = (data) => { this.stubbedAction(action, data) }
       }
     })
   },
-  stubedAction: function(actionName, data) {
+  stubbedAction: function(actionName, data) {
     this.recievedData[actionName] = data
   },
   saveAction: function(action) {
     this.originalActions[action] = this[action]
   },
   restore: function() {
-    let orignals = Object.getOwnPropertyNames(this.originalActions).filter((fn)=>{ return typeof this.originalActions[fn] === 'function'})
-    orignals.forEach((fn)=>{this[fn] = this.originalActions[fn]})
+    let originals = Object.getOwnPropertyNames(this.originalActions)
+                          .filter((action) => { return typeof this.originalActions[action] === 'function' })
+    originals.forEach((action) => { this[action] = this.originalActions[action] })
     this.originalActions = {}
   },
   fireApi: function(method, url, data, options) {
-    //set default values
+    // set default values
     var errorAction = options.errorAction ? options.errorAction : options.successAction
     fetcher[method].call(fetcher,url, data)
       .then(function(data) {
         var scopedData = options.JSONHead ? data[options.JSONHead] : data
         if (options['successAction']) {
           AppDispatcher.dispatch({
-            actionType: options['successAction'],
+            actionType: options.successAction,
             data: scopedData
           })
         }
