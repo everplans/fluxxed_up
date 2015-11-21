@@ -36,10 +36,10 @@ var ActionPrototype = {
   fireApi: function(method, url, data, options) {
     // set default values
     var errorAction = options.errorAction ? options.errorAction : options.successAction
-    fetcher[method].call(fetcher,url, data)
-      .then(function(data) {
-        var scopedData = options.JSONHead ? data[options.JSONHead] : data
-        if (options['successAction']) {
+    fetcher[method].call(fetcher, url, data)
+      .then(function(successData) {
+        var scopedData = options.JSONHead ? successData[options.JSONHead] : successData
+        if (options.successAction) {
           AppDispatcher.dispatch({
             actionType: options.successAction,
             data: scopedData
@@ -55,9 +55,9 @@ var ActionPrototype = {
           })
         }
       }.bind(this))
-      .fail(function(data) {
-        var scopedErrors = options.JSONHead ? data[options.JSONHead] : data
-        var errors = scopedErrors ? scopedErrors.errors : data.errors
+      .fail(function(failureData) {
+        var scopedErrors = options.JSONHead ? failureData[options.JSONHead] : failureData
+        var errors = scopedErrors ? scopedErrors.errors : failureData.errors
         AppDispatcher.dispatch({
           actionType: errorAction,
           data: {errors: errors}
