@@ -5,7 +5,7 @@ import StorePrototype from './StorePrototype'
 export default function bindResources(Component, resourceName) {
   function extractStores() { return Object.getOwnPropertyNames(stores).map(store => stores[store]) }
   function capitalize(word) { return word.charAt(0).toUpperCase() + word.slice(1) }
-  function singularize(word) { return word.slice(-1) === 's' ? word.slice(0, -1) : word }
+  function singularize(word) { return (word.slice(-1) === 's' ? word.slice(0, -1) : word) }
 
   var bootAction = `fetch${capitalize(resourceName)}`
 
