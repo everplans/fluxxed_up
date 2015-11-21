@@ -36,7 +36,7 @@ var ActionPrototype = {
   fireApi: function(method, url, data, options) {
     // set default values
     var errorAction = options.errorAction ? options.errorAction : options.successAction
-    fetcher[method].call(fetcher, url, data)
+    fetcher[method](fetcher, url, data)
       .then(function(successData) {
         if (options.successAction) {
           AppDispatcher.dispatch({
