@@ -66,4 +66,3 @@ var ActionPrototype = {
 }
 
 export default ActionPrototype
-
