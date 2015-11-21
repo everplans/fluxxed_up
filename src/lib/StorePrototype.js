@@ -87,21 +87,18 @@ function factory(registerAction, extendType, registerMessageAction) {
     registerMessageCallback: function(actionType) {
       return AppDispatcher.register(function(action) {
         if (action.actionType === actionType)
-          this.receiveMsg(action.data)
+          this.receiveMessage(action.data)
       }.bind(this))
     }
   })
 
   var store = Object.create(StorePrototype)
-  if (registerAction) {
+  if (registerAction)
     store.registerRecieveCallback(registerAction)
-  }
-  if (extendType) {
+  if (extendType)
     store = assign(store, extendType)
-  }
-  if (registerMessageAction) {
+  if (registerMessageAction)
     store.registerMessageCallback(registerMessageAction)
-  }
   return store
 }
 
