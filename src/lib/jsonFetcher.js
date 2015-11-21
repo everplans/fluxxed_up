@@ -78,12 +78,6 @@ var fetcher = {
     request.processData = false
     request.contentType = false
     return this.sendRequest(request)
-  },
-  parseError: function(error) {
-    if (error.error)
-      return error.error.message
-    else
-      return 'There was an unexpected error. Please try again. If the error persists, please contact your account representative.'
   }
 }
 
