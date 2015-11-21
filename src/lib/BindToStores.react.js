@@ -6,14 +6,14 @@ export default function bindResources(Component, resourceName) {
 
   function extractStores() {return Object.getOwnPropertyNames(stores).map(function(o) {return stores[o]})}
   function capitalize(word) { return word.charAt(0).toUpperCase() + word.slice(1) }
-  function singularize(word) { return word.slice(-1) === "s" ? word.slice(0, -1) : word }
+  function singularize(word) { return word.slice(-1) === 's' ? word.slice(0, -1) : word }
 
-  var bootAction = "fetch" + capitalize(resourceName)
+  var bootAction = 'fetch' + capitalize(resourceName)
 
   //figure out how to pass in actions
   //import actionClass from `PATH TO ACTIONS/${singularize(capitalize(resourceName))}Actions`
 
-  var actionType = actionClass.Types["GOT_"+ resourceName.toUpperCase()]
+  var actionType = actionClass.Types['GOT_'+ resourceName.toUpperCase()]
   var resourceStore = StorePrototype(actionType)
   var stores = {}
   stores[resourceName] = resourceStore
