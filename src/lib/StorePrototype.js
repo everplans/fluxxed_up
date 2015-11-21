@@ -19,90 +19,90 @@ function factory(registerAction, extendType, registerMessageAction) {
     _msg: null,
     _data: {},
     emitChange: function() {
-      this.emit('CHANGE');
+      this.emit('CHANGE')
     },
     addChangeListener: function(callback) {
-      this.on('CHANGE', callback);
+      this.on('CHANGE', callback)
     },
     removeChangeListener: function (callback) {
-      this.removeListener('CHANGE', callback);
+      this.removeListener('CHANGE', callback)
     },
     getMsg: function() {
-      return this._msg;
+      return this._msg
     },
     setMsg: function(msg) {
       this._msg = msg
     },
     clearFlash: function() {
-      this._msg = null;
-      this.emitChange();
+      this._msg = null
+      this.emitChange()
     },
     getErrors: function() {
-      return this._errors;
+      return this._errors
     },
     pushError: function(error) {
-      this._errors.push(error);
+      this._errors.push(error)
     },
     setErrors: function(errors) {
-      this._errors = errors;
+      this._errors = errors
     },
     clearErrors: function() {
-      this._errors = [];
+      this._errors = []
     },
     hasErrors: function() {
       return (this._errors.length > 0)
     },
     setData: function(data) {
-      this._data = data;
+      this._data = data
     },
     getData: function() {
-      return this._data;
+      return this._data
     },
     getState: function() {
       return {data: this._data, errors: this._errors, message: this._msg}
     },
-    clearState: function(){
-      this.setData({});
+    clearState: function() {
+      this.setData({})
     },
     receiveData: function(data) {
       if (data.errors)
-        this.setErrors(data.errors);
+        this.setErrors(data.errors)
       else {
-        this.setData(data);
-        this.clearErrors();
+        this.setData(data)
+        this.clearErrors()
       }
-      this.emitChange();
+      this.emitChange()
     },
     receiveMsg: function(msg) {
-      this.setMsg(msg);
-      this.clearErrors();
-      this.emitChange();
+      this.setMsg(msg)
+      this.clearErrors()
+      this.emitChange()
     },
     registerRecieveCallback: function(actionType) {
       return AppDispatcher.register(function(action) {
         if (action.actionType == actionType)
-          this.receiveData(action.data);
+          this.receiveData(action.data)
       }.bind(this))
     },
     registerMessageCallback: function(actionType) {
       return AppDispatcher.register(function(action) {
         if (action.actionType == actionType)
-          this.receiveMsg(action.data);
-      }.bind(this));
+          this.receiveMsg(action.data)
+      }.bind(this))
     }
-  });
+  })
 
-  var store = Object.create(StorePrototype);
+  var store = Object.create(StorePrototype)
   if (registerAction) {
-    store.registerRecieveCallback(registerAction);
+    store.registerRecieveCallback(registerAction)
   }
   if (extendType) {
-    store = assign(store, extendType);
+    store = assign(store, extendType)
   }
   if (registerMessageAction) {
     store.registerMessageCallback(registerMessageAction)
   }
-  return store;
+  return store
 }
 
-module.exports = factory;
+module.exports = factory
