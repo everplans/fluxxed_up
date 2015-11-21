@@ -2,7 +2,7 @@ var jQuery = (typeof $ !== 'undefined') ? $ : require('jquery') // funny little 
 import extra_storage from './extra_storage'
 import defaultAdaptor from './AjaxAdaptorBase'
 
-function _cleanSlashes(path) {
+function cleanSlashes(path) {
   return `${path.indexOf('/') === 0 ? '' : '/'}${path}`
 }
 
@@ -17,7 +17,7 @@ var fetcher = {
     var headers = {} // TODO grab special header
     var adaptor = this.getAdaptor()
     var opts = {
-      url: adaptor.serverBase() + _cleanSlashes(adaptor.pathRoot()) + _cleanSlashes(path)
+      url: adaptor.serverBase() + cleanSlashes(adaptor.pathRoot()) + cleanSlashes(path)
     }
     if (method)
       opts.method = method
