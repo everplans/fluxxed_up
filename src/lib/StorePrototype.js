@@ -2,23 +2,16 @@ import { EventEmitter } from 'events'
 import assign from 'object-assign'
 import AppDispatcher from '../lib/ep-dispatcher'
 
-
-//this factory method will return a fully baked store. The following options are all optional
-
-/*
- *  - registerAction - this is an action type to auto register with the app dispatcher. The callback will 
- *  be  the receiveData method.
- *
- *  - extendType - this is an object prototype which will be applied to the store. Note, only a shallow
- *  copy will occur. Use this to extend the default behavior of the store pattern.
- *
- *  - registerMessageAction - this is an action type to auto register with the app dispatcher. The callback
- *  here is the receiveMsg callback.
- *
- *  In general, 95% of functionality can be accomplished using these three. But you can still register
- *  your own callbacks, add your own methods, etc.. 
-
- */
+// This factory method will return a fully-baked store. The following options are all optional:
+  // * registerAction: this is an action type to auto-register with the app dispatcher. The callback will be the
+  //                   receiveData method.
+  // * extendType: this is an object prototype which will be applied to the store. Note, only a shallow copy will
+  //               occur. Use this to extend the default behavior of the store pattern.
+  // * registerMessageAction: this is an action type to auto register with the app dispatcher. The callback here is
+  //                          the receiveMsg callback.
+  // *
+// In general, 95% of functionality can be accomplished using these three options, but you can still register your own
+// callbacks, add your own methods, etc...
 
 var factory = function(registerAction, extendType, registerMessageAction) {
   
