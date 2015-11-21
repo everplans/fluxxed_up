@@ -80,13 +80,13 @@ function factory(registerAction, extendType, registerMessageAction) {
     },
     registerRecieveCallback: function(actionType) {
       return AppDispatcher.register(function(action) {
-        if (action.actionType == actionType)
+        if (action.actionType === actionType)
           this.receiveData(action.data)
       }.bind(this))
     },
     registerMessageCallback: function(actionType) {
       return AppDispatcher.register(function(action) {
-        if (action.actionType == actionType)
+        if (action.actionType === actionType)
           this.receiveMsg(action.data)
       }.bind(this))
     }
