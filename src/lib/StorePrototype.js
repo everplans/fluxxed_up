@@ -8,7 +8,7 @@ import AppDispatcher from '../lib/ep-dispatcher'
   // * extendType: this is an object prototype which will be applied to the store. Note, only a shallow copy will
   //               occur. Use this to extend the default behavior of the store pattern.
   // * registerMessageAction: this is an action type to auto register with the app dispatcher. The callback here is
-  //                          the receiveMsg callback.
+  //                          the receiveMessage callback.
   // *
 // In general, 95% of functionality can be accomplished using these three options, but you can still register your own
 // callbacks, add your own methods, etc...
@@ -16,7 +16,7 @@ import AppDispatcher from '../lib/ep-dispatcher'
 function factory(registerAction, extendType, registerMessageAction) {
   var StorePrototype = assign(EventEmitter.prototype, {
     _errors: [],
-    _msg: null,
+    message: null,
     _data: {},
     emitChange: function() {
       this.emit('CHANGE')
@@ -27,14 +27,14 @@ function factory(registerAction, extendType, registerMessageAction) {
     removeChangeListener: function (callback) {
       this.removeListener('CHANGE', callback)
     },
-    getMsg: function() {
-      return this._msg
+    getMessage: function() {
+      return this.message
     },
-    setMsg: function(msg) {
-      this._msg = msg
+    setMessage: function(message) {
+      this.message = message
     },
     clearFlash: function() {
-      this._msg = null
+      this.message = null
       this.emitChange()
     },
     getErrors: function() {
@@ -59,7 +59,7 @@ function factory(registerAction, extendType, registerMessageAction) {
       return this._data
     },
     getState: function() {
-      return {data: this._data, errors: this._errors, message: this._msg}
+      return {data: this._data, errors: this._errors, message: this.message}
     },
     clearState: function() {
       this.setData({})
@@ -73,8 +73,8 @@ function factory(registerAction, extendType, registerMessageAction) {
       }
       this.emitChange()
     },
-    receiveMsg: function(msg) {
-      this.setMsg(msg)
+    receiveMessage: function(message) {
+      this.setMessage(message)
       this.clearErrors()
       this.emitChange()
     },
