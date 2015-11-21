@@ -6,6 +6,15 @@ function cleanSlashes(path) {
   return `${path.indexOf('/') === 0 ? '' : '/'}${path}`
 }
 
+// Success data will only be a string if a test fixture returns it.
+// TODO: test side effects should not dictate the structure of this code, so this needs to be fixed:
+function ensureDataIsObject(data) {
+  if (typeof data !== 'object')
+    return JSON.parse(data)
+
+  return data
+}
+
 var fetcher = {
   setAdaptor: function(adaptor) {
     this.adaptor = adaptor
@@ -32,9 +41,7 @@ var fetcher = {
     var promise = jQuery.Deferred()
     jQuery.ajax(request)
       .done(function (data, result, response) {
-        if (typeof data !== 'object')
-          data = JSON.parse(data) // this would only be a string if a test fixture returns it -- would love to not have test side effects here -BJK
-        promise.resolve(data, response.status)
+        promise.resolve(ensureDataIsObject(data), response.status)
       })
       .fail(function(error) {
         var errorJSON
