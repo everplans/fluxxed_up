@@ -3,10 +3,7 @@ import extra_storage from './extra_storage'
 import defaultAdaptor from './AjaxAdaptorBase';
 
 var _cleanSlashes = function(path) {
-  if (path.indexOf("/") === 0)
-    return path;
-  else
-    return "/" + path;
+  return `${path.indexOf("/") === 0 ? '' : '/'}${path}`
 }
 
 var fetcher = {
