@@ -1,6 +1,6 @@
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
-var AppDispatcher = require('../lib/ep-dispatcher');
+var AppDispatcher = require('../lib/dispatcher');
 
 
 //this factory method will return a fully baked store. The following options are all optional

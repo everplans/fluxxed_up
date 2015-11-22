@@ -1,6 +1,6 @@
 import ActionPrototype from '../../src/lib/ActionPrototype'
 import StorePrototype from '../../src/lib/StorePrototype'
-import Dispatcher from '../../src/lib/ep-dispatcher'
+import Dispatcher from '../../src/lib/dispatcher'
 import assign from 'object-assign'
 import KeyMirror from 'keymirror'
 //import * as FUHelpers from '../support/ComponentHelpers'

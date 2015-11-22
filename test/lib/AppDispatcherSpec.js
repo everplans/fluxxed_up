@@ -1,4 +1,4 @@
-var AppDispatcher = require('../../src/lib/ep-dispatcher');
+var AppDispatcher = require('../../src/lib/dispatcher');
 var KeyMirror = require('keymirror');
 var Invariant = require('invariant');
 
