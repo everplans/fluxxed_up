@@ -30,7 +30,7 @@ var TestAction = assign(ActionPrototype, {
 
 var TestStore = StorePrototype(TestAction.Types.GOT_THING)
 
-class TestComponent  extends React.Component{
+class TestComponent  extends React.Component {
   constructor(props) {
     super(props)
     this.state = {value: 'initial value'}
@@ -48,7 +48,7 @@ class TestComponent  extends React.Component{
     return (
       <div><h1>Test Component</h1>
         <div className='answer'>Form Value: {this.state.value}</div>
-        <input ref='value' onChange={this.getVal.bind(this)} defaultValue={this.state.value}/>
+        <input ref='value' onChange={this.getVal.bind(this)} defaultValue={this.state.value} />
         <a onClick={this.handleSubmit.bind(this)}>Submit</a>
       </div>
     )
@@ -70,7 +70,7 @@ describe("Fluxxed up test helpers", function() {
   describe("Test Rig", function() {
     var rig = new TestRig()
     beforeEach(() => {
-      rig.boltOn(<TestComponent/>)
+      rig.boltOn(<TestComponent />)
     })
     afterEach(() => {
       rig.boltOff()
