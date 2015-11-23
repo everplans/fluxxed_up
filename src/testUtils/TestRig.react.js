@@ -33,7 +33,7 @@ export default class TestRig {
 
   boltOn(TestComponent) {
     this.div = document.createElement('div');
-    this.component = React.render(<TestRigComponent><TestComponent/></TestRigComponent>, this.div)
+    this.component = React.render(<TestRigComponent>{TestComponent}</TestRigComponent>, this.div)
     this.domNode = $(React.findDOMNode(this.component))
   }
 
