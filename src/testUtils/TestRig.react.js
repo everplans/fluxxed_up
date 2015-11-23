@@ -68,6 +68,8 @@ export default class TestRig {
 
   fillInElement(element, value) {
     element.val(value)
+    var rawElement = element.jquery ? element[0] : element //React doesn't like dealing with a jquery wrapper
+    TestUtils.Simulate.change(rawElement)
   }
 }
 
