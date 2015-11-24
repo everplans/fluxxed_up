@@ -56,7 +56,7 @@ export default class TestRig {
   }
   fillInElement(element, value) {
     element.val(value)
-    var rawElement = element.jquery ? element[0] : element //React doesn't like dealing with a jquery wrapper
+    var rawElement = (element.jquery ? element[0] : element) // React doesn't like dealing with a jQuery wrapper.
     TestUtils.Simulate.change(rawElement)
   }
 }
@@ -64,6 +64,6 @@ export default class TestRig {
 /*
 TODOS:
   1. Figure out to fire an error if the expecation callback block is never fired.
-  2. be able to add expecatoins in a chain, and then fire them all at once.
-  3. make firing the expectations an explicit thing, so that an accidental re-render doesn't mess things up.
+  2. Be able to add expectations in a chain, and then fire them all at once.
+  3. Make firing the expectations an explicit thing, so that an accidental re-render doesn't mess things up.
 */

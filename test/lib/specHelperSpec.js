@@ -39,8 +39,8 @@ class TestComponent  extends React.Component {
     this.setState({formVal: e.target.value})
   }
   handleSubmit() {
-    //not that this is simulating some other side effect of clicking the button (like server response after a click)
-    //but this just shows something already set in state
+    // Not that this is simulating some other side effect of clicking the button (like server response after a click),
+    // but this just shows something already set in state
     this.setState({value: this.state.formVal})
   }
   render() {
@@ -67,22 +67,24 @@ describe('Fluxxed up test helpers', function() {
   })
   describe("Test Rig", function() {
     var rig = new TestRig()
+
     beforeEach(() => {
       rig.boltOn(<TestComponent />)
     })
+
     afterEach(() => {
       rig.boltOff()
     })
 
-    it("renders", ()=> {
+    it("renders", () => {
       expect(rig.domNode.find('h1').text()).to.equal('Test Component')
     })
 
-    it("has a value in the text box", ()=> {
+    it("has a value in the text box", () => {
       expect(rig.domNode.find('input').val()).to.equal('initial value')
     })
 
-    it("has a value in the page", ()=> {
+    it("has a value in the page", () => {
       expect(rig.domNode.find('.answer').text()).to.match(/initial value$/)
     })
 
