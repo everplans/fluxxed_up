@@ -29,26 +29,31 @@ var TestAction = assign(ActionPrototype, {
 
 var TestStore = StorePrototype(TestAction.Types.GOT_THING)
 
-var TestComponent = React.createClass({
-  getInitialState: function() {
-    return {
-      value: 'initial value'
-    }
-  },
-  handleSubmit: function() {
-    this.setState({value: $(this.refs.value.getDOMNode()).val()})
-  },
-  render: function() {
+class TestComponent  extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {value: 'initial value'}
+  }
+  getVal(e) {
+    e.preventDefault()
+    this.setState({formVal: e.target.value})
+  }
+  handleSubmit() {
+    //not that this is simulating some other side effect of clicking the button (like server response after a click)
+    //but this just shows something already set in state
+    this.setState({value: this.state.formVal})
+  }
+  render() {
     return (
       <div>
         <h1>Test Component</h1>
         <div className='answer'>Form Value: {this.state.value}</div>
-        <input ref='value' defaultValue={this.state.value} />
-        <a onClick={this.handleSubmit}>Submit</a>
+        <input ref='value' onChange={this.getVal.bind(this)} defaultValue={this.state.value} />
+        <a onClick={this.handleSubmit.bind(this)}>Submit</a>
       </div>
     )
   }
-})
+}
 
 describe('Fluxxed up test helpers', function() {
   describe('Action helpers', function() {
@@ -60,43 +65,25 @@ describe('Fluxxed up test helpers', function() {
       expect(TestAction.fetchWithWrongDispatch).to.not.eventually(done).informRegisteredStore(TestStore)
     })
   })
-
-  describe('Component Helpers', function() {
-    var domNode
-    var node
-
-    beforeEach(() => {
-      // TODO: either expose a method for this OR use old school way.
-      node = React.render(<TestComponent/>, document.createElement('div'))
-      domNode = $(node.getDOMNode())
-    })
-
-    afterEach(() => {
-      React.unmountComponentAtNode(React.findDOMNode(node).parentNode)
-    })
-
-    it('renders', () => {
-      expect(domNode.find('h1')).to.have.text('Test Component')
-    })
-
-    it('has a value in the text box', () => {
-      expect(domNode.find('input').val()).to.equal('initial value')
-    })
-
-    it('has a value in the page', () => {
-      expect(domNode.find('.answer').text()).to.match(/initial value$/)
-    })
-  })
-
-  describe('Test Rig', function() {
+  describe("Test Rig", function() {
     var rig = new TestRig()
-
     beforeEach(() => {
       rig.boltOn(<TestComponent />)
     })
-
     afterEach(() => {
       rig.boltOff()
+    })
+
+    it("renders", ()=> {
+      expect(rig.domNode.find('h1').text()).to.equal('Test Component')
+    })
+
+    it("has a value in the text box", ()=> {
+      expect(rig.domNode.find('input').val()).to.equal('initial value')
+    })
+
+    it("has a value in the page", ()=> {
+      expect(rig.domNode.find('.answer').text()).to.match(/initial value$/)
     })
 
     it('updates the form', (done) => {
