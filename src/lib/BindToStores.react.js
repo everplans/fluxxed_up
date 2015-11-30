@@ -42,7 +42,14 @@ export default function bindResources(Component, resourceName) {
         this.setState(state);
       },
       render() {
-        return <Component {...this.props} {...this.state}/>
+        return (
+          <div>
+            { this.state.loading ?
+              <div>Loading...</div> :
+              <Component {...this.props} {...this.state} />
+            }
+          </div>
+        )
       }
   })
   return BoundComponent;
