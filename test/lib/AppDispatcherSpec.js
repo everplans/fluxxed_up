@@ -1,4 +1,4 @@
-import AppDispatcher from '../../src/lib/ep-dispatcher'
+import AppDispatcher from '../../src/lib/fu-dispatcher'
 import KeyMirror from 'keymirror'
 import Invariant from 'invariant'
 
