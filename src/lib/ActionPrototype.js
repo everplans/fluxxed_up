@@ -1,5 +1,5 @@
 import fetcher from '../lib/jsonFetcher'
-import AppDispatcher  from '../lib/dispatcher'
+import AppDispatcher  from '../lib/fu-dispatcher'
 import KeyMirror from 'keymirror'
 
 // TODOS:

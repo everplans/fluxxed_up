@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events'
 import assign from 'object-assign'
-import AppDispatcher from '../lib/dispatcher'
+import AppDispatcher from '../lib/fu-dispatcher'
 
 // This factory method will return a fully-baked store. The following options are all optional:
   // * registerAction: this is an action type to auto-register with the app dispatcher. The callback will be the
