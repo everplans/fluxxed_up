@@ -25,6 +25,9 @@ export class TestRigComponent extends React.Component {
 export default class TestRig {
   constructor(TestComponent) {
     if (TestComponent) this.boltOn(TestComponent)
+
+    this.screwOn = this.boltOn
+    this.screwOff = this.boltOff
   }
   boltOn(TestComponent) {
     this.div = document.createElement('div')

@@ -29,7 +29,7 @@ var TestAction = assign(ActionPrototype, {
 
 var TestStore = StorePrototype(TestAction.Types.GOT_THING)
 
-class TestComponent  extends React.Component {
+class TestComponent extends React.Component {
   constructor(props) {
     super(props)
     this.state = {value: 'initial value'}
@@ -65,26 +65,28 @@ describe('Fluxxed up test helpers', function() {
       expect(TestAction.fetchWithWrongDispatch).to.not.eventually(done).informRegisteredStore(TestStore)
     })
   })
-  describe("Test Rig", function() {
+
+  describe('Test Rig', function() {
     var rig = new TestRig()
 
     beforeEach(() => {
-      rig.boltOn(<TestComponent />)
+      rig.screwOn(<TestComponent />)
     })
 
     afterEach(() => {
-      rig.boltOff()
+      rig.screwOff()
     })
 
-    it("renders", () => {
+    it('renders', () => {
       expect(rig.domNode.find('h1').text()).to.equal('Test Component')
     })
 
-    it("has a value in the text box", () => {
+    it('has a value in the text box', () => {
       expect(rig.domNode.find('input').val()).to.equal('initial value')
     })
 
-    it("has a value in the page", () => {
+
+    it('has a value in the page', () => {
       expect(rig.domNode.find('.answer').text()).to.match(/initial value$/)
     })
 
