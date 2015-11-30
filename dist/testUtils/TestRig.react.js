@@ -109,6 +109,8 @@ var TestRig = (function () {
 
   TestRig.prototype.fillInElement = function fillInElement(element, value) {
     element.val(value);
+    var rawElement = element.jquery ? element[0] : element; //React doesn't like dealing with a jquery wrapper
+    TestUtils.Simulate.change(rawElement);
   };
 
   return TestRig;
