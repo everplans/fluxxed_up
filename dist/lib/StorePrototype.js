@@ -1,32 +1,33 @@
 'use strict';
 
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-var AppDispatcher = require('../lib/ep-dispatcher');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-//this factory method will return a fully baked store. The following options are all optional
+var _events = require('events');
 
-/*
- *  - registerAction - this is an action type to auto register with the app dispatcher. The callback will 
- *  be  the receiveData method.
- *
- *  - extendType - this is an object prototype which will be applied to the store. Note, only a shallow
- *  copy will occur. Use this to extend the default behavior of the store pattern.
- *
- *  - registerMessageAction - this is an action type to auto register with the app dispatcher. The callback
- *  here is the receiveMsg callback.
- *
- *  In general, 95% of functionality can be accomplished using these three. But you can still register
- *  your own callbacks, add your own methods, etc.. 
+var _objectAssign = require('object-assign');
 
- */
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var factory = function factory(registerAction, extendType, registerMessageAction) {
+var _libFuDispatcher = require('../lib/fu-dispatcher');
 
-  var StorePrototype = assign(EventEmitter.prototype, {
-    _errors: [],
-    _msg: null,
-    _data: {},
+var _libFuDispatcher2 = _interopRequireDefault(_libFuDispatcher);
+
+// This factory method will return a fully-baked store. The following options are all optional:
+// * registerAction: this is an action type to auto-register with the app dispatcher. The callback will be the
+//                   receiveData method.
+// * extendType: this is an object prototype which will be applied to the store. Note, only a shallow copy will
+//               occur. Use this to extend the default behavior of the store pattern.
+// * registerMessageAction: this is an action type to auto register with the app dispatcher. The callback here is
+//                          the receiveMessage callback.
+// *
+// In general, 95% of functionality can be accomplished using these three options, but you can still register your own
+// callbacks, add your own methods, etc...
+
+function factory(registerAction, extendType, registerMessageAction) {
+  var StorePrototype = _objectAssign2['default'](_events.EventEmitter.prototype, {
+    errors: [],
+    message: null,
+    data: {},
     emitChange: function emitChange() {
       this.emit('CHANGE');
     },
@@ -36,39 +37,39 @@ var factory = function factory(registerAction, extendType, registerMessageAction
     removeChangeListener: function removeChangeListener(callback) {
       this.removeListener('CHANGE', callback);
     },
-    getMsg: function getMsg() {
-      return this._msg;
+    getMessage: function getMessage() {
+      return this.message;
     },
-    setMsg: function setMsg(msg) {
-      this._msg = msg;
+    setMessage: function setMessage(message) {
+      this.message = message;
     },
     clearFlash: function clearFlash() {
-      this._msg = null;
+      this.message = null;
       this.emitChange();
     },
     getErrors: function getErrors() {
-      return this._errors;
+      return this.errors;
     },
     pushError: function pushError(error) {
-      this._errors.push(error);
+      this.errors.push(error);
     },
     setErrors: function setErrors(errors) {
-      this._errors = errors;
+      this.errors = errors;
     },
     clearErrors: function clearErrors() {
-      this._errors = [];
+      this.errors = [];
     },
     hasErrors: function hasErrors() {
-      return this._errors.length > 0;
+      return this.errors.length > 0;
     },
     setData: function setData(data) {
-      this._data = data;
+      this.data = data;
     },
     getData: function getData() {
-      return this._data;
+      return this.data;
     },
     getState: function getState() {
-      return { data: this._data, errors: this._errors, message: this._msg };
+      return { data: this.data, errors: this.errors, message: this.message };
     },
     clearState: function clearState() {
       this.setData({});
@@ -80,34 +81,28 @@ var factory = function factory(registerAction, extendType, registerMessageAction
       }
       this.emitChange();
     },
-    receiveMsg: function receiveMsg(msg) {
-      this.setMsg(msg);
+    receiveMessage: function receiveMessage(message) {
+      this.setMessage(message);
       this.clearErrors();
       this.emitChange();
     },
-    registerRecieveCallback: function registerRecieveCallback(actionType) {
-      return AppDispatcher.register((function (action) {
-        if (action.actionType == actionType) this.receiveData(action.data);
+    registerReceiveCallback: function registerReceiveCallback(actionType) {
+      return _libFuDispatcher2['default'].register((function (action) {
+        if (action.actionType === actionType) this.receiveData(action.data);
       }).bind(this));
     },
     registerMessageCallback: function registerMessageCallback(actionType) {
-      return AppDispatcher.register((function (action) {
-        if (action.actionType == actionType) this.receiveMsg(action.data);
+      return _libFuDispatcher2['default'].register((function (action) {
+        if (action.actionType === actionType) this.receiveMessage(action.data);
       }).bind(this));
     }
   });
 
   var store = Object.create(StorePrototype);
-  if (registerAction) {
-    store.registerRecieveCallback(registerAction);
-  }
-  if (extendType) {
-    store = assign(store, extendType);
-  }
-  if (registerMessageAction) {
-    store.registerMessageCallback(registerMessageAction);
-  }
+  if (registerAction) store.registerReceiveCallback(registerAction);
+  if (extendType) store = _objectAssign2['default'](store, extendType);
+  if (registerMessageAction) store.registerMessageCallback(registerMessageAction);
   return store;
-};
+}
 
 module.exports = factory;

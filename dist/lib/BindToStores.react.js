@@ -12,30 +12,32 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var StorePrototype = require('./StorePrototype');
-//let's say for now, stores is a dictionary of name and object
+var _StorePrototype = require('./StorePrototype');
+
+var _StorePrototype2 = _interopRequireDefault(_StorePrototype);
+
+// let's say for now, stores is a dictionary of name and object
 
 function bindResources(Component, resourceName) {
-
   function extractStores() {
-    return Object.getOwnPropertyNames(stores).map(function (o) {
-      return stores[o];
+    return Object.getOwnPropertyNames(stores).map(function (store) {
+      return stores[store];
     });
   }
   function capitalize(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
   function singularize(word) {
-    return word.slice(-1) == "s" ? word.slice(0, -1) : word;
+    return word.slice(-1) === 's' ? word.slice(0, -1) : word;
   }
 
-  var bootAction = "fetch" + capitalize(resourceName);
+  var bootAction = 'fetch' + capitalize(resourceName);
 
-  //figure out how to pass in actions
-  //var actionClass = require("PATH TO ACTIONS/" + singularize(capitalize(resourceName)) + "Actions");
+  // figure out how to pass in actions
+  // import actionClass from `PATH TO ACTIONS/${singularize(capitalize(resourceName))}Actions`
 
-  var actionType = actionClass.Types["GOT_" + resourceName.toUpperCase()];
-  var resourceStore = StorePrototype(actionType);
+  var actionType = actionClass.Types['GOT_' + resourceName.toUpperCase()];
+  var resourceStore = _StorePrototype2['default'](actionType);
   var stores = {};
   stores[resourceName] = resourceStore;
 

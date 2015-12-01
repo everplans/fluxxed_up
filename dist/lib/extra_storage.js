@@ -11,7 +11,6 @@ var extra_storage = {
       return storage[key];
     }
   },
-
   setItem: function setItem(key, value) {
     try {
       window.sessionStorage.setItem(key, value);
@@ -19,7 +18,6 @@ var extra_storage = {
       storage[key] = value;
     }
   },
-
   removeItem: function removeItem(key) {
     try {
       return window.sessionStorage.removeItem(key);
@@ -28,7 +26,6 @@ var extra_storage = {
       return undefined;
     }
   }
-
 };
 
 module.exports = extra_storage;

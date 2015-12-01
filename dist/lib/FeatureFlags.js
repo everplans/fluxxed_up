@@ -11,13 +11,13 @@ var FeatureFlags = (function () {
     var _this = this;
 
     this.flags = {};
-    flags.map(function (f) {
-      _this.flags[f.flag] = f.status;
+    flags.map(function (flagObject) {
+      _this.flags[flagObject.flag] = flagObject.status;
     });
   };
 
-  FeatureFlags.prototype.isEnabled = function isEnabled(flag) {
-    return this.flags && this.flags[flag] ? String(this.flags[flag]).toUpperCase() === 'ENABLED' : false;
+  FeatureFlags.prototype.isEnabled = function isEnabled(flagName) {
+    return this.flags && this.flags[flagName] ? String(this.flags[flagName]).toUpperCase() === 'ENABLED' : false;
   };
 
   return FeatureFlags;

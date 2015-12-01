@@ -20,19 +20,17 @@ var _libExtra_storage2 = _interopRequireDefault(_libExtra_storage);
 
 exports.ExtraStorage = _libExtra_storage2['default'];
 
-var _libEpDispatcher = require('./lib/ep-dispatcher');
+var _libFuDispatcher = require('./lib/fu-dispatcher');
 
-var _libEpDispatcher2 = _interopRequireDefault(_libEpDispatcher);
+var _libFuDispatcher2 = _interopRequireDefault(_libFuDispatcher);
 
-exports.Dispatcher = _libEpDispatcher2['default'];
+exports.Dispatcher = _libFuDispatcher2['default'];
 
 var _libJsonFetcher = require('./lib/jsonFetcher');
 
 var _libJsonFetcher2 = _interopRequireDefault(_libJsonFetcher);
 
 exports.JsonFetcher = _libJsonFetcher2['default'];
-
-//export FeatureFlags from './lib/FeatureFlags' -- haven;t quite figured out the singleton pattern here
 
 var _testUtils = require('./testUtils');
 

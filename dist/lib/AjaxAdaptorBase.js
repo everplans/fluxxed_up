@@ -13,7 +13,7 @@ var AjaxAdaptorBase = (function () {
     return '';
   };
 
-  //default will use the relative path
+  // default will use the relative path
 
   AjaxAdaptorBase.prototype.pathRoot = function pathRoot() {
     return '/';
@@ -23,7 +23,7 @@ var AjaxAdaptorBase = (function () {
     return {};
   };
 
-  //any headers that should be in every ajax request
+  // any headers that should be in every ajax request
   return AjaxAdaptorBase;
 })();
 
