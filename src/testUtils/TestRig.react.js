@@ -57,6 +57,7 @@ export default class TestRig {
   toggleCheckbox(selector) {
     var element = this.domNode.find(selector) // Selector should be specific to the checkbox
     $(element).prop('checked', !($(element)[0].checked))
+
   }
 
   fillInElement(element, value) {
