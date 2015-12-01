@@ -58,7 +58,6 @@ export default class TestRig {
     var element = this.domNode.find(selector) // Selector should be specific to the checkbox
     $(element).prop('checked', !($(element)[0].checked))
   }
-
   fillInElement(element, value) {
     element.val(value)
     var rawElement = (element.jquery ? element[0] : element) // React doesn't like dealing with a jQuery wrapper.
