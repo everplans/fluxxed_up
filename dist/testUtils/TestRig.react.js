@@ -112,7 +112,7 @@ var TestRig = (function () {
   TestRig.prototype.toggleCheckbox = function toggleCheckbox(selector) {
     var element = this.domNode.find(selector); // Selector should be specific to the checkbox
     $(element).prop('checked', !$(element)[0].checked);
-    TestUtils.Simulate.change(element);
+    TestUtils.Simulate.change(element[0]);
   };
 
   TestRig.prototype.fillInElement = function fillInElement(element, value) {
