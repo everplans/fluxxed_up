@@ -49,7 +49,7 @@ class TestComponent extends React.Component {
         <h1>Test Component</h1>
         <div className='answer'>Form Value: {this.state.value}</div>
         <input ref='value' onChange={this.getVal.bind(this)} defaultValue={this.state.value} />
-        <input id='checkbox-input' type='checkbox' ref='checkValue' onChange={this.getVal.bind(this)} />
+        <input id='checkbox-input' type='checkbox' ref='checkValue' />
         <a onClick={this.handleSubmit.bind(this)}>Submit</a>
       </div>
     )
