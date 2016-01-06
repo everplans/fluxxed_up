@@ -50,6 +50,7 @@ class TestComponent extends React.Component {
         <div className='answer'>Form Value: {this.state.value}</div>
         <input ref='value' onChange={this.getVal.bind(this)} defaultValue={this.state.value} />
         <input id='checkbox-input' type='checkbox' ref='checkValue' />
+        <input id='radio-input' type='radio' ref='radioValue' />
         <a onClick={this.handleSubmit.bind(this)}>Submit</a>
       </div>
     )
@@ -96,12 +97,14 @@ describe('Fluxxed up test helpers', function() {
       rig.fillIn('input', 'new thing')
       rig.clickLink('Submit')
       rig.toggleCheckbox('#checkbox-input')
+      rig.toggleRadio('#radio-input')
 
       // Set the expectations:
       // (TODO: make these Chai DSL.)
       rig.setExpectationCallback(() => {
         expect(rig.domNode.find('.answer').text()).to.match(/new thing$/)
         expect(rig.domNode.find('#checkbox-input')[0].checked).to.match(/true/)
+        expect(rig.domNode.find('#radio-input')[0].checked).to.match(/true/)
         done()
       })
 
