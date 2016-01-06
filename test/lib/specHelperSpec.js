@@ -105,10 +105,22 @@ describe('Fluxxed up test helpers', function() {
         expect(rig.domNode.find('.answer').text()).to.match(/new thing$/)
         expect(rig.domNode.find('#checkbox-input')[0].checked).to.be.true
         expect(rig.domNode.find('#radio-input')[0].checked).to.be.true
-        done()
       })
 
       // Signal that a re-render should be performed:
+      rig.finish()
+
+      // Check that toggling back to false works too:
+      rig.toggleCheckbox('#checkbox-input')
+      rig.toggleRadio('#radio-input')
+
+      rig.setExpectationCallback(() => {
+        expect(rig.domNode.find('#checkbox-input')[0].checked).to.be.false
+        expect(rig.domNode.find('#radio-input')[0].checked).to.be.false
+
+        done()
+      })
+
       rig.finish()
     })
   })
