@@ -12,14 +12,14 @@ var TestAction = assign(ActionPrototype, {
     GOT_THING: null,
     NOTHING: null
   }),
-  fetchThing: function() {
+  fetchThing() {
     // Actually fire the API:
     Dispatcher.dispatch({
       actionType: TestAction.Types.GOT_THING,
       data: {foo: 'bar'}
     })
   },
-  fetchWithWrongDispatch: function() {
+  fetchWithWrongDispatch() {
     Dispatcher.dispatch({
       actionType: TestAction.Types.NOTHING,
       data: {foo: 'bar'}
@@ -57,27 +57,23 @@ class TestComponent extends React.Component {
   }
 }
 
-describe('Fluxxed up test helpers', function() {
-  describe('Action helpers', function() {
-    it('dispatches to test store', function(done) {
+describe('Fluxxed up test helpers', () => {
+  describe('Action helpers', () => {
+    it('dispatches to test store', done => {
       expect(TestAction.fetchThing).to.eventually(done).informRegisteredStore(TestStore)
     })
 
-    it('wrong action will not notify the store', function(done) {
+    it('wrong action will not notify the store', done => {
       expect(TestAction.fetchWithWrongDispatch).to.not.eventually(done).informRegisteredStore(TestStore)
     })
   })
 
-  describe('Test Rig', function() {
+  describe('Test Rig', () => {
     var rig = new TestRig()
 
-    beforeEach(() => {
-      rig.screwOn(<TestComponent />)
-    })
+    beforeEach(() => rig.screwOn(<TestComponent />))
 
-    afterEach(() => {
-      rig.screwOff()
-    })
+    afterEach(() => rig.screwOff())
 
     it('renders', () => {
       expect(rig.domNode.find('h1').text()).to.equal('Test Component')
@@ -92,7 +88,7 @@ describe('Fluxxed up test helpers', function() {
       expect(rig.domNode.find('.answer').text()).to.match(/initial value$/)
     })
 
-    it('updates the form', (done) => {
+    it('updates the form', done => {
       // Manipulate the DOM:
       rig.fillIn('input', 'new thing')
       rig.clickLink('Submit')
