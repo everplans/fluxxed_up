@@ -108,7 +108,7 @@ describe('Fluxxed up test helpers', function() {
         done()
       })
 
-      // Signal that test should be finished:
+      // Signal that a re-render should be performed:
       rig.finish()
     })
   })
