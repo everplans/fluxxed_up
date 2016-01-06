@@ -28,6 +28,8 @@ export default class TestRig {
 
     this.screwOn = this.boltOn
     this.screwOff = this.boltOff
+    this.toggleCheckbox = this.toggleElement
+    this.toggleRadio = this.toggleElement
   }
   boltOn(TestComponent) {
     this.div = document.createElement('div')
