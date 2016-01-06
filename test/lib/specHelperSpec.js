@@ -103,8 +103,8 @@ describe('Fluxxed up test helpers', function() {
       // (TODO: make these Chai DSL.)
       rig.setExpectationCallback(() => {
         expect(rig.domNode.find('.answer').text()).to.match(/new thing$/)
-        expect(rig.domNode.find('#checkbox-input')[0].checked).to.match(/true/)
-        expect(rig.domNode.find('#radio-input')[0].checked).to.match(/true/)
+        expect(rig.domNode.find('#checkbox-input')[0].checked).to.be.true
+        expect(rig.domNode.find('#radio-input')[0].checked).to.be.true
         done()
       })
 
