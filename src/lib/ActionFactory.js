@@ -11,7 +11,7 @@ export default class ActionFactory {
       previous[keyName] = null
       return previous
     }, {}))
-    Object.assign(this, ActionPrototype) //eventually we'll make all actions use this class and we don't need the prototype
+    Object.assign(this, ActionPrototype) // eventually we'll make all actions use this class and we don't need the prototype
   }
 
   buildAction(name, method, url, options) {
