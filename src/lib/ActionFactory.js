@@ -1,4 +1,4 @@
-import KeyMirror from 'keymirror'
+import keyMirror from 'keymirror'
 
 import ActionPrototype from './ActionPrototype'
 import AppDispatcher from './fu-dispatcher'
@@ -6,7 +6,7 @@ import AppDispatcher from './fu-dispatcher'
 export default class ActionFactory {
   // takes an array of strings which become action Types, via KeyMirror
   constructor(actionTypes) {
-    this.Types = KeyMirror(actionTypes.reduce((previous, keyName) => {
+    this.Types = keyMirror(actionTypes.reduce((previous, keyName) => {
       previous[keyName] = null
       return previous
     }, {}))
