@@ -26,11 +26,11 @@ var _libFuDispatcher2 = _interopRequireDefault(_libFuDispatcher);
 
 exports.Dispatcher = _libFuDispatcher2['default'];
 
-var _libJsonFetcher = require('./lib/jsonFetcher');
+var _libJsonStatham = require('./lib/jsonStatham');
 
-var _libJsonFetcher2 = _interopRequireDefault(_libJsonFetcher);
+var _libJsonStatham2 = _interopRequireDefault(_libJsonStatham);
 
-exports.JsonFetcher = _libJsonFetcher2['default'];
+exports.jsonStatham = _libJsonStatham2['default'];
 
 var _testUtils = require('./testUtils');
 
