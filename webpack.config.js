@@ -11,11 +11,6 @@ module.exports = {
       {test: /\.(svg|png|gif)$/, loader: 'url-loader?limit=8192'}
     ]
   },
-  jshint: {
-    asi: true,
-    esnext: true,
-    sub: true
-  },
   resolve: {
     extensions: ['', '.js']
   }
