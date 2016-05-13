@@ -10,7 +10,6 @@ engines:
 ratings:
   paths:
   - "**.js"
-  - "**.jsx"
 exclude_paths:
 - dist/
 - test/
