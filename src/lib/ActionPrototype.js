@@ -1,4 +1,4 @@
-import fetcher from '../lib/jsonFetcher'
+import jsonStatham from '../lib/jsonFetcher'
 import AppDispatcher from '../lib/fu-dispatcher'
 import KeyMirror from 'keymirror'
 
@@ -31,7 +31,7 @@ var ActionPrototype = {
   fireApi(method, url, data, options) {
     // set default values
     var errorAction = options.errorAction ? options.errorAction : options.successAction
-    fetcher[method](fetcher, url, data)
+    jsonStatham[method](jsonStatham, url, data)
       .then(successData => {
         if (options.successAction) {
           AppDispatcher.dispatch({
