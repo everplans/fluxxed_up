@@ -4,13 +4,17 @@ import StorePrototype from './StorePrototype'
 // let's say for now, stores is a dictionary of name and object
 export default function bindResources(Component, resourceName) {
   function extractStores() { return Object.getOwnPropertyNames(stores).map(store => stores[store]) }
-  function capitalize(word) { return word.charAt(0).toUpperCase() + word.slice(1) }
+  function snakeToCamel(input) {
+    return (input.charAt(0).toUpperCase() +
+            input.slice(1).replace(/(\_\w)/g, function(match) { return match[1].toUpperCase() })
+           )
+  }
   function singularize(word) { return (word.slice(-1) === 's' ? word.slice(0, -1) : word) }
 
-  var bootAction = `fetch${capitalize(resourceName)}`
+  var bootAction = `fetch${snakeToCamel(resourceName)}`
 
   // figure out how to pass in actions
-  // import actionClass from `PATH TO ACTIONS/${singularize(capitalize(resourceName))}Actions`
+  // import actionClass from `PATH TO ACTIONS/${singularize(snakeToCamel(resourceName))}Actions`
 
   var actionType = actionClass.Types[`GOT_${resourceName.toUpperCase()}`]
   var resourceStore = StorePrototype(actionType)
@@ -45,3 +49,6 @@ export default function bindResources(Component, resourceName) {
   })
   return BoundComponent
 }
+
+// TODO: consider implementing a resourceNameCleaner that strips whitespace, calls `.replace(/_{2,}/g, '_')` to
+// ensure multiple underscores do not appear in a row, etc.
