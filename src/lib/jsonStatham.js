@@ -14,7 +14,7 @@ function ensureDataIsObject(data) {
   return data
 }
 
-var fetcher = {
+var jsonStatham = {
   setAdaptor(adaptor) {
     this.adaptor = adaptor
   },
@@ -79,4 +79,4 @@ var fetcher = {
   }
 }
 
-export default fetcher
+export default jsonStatham

@@ -15,7 +15,7 @@ export default function (chai, utils) {
     var done = utils.flag(this, 'done')
     var ctx = this
 
-    // TODO: Possibly stub jsonFetcher.
+    // TODO: Possibly stub jsonStatham.
 
     // Freak out if there is no done callback:
     var needCallback = new Assertion()
