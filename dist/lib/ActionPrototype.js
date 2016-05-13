@@ -41,11 +41,11 @@ var ActionPrototype = {
       }
     });
   },
-  stubbedAction: function stubbedAction(actionName, data) {
-    this.receivedData[actionName] = data;
-  },
   saveAction: function saveAction(action) {
     this.originalActions[action] = this[action];
+  },
+  stubbedAction: function stubbedAction(actionName, data) {
+    this.receivedData[actionName] = data;
   },
   restore: function restore() {
     var _this2 = this;
@@ -59,6 +59,8 @@ var ActionPrototype = {
     this.originalActions = {};
   },
   fireApi: function fireApi(method, url, data, options) {
+    var _this3 = this;
+
     // set default values
     var errorAction = options.errorAction ? options.errorAction : options.successAction;
     _libJsonFetcher2['default'][method](_libJsonFetcher2['default'], url, data).then((function (successData) {
@@ -68,12 +70,11 @@ var ActionPrototype = {
           data: options.JSONHead ? successData[options.JSONHead] : successData
         });
       }
-      if (options.onSuccess) {
-        options.onSuccess.apply();
-      }
+      if (options.onSuccess) options.onSuccess.apply();
+
       if (options.successMsg) {
         _libFuDispatcher2['default'].dispatch({
-          actionType: this.specialTypes.GOT_MSG,
+          actionType: _this3.specialTypes.GOT_MSG,
           data: options.successMsg
         });
       }
