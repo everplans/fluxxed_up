@@ -2,9 +2,7 @@ import assign from 'object-assign'
 import React from 'react'
 
 export default (Component, props, stubs) => {
-  // function RouterStub() { }
-
-  var RouterStub = assign(
+  const RouterStub = assign(
     {
       createHref() {},
       getCurrentParams () {},
@@ -18,7 +16,7 @@ export default (Component, props, stubs) => {
       push () {},
       replace () {}
     },
-    stubs  // Pass additional empty functions as necessary
+    stubs  // Pass additional empty functions as necessary.
   )
 
   return React.createClass({
