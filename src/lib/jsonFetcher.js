@@ -15,17 +15,17 @@ function ensureDataIsObject(data) {
 }
 
 var fetcher = {
-  setAdaptor: function(adaptor) {
+  setAdaptor(adaptor) {
     this.adaptor = adaptor
   },
-  getAdaptor: function() {
+  getAdaptor() {
     return (this.adaptor ? this.adaptor : new defaultAdaptor())
   },
-  buildRequest: function(path, method, data, withCredentials) {
+  buildRequest(path, method, data, withCredentials) {
     var headers = {} // TODO grab special header
     var adaptor = this.getAdaptor()
     var opts = {
-      headers: headers,
+      headers,
       url: adaptor.serverBase() + cleanSlashes(adaptor.pathRoot()) + cleanSlashes(path)
     }
     if (method)
@@ -36,13 +36,11 @@ var fetcher = {
       opts.xhrFields = {withCredentials: true}
     return opts
   },
-  sendRequest: function(request) {
+  sendRequest(request) {
     var promise = jQuery.Deferred()
     jQuery.ajax(request)
-      .done(function (data, result, response) {
-        promise.resolve(ensureDataIsObject(data), response.status)
-      })
-      .fail(function(error) {
+      .done((data, result, response) => { promise.resolve(ensureDataIsObject(data), response.status) })
+      .fail(error => {
         var errorJSON
         if (error.responseJSON)
           errorJSON = error.responseJSON
@@ -55,22 +53,22 @@ var fetcher = {
 
     return promise
   },
-  fetch: function(url) { // temporary backwards compatibility
+  fetch(url) { // temporary backwards compatibility
     return this.get(url)
   },
-  get: function(url, withCredentials) {
+  get(url, withCredentials) {
     return this.sendRequest(this.buildRequest(url, 'GET', null, withCredentials))
   },
-  put: function(url, data) {
+  put(url, data) {
     return this.sendRequest(this.buildRequest(url, 'PUT', data))
   },
-  post: function(url, data, withCredentials) {
+  post(url, data, withCredentials) {
     return this.sendRequest(this.buildRequest(url, 'POST', data, withCredentials))
   },
-  delete: function(url, data, withCredentials) {
+  delete(url, data, withCredentials) {
     return this.sendRequest(this.buildRequest(url, 'DELETE', data, withCredentials))
   },
-  postFile: function(url, data) {
+  postFile(url, data) {
     // Taken from: http://stackoverflow.com/questions/12431760/html5-formdata-file-upload-with-rubyonrails
     // and http://stackoverflow.com/questions/21234106/upload-file-using-reactjs-via-blueimp-fileupload-jquery-plugin
     var request = this.buildRequest(url, 'POST', data)
