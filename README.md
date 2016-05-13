@@ -40,7 +40,7 @@ var TestAction = assign(ActionPrototype, {
 * Dispatcher
 Lightweight wrapper around the flux dispatcher. It will throw an exception if you try to dispatch an action with an undefined type. (You'd be surprised how many bugs you pre-emptively avoid doing this).
 
-* JsonFetcher
+* jsonStatham
 Lightweight wrapper around jQuery's ajax functionality. It assumes a simple RESTful api on the server side. It will fire success/failure callbacks based on server response. I has some extra settings to specific API keys and other auth.
 
 * FeatureFlags

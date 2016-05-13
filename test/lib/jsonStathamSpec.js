@@ -1,8 +1,8 @@
 import utils from '../../test/support/TestUtils'
-import fetcher from'../../src/lib/jsonFetcher'
+import jsonStatham from'../../src/lib/jsonStatham'
 import AjaxAdaptorBase from '../../src/lib/AjaxAdaptorBase'
 
-describe('jsonFetcher', function() {
+describe('jsonStatham', function() {
   var listener
   var server
   var spy
@@ -11,7 +11,7 @@ describe('jsonFetcher', function() {
     serverBase() { return 'http://test.com' }
     pathRoot() { return '/api' }
   }
-  fetcher.setAdaptor(new testAdaptor())
+  jsonStatham.setAdaptor(new testAdaptor())
 
   beforeEach(function() {
     spy = sinon.spy($, 'ajax')
@@ -27,41 +27,41 @@ describe('jsonFetcher', function() {
 
   describe('mechanics: ', function() {
     it('builds get request', function() {
-      fetcher.get('/bla')
+      jsonStatham.get('/bla')
       expect(args().url).to.equal('http://test.com/api/bla')
     })
 
     it('builds PUT request', function() {
-      fetcher.put('/bla', {param: 'some data'})
+      jsonStatham.put('/bla', {param: 'some data'})
       expect(args().url).to.equal('http://test.com/api/bla')
       expect(args().method).to.equal('PUT')
       expect(args().data.param).to.equal('some data')
     })
 
     it('builds POST request', function() {
-      fetcher.post('/bla', {param: 'some data'})
+      jsonStatham.post('/bla', {param: 'some data'})
       expect(args().url).to.equal('http://test.com/api/bla')
       expect(args().method).to.equal('POST')
       expect(args().data.param).to.equal('some data')
     })
 
     it('builds delete request', function() {
-      fetcher.delete('/bla', {param: 'some data'})
+      jsonStatham.delete('/bla', {param: 'some data'})
       expect(args().url).to.equal('http://test.com/api/bla')
       expect(args().method).to.equal('DELETE')
       expect(args().data.param).to.equal('some data')
     })
 
     it('sets auth credentials', function() {
-      expect(fetcher.buildRequest('/bla', null, {}, true).xhrFields.withCredentials).to.equal(true)
+      expect(jsonStatham.buildRequest('/bla', null, {}, true).xhrFields.withCredentials).to.equal(true)
     })
 
     it('does not set auth credentials', function() {
-      expect(fetcher.buildRequest('/bla').xhrFields).to.equal(undefined)
+      expect(jsonStatham.buildRequest('/bla').xhrFields).to.equal(undefined)
     })
 
     it('sends post with auth credentials', function() {
-      fetcher.post('/bla', {email: 'dude@dude.com'}, true)
+      jsonStatham.post('/bla', {email: 'dude@dude.com'}, true)
       expect(args().xhrFields.withCredentials).to.equal(true)
     })
   })
@@ -78,7 +78,7 @@ describe('jsonFetcher', function() {
     it('GET json', function(done) {
       utils.createServerAndMock('GET', '/api/test', JSON.stringify({fun: 'times'}), server, 200)
 
-      fetcher.fetch('/test').done(function(data) {
+      jsonStatham.fetch('/test').done(function(data) {
         expect(data.fun).to.equal('times')
         done()
       })
@@ -87,7 +87,7 @@ describe('jsonFetcher', function() {
     it('POST data', function(done) {
       utils.createServerAndMock('POST', '/api/test', JSON.stringify({fun: 'times for post'}), server, 200)
 
-      fetcher.post('/test').done(function(data) {
+      jsonStatham.post('/test').done(function(data) {
         expect(data.fun).to.equal('times for post')
         done()
       })
@@ -95,7 +95,7 @@ describe('jsonFetcher', function() {
 
     it('POST data with error', function(done) {
       utils.createServerAndMock('POST', '/api/test', JSON.stringify({error: {message: 'oops'}}), server, 422)
-      fetcher.post('/test').done(function() {}).fail(function(data) {
+      jsonStatham.post('/test').done(function() {}).fail(function(data) {
         expect(data.error.message).to.equal('oops')
         done()
       })
@@ -105,7 +105,7 @@ describe('jsonFetcher', function() {
       utils.createServerAndMock('POST', '/api/test', JSON.stringify({fun: 'times for post'}), server, 200)
       var formData = new FormData()
       formData.append('comments', 'hey there', 'stuff')
-      fetcher.postFile('/test').done(function(data) {
+      jsonStatham.postFile('/test').done(function(data) {
         expect(data.fun).to.equal('times for post')
         done()
       })
@@ -115,7 +115,7 @@ describe('jsonFetcher', function() {
       utils.createServerAndMock('POST', '/api/test', JSON.stringify({error: {message: 'oops'}}), server, 422)
       var formData = new FormData()
       formData.append('comments', 'hey there', 'stuff')
-      fetcher.postFile('/test', formData).fail(function(data) {
+      jsonStatham.postFile('/test', formData).fail(function(data) {
         expect(data.error.message).to.equal('oops')
         done()
       })
