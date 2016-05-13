@@ -1,7 +1,7 @@
-var webpackConfig = Object.create(require('./webpack.config.js'));
-webpackConfig.devtool = 'inline-source-map';
-webpackConfig.entry = {} ;
-webpackConfig.watch = true;
+var webpackConfig = Object.create(require('./webpack.config.js'))
+webpackConfig.devtool = 'inline-source-map'
+webpackConfig.entry = {}
+webpackConfig.watch = true
 
 module.exports = function(config) {
   config.set({
@@ -27,5 +27,5 @@ module.exports = function(config) {
         ui: 'bdd'
       }
     }
-  });
-};
+  })
+}
