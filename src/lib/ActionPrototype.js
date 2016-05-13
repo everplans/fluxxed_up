@@ -11,42 +11,37 @@ var ActionPrototype = {
     GOT_MSG: null
   }),
   originalActions: {},
-  stubForTests: function() {
+  stubForTests() {
     this.receivedData = {}
-    let actions = Object.getOwnPropertyNames(this).filter((fn) => { return typeof this[fn] === 'function' })
-    actions.forEach((action) => {
+    const actions = Object.getOwnPropertyNames(this).filter(fn => typeof this[fn] === 'function')
+    actions.forEach(action => {
       if (['fireApi', 'stubForTests', 'stubbedAction', 'saveAction', 'restore'].indexOf(action) < 0) {
         this.saveAction(action)
-        this[action] = (data) => { this.stubbedAction(action, data) }
+        this[action] = data => { this.stubbedAction(action, data) }
       }
     })
   },
-  stubbedAction: function(actionName, data) {
-    this.receivedData[actionName] = data
-  },
-  saveAction: function(action) {
-    this.originalActions[action] = this[action]
-  },
-  restore: function() {
-    let originals = Object.getOwnPropertyNames(this.originalActions)
-                          .filter((action) => { return typeof this.originalActions[action] === 'function' })
-    originals.forEach((action) => { this[action] = this.originalActions[action] })
+  saveAction(action) { this.originalActions[action] = this[action] },
+  stubbedAction(actionName, data) { this.receivedData[actionName] = data },
+  restore() {
+    const originals = Object.getOwnPropertyNames(this.originalActions).filter(action => typeof this.originalActions[action] === 'function')
+    originals.forEach(action => { this[action] = this.originalActions[action] })
     this.originalActions = {}
   },
-  fireApi: function(method, url, data, options) {
+  fireApi(method, url, data, options) {
     // set default values
     var errorAction = options.errorAction ? options.errorAction : options.successAction
     fetcher[method](fetcher, url, data)
-      .then(function(successData) {
+      .then(successData => {
         if (options.successAction) {
           AppDispatcher.dispatch({
             actionType: options.successAction,
             data: (options.JSONHead ? successData[options.JSONHead] : successData)
           })
         }
-        if (options.onSuccess) {
+        if (options.onSuccess)
           options.onSuccess.apply()
-        }
+
         if (options.successMsg) {
           AppDispatcher.dispatch({
             actionType: this.specialTypes.GOT_MSG,
@@ -54,12 +49,12 @@ var ActionPrototype = {
           })
         }
       }.bind(this))
-      .fail(function(failureData) {
+      .fail(failureData => {
         var scopedErrors = options.JSONHead ? failureData[options.JSONHead] : failureData
         var errors = scopedErrors ? scopedErrors.errors : failureData.errors
         AppDispatcher.dispatch({
           actionType: errorAction,
-          data: {errors: errors}
+          data: {errors}
         })
       })
   }

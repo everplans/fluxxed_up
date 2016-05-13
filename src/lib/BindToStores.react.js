@@ -34,7 +34,7 @@ export default function bindResources(Component, resourceName) {
     },
     handleStoresChanged() {
       var state = {processing: false, loading: false}
-      Object.getOwnPropertyNames(stores).map(function(store) {
+      Object.getOwnPropertyNames(stores).map(store => {
         state[store] = stores[store].getState()
       })
       this.setState(state)

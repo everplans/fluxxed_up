@@ -11,17 +11,6 @@ The goal of fluxxed_up is to keep most components as stateless as possible by wr
 ## History
 This is a complete reboot of some earlier ideas that began in a Backbone app. If you look at the original commits you'll see it. We kept this repo as a reminder of our earlier folly. Who knows, maybe this won't be a React framework for long.
 
-## Contributors of Actual Code:
-* Bernie 'The Wicker Man' Kravitz.
-
-## Contributors of Emotional Support:
-* Warren 'National Treasure' Habib;
-* Maneesh 'Kiss of Death' Anand;
-* Tolu 'The Rock' Komolafe;
-* Jesmine 'Ghost Rider' Omonori; and,
-* Bart 'Kick-Ass' Riordan.
-
-
 ## Releasing:
 Right now, until we get some gulp scripts in place make sure to run the following before packaging and releasing a version:
 * `npm run build`
