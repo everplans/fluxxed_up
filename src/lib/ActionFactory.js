@@ -18,7 +18,7 @@ export default class ActionFactory {
   }
   // builds an action function that just dispatches a type with a passed data payload
   buildActionDispatch(name, type) {
-    this[name] = data => AppDispatcher.dispatch({data: data, actionType: type})
+    this[name] = data => AppDispatcher.dispatch({actionType: type, data})
   }
 
 }
