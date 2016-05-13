@@ -95,7 +95,8 @@ describe('Fluxxed up test helpers', function() {
       // Manipulate the DOM:
       rig.fillIn('input', 'new thing')
       rig.clickLink('Submit')
-      rig.toggleCheckbox('#checkbox-input')
+      var element = rig.domNode.find('#checkbox-input')[0]
+      rig.toggleCheckbox(element)
 
       // Set the expectations:
       // (TODO: make these Chai DSL.)
