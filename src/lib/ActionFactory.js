@@ -2,7 +2,6 @@ import KeyMirror from 'keymirror'
 
 import ActionPrototype from './ActionPrototype'
 import AppDispatcher from './fu-dispatcher'
-import fetcher from './jsonFetcher'
 
 export default class ActionFactory {
   // takes an array of strings which become action Types, via KeyMirror
