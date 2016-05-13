@@ -21,6 +21,7 @@
       "API_HOST": false,
       "API_KEY": false,
       "ASSET_HOST": false,
+      "chai": false,
       "CONTENT_HOST": false,
       "expect": false,
       "NODE_APP_HOST": false,
