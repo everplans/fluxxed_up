@@ -1,4 +1,4 @@
-import jsonStatham from '../lib/jsonFetcher'
+import jsonStatham from '../lib/jsonStatham'
 import AppDispatcher from '../lib/fu-dispatcher'
 import KeyMirror from 'keymirror'
 
