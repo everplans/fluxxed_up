@@ -123,9 +123,9 @@ describe('Fluxxed up test helpers', function() {
     })
 
     it('selects the right value for the select box', () => {
-      rig.setValue('.select-input', "1")
+      rig.setValue('.select-input', '1')
 
-      expect(rig.domNode.find('.select-input')[0].value).to.equal("1")
+      expect(rig.domNode.find('.select-input')[0].value).to.equal('1')
     })
   })
 })
