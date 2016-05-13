@@ -61,6 +61,10 @@ export default class TestRig {
     element.checked = !(element.checked)
     TestUtils.Simulate.change(element)
   }
+  toggleRadioButton(element) {
+    element.checked = !(element.checked)
+    TestUtils.Simulate.change(element)
+  }
   fillInElement(element, value) {
     element.val(value)
     var rawElement = (element.jquery ? element[0] : element) // React doesn't like dealing with a jQuery wrapper.

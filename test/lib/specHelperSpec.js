@@ -50,6 +50,7 @@ class TestComponent extends React.Component {
         <div className='answer'>Form Value: {this.state.value}</div>
         <input ref='value' onChange={this.getVal.bind(this)} defaultValue={this.state.value} />
         <input id='checkbox-input' type='checkbox' ref='checkValue' />
+        <input className='radio-input' type='radio' />
         <a onClick={this.handleSubmit.bind(this)}>Submit</a>
       </div>
     )
@@ -108,6 +109,13 @@ describe('Fluxxed up test helpers', function() {
 
       // Signal that test should be finished:
       rig.finish()
+    })
+
+    it('toggles the radio button', () => {
+      var element = rig.domNode.find('.radio-input')[0]
+      rig.toggleRadioButton(element)
+
+      expect(rig.domNode.find('.radio-input')[0].checked).to.equal(true)
     })
   })
 })
