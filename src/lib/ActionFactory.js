@@ -14,14 +14,6 @@ export default class ActionFactory {
     Object.assign(this, ActionPrototype) //eventually we'll make all actions use this class and we don't need the prototype
   }
 
-  /* -- builds the action method and calls fireApi for you example usage
-    myActions.buildAction(
-      'updateAssessment',
-      'put',
-      'quickplan/update',
-      { successAction: myActions.Types.GOT_ASSESSMENT_QUESTION}
-    )
-  */
   buildAction(name, method, url, options) {
     this[name] = function(data) {
       this.fireApi(method, url, data, options)
