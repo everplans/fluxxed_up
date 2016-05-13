@@ -14,9 +14,7 @@ export default class ActionFactory {
   }
 
   buildAction(name, method, url, options) {
-    this[name] = data => {
-      this.fireApi(method, url, data, options)
-    }
+    this[name] = data => this.fireApi(method, url, data, options)
   }
   // builds an action function that just dispatches a type with a passed data payload
   buildActionDispatch(name, type) {
