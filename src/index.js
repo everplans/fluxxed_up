@@ -1,5 +1,5 @@
 export ActionPrototype from './lib/ActionPrototype'
 export ExtraStorage from './lib/extra_storage'
 export Dispatcher from './lib/fu-dispatcher'
-export JsonStatham from './lib/jsonStatham'
+export jsonStatham from './lib/jsonStatham'
 export * from './testUtils'
