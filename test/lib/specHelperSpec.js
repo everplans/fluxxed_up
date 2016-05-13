@@ -52,8 +52,8 @@ class TestComponent extends React.Component {
         <input id='checkbox-input' type='checkbox' ref='checkValue' />
         <input className='radio-input' type='radio' />
         <select className='select-input'>
-          <option name="month">Month</option>
-          <option value="1">January</option>
+          <option name='month'>Month</option>
+          <option value='1'>January</option>
           <option value="2">February</option>
         </select>
         <a onClick={this.handleSubmit.bind(this)}>Submit</a>
@@ -101,8 +101,8 @@ describe('Fluxxed up test helpers', function() {
       // Manipulate the DOM:
       rig.fillIn('input', 'new thing')
       rig.clickLink('Submit')
-      var element = rig.domNode.find('#checkbox-input')[0]
-      rig.toggleCheckbox(element)
+
+      rig.toggleCheckbox('#checkbox-input')
 
       // Set the expectations:
       // (TODO: make these Chai DSL.)
@@ -117,15 +117,13 @@ describe('Fluxxed up test helpers', function() {
     })
 
     it('toggles the radio button', () => {
-      var element = rig.domNode.find('.radio-input')[0]
-      rig.toggleRadioButton(element)
+      rig.toggleRadioButton('.radio-input')
 
       expect(rig.domNode.find('.radio-input')[0].checked).to.equal(true)
     })
 
     it('selects the right value for the select box', () => {
-      var element = rig.domNode.find('.select-input')[0]
-      rig.select(element, "1")
+      rig.setValue('.select-input', "1")
 
       expect(rig.domNode.find('.select-input')[0].value).to.equal("1")
     })
