@@ -4,9 +4,9 @@ exports.__esModule = true;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _libJsonFetcher = require('../lib/jsonFetcher');
+var _libJsonStatham = require('../lib/jsonStatham');
 
-var _libJsonFetcher2 = _interopRequireDefault(_libJsonFetcher);
+var _libJsonStatham2 = _interopRequireDefault(_libJsonStatham);
 
 var _libFuDispatcher = require('../lib/fu-dispatcher');
 
@@ -63,7 +63,7 @@ var ActionPrototype = {
 
     // set default values
     var errorAction = options.errorAction ? options.errorAction : options.successAction;
-    _libJsonFetcher2['default'][method](_libJsonFetcher2['default'], url, data).then((function (successData) {
+    _libJsonStatham2['default'][method](_libJsonStatham2['default'], url, data).then((function (successData) {
       if (options.successAction) {
         _libFuDispatcher2['default'].dispatch({
           actionType: options.successAction,
