@@ -24,7 +24,7 @@ function ensureDataIsObject(data) {
   return data;
 }
 
-var fetcher = {
+var jsonStatham = {
   setAdaptor: function setAdaptor(adaptor) {
     this.adaptor = adaptor;
   },
@@ -55,10 +55,6 @@ var fetcher = {
 
     return promise;
   },
-  fetch: function fetch(url) {
-    // temporary backwards compatibility
-    return this.get(url);
-  },
   get: function get(url, withCredentials) {
     return this.sendRequest(this.buildRequest(url, 'GET', null, withCredentials));
   },
@@ -82,5 +78,5 @@ var fetcher = {
   }
 };
 
-exports['default'] = fetcher;
+exports['default'] = jsonStatham;
 module.exports = exports['default'];
