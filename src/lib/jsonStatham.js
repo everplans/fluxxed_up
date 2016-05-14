@@ -18,10 +18,9 @@ var jsonStatham = {
   setAdaptor(adaptor) { this.adaptor = adaptor },
   getAdaptor() { return (this.adaptor ? this.adaptor : new defaultAdaptor()) },
   buildRequest(path, method, data, withCredentials) {
-    var headers = {} // TODO grab special header
     var adaptor = this.getAdaptor()
     var opts = {
-      headers,
+      headers: adaptor.headers(),
       url: adaptor.serverBase() + cleanSlashes(adaptor.pathRoot()) + cleanSlashes(path)
     }
     if (method)
