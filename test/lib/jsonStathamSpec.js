@@ -3,7 +3,7 @@ import jsonStatham from'../../src/lib/jsonStatham'
 import AjaxAdaptorBase from '../../src/lib/AjaxAdaptorBase'
 
 class TestAdaptor extends AjaxAdaptorBase {
-  headers() { return {yuri: 'orlov'} }
+  defaultHeaders() { return {yuri: 'orlov'} }
   pathRoot() { return '/api' }
   serverBase() { return 'http://test.com' }
 }

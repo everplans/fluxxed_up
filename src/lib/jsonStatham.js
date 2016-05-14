@@ -20,7 +20,7 @@ var jsonStatham = {
   buildRequest(path, method, data, withCredentials) {
     var adaptor = this.getAdaptor()
     var opts = {
-      headers: adaptor.headers(),
+      headers: adaptor.defaultHeaders(),
       url: adaptor.serverBase() + cleanSlashes(adaptor.pathRoot()) + cleanSlashes(path)
     }
     if (method)
