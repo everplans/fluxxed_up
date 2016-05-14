@@ -87,7 +87,7 @@ describe('jsonStatham', () => {
 
     it('POST data with error', done => {
       utils.createServerAndMock('POST', '/api/test', JSON.stringify({error: {message: 'oops'}}), server, 422)
-      jsonStatham.post('/test').done(() => null).fail(data => {
+      jsonStatham.post('/test').done(function() {}).fail(data => {
         expect(data.error.message).to.equal('oops')
         done()
       })
