@@ -15,12 +15,8 @@ function ensureDataIsObject(data) {
 }
 
 var jsonStatham = {
-  setAdaptor(adaptor) {
-    this.adaptor = adaptor
-  },
-  getAdaptor() {
-    return (this.adaptor ? this.adaptor : new defaultAdaptor())
-  },
+  setAdaptor(adaptor) { this.adaptor = adaptor },
+  getAdaptor() { return (this.adaptor ? this.adaptor : new defaultAdaptor()) },
   buildRequest(path, method, data, withCredentials) {
     var headers = {} // TODO grab special header
     var adaptor = this.getAdaptor()
@@ -53,21 +49,10 @@ var jsonStatham = {
 
     return promise
   },
-  fetch(url) { // temporary backwards compatibility
-    return this.get(url)
-  },
-  get(url, withCredentials) {
-    return this.sendRequest(this.buildRequest(url, 'GET', null, withCredentials))
-  },
-  put(url, data) {
-    return this.sendRequest(this.buildRequest(url, 'PUT', data))
-  },
-  post(url, data, withCredentials) {
-    return this.sendRequest(this.buildRequest(url, 'POST', data, withCredentials))
-  },
-  delete(url, data, withCredentials) {
-    return this.sendRequest(this.buildRequest(url, 'DELETE', data, withCredentials))
-  },
+  get(url, withCredentials) { return this.sendRequest(this.buildRequest(url, 'GET', null, withCredentials)) },
+  put(url, data) { return this.sendRequest(this.buildRequest(url, 'PUT', data)) },
+  post(url, data, withCredentials) { return this.sendRequest(this.buildRequest(url, 'POST', data, withCredentials)) },
+  delete(url, data, withCredentials) { return this.sendRequest(this.buildRequest(url, 'DELETE', data, withCredentials)) },
   postFile(url, data) {
     // Taken from: http://stackoverflow.com/questions/12431760/html5-formdata-file-upload-with-rubyonrails
     // and http://stackoverflow.com/questions/21234106/upload-file-using-reactjs-via-blueimp-fileupload-jquery-plugin
