@@ -4,13 +4,16 @@ import AjaxAdaptorBase from '../../src/lib/AjaxAdaptorBase'
 
 describe('jsonStatham', function() {
   var listener
-  var server
-  var spy
+var spy
+const args = () => spy.getCall(0).args[0]
 
-  class testAdaptor extends AjaxAdaptorBase {
-    serverBase() { return 'http://test.com' }
-    pathRoot() { return '/api' }
-  }
+class TestAdaptor extends AjaxAdaptorBase {
+  pathRoot() { return '/api' }
+  serverBase() { return 'http://test.com' }
+}
+
+  var server
+
   jsonStatham.setAdaptor(new testAdaptor())
 
   beforeEach(function() {
@@ -21,9 +24,6 @@ describe('jsonStatham', function() {
     $.ajax.restore()
   })
 
-  function args() {
-    return spy.getCall(0).args[0]
-  }
 
   describe('mechanics: ', function() {
     it('builds get request', function() {
