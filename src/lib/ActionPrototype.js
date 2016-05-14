@@ -48,7 +48,7 @@ var ActionPrototype = {
             data: options.successMsg
           })
         }
-      }.bind(this))
+      })
       .fail(failureData => {
         var scopedErrors = options.JSONHead ? failureData[options.JSONHead] : failureData
         var errors = scopedErrors ? scopedErrors.errors : failureData.errors
