@@ -17,10 +17,10 @@ function ensureDataIsObject(data) {
 var jsonStatham = {
   setAdaptor(adaptor) { this.adaptor = adaptor },
   getAdaptor() { return (this.adaptor ? this.adaptor : new defaultAdaptor()) },
-  buildRequest(path, method, data, withCredentials) {
+  buildRequest(path, method, data, withCredentials, additionalHeaders) {
     var adaptor = this.getAdaptor()
     var opts = {
-      headers: adaptor.defaultHeaders(),
+      headers: adaptor.headers(additionalHeaders),
       url: adaptor.serverBase() + cleanSlashes(adaptor.pathRoot()) + cleanSlashes(path)
     }
     if (method)
