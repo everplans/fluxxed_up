@@ -1,11 +1,9 @@
-import assign from 'object-assign'
 import utils from '../../test/support/TestUtils'
 import jsonStatham from'../../src/lib/jsonStatham'
 import AjaxAdaptorBase from '../../src/lib/AjaxAdaptorBase'
 
 class TestAdaptor extends AjaxAdaptorBase {
   defaultHeaders() { return {yuri: 'orlov'} }
-  headers(additionalHeaders) { return assign(this.defaultHeaders(), additionalHeaders) }
   pathRoot() { return '/api' }
   serverBase() { return 'http://test.com' }
 }
