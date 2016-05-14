@@ -2,10 +2,6 @@ import utils from '../../test/support/TestUtils'
 import jsonStatham from'../../src/lib/jsonStatham'
 import AjaxAdaptorBase from '../../src/lib/AjaxAdaptorBase'
 
-
-var spy
-const getArgumentsPassedToSpy = () => spy.getCall(0).args[0]
-
 class TestAdaptor extends AjaxAdaptorBase {
   pathRoot() { return '/api' }
   serverBase() { return 'http://test.com' }
@@ -13,6 +9,8 @@ class TestAdaptor extends AjaxAdaptorBase {
 
 describe('jsonStatham', () => {
   var server
+  var spy
+  const getArgumentsPassedToSpy = () => spy.getCall(0).args[0]
 
   before(() => jsonStatham.setAdaptor(new TestAdaptor()))
 
