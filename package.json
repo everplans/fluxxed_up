@@ -48,6 +48,7 @@
     "object-assign": "^3.0.0",
     "phantomjs": "^1.9.17",
     "react": "^0.13.3",
+    "rimraf": "^2.5.2",
     "sinon": "^1.15.4",
     "webpack": "^1.5.3"
   }
