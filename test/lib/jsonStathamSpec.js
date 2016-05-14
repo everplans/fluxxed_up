@@ -4,7 +4,7 @@ import AjaxAdaptorBase from '../../src/lib/AjaxAdaptorBase'
 
 
 var spy
-const args = () => spy.getCall(0).args[0]
+const getArgumentsPassedToSpy = () => spy.getCall(0).args[0]
 
 class TestAdaptor extends AjaxAdaptorBase {
   pathRoot() { return '/api' }
@@ -28,28 +28,28 @@ describe('jsonStatham', () => {
   describe('mechanics: ', () => {
     it('builds get request', () => {
       jsonStatham.get('/bla')
-      expect(args().url).to.equal('http://test.com/api/bla')
+      expect(getArgumentsPassedToSpy().url).to.equal('http://test.com/api/bla')
     })
 
     it('builds PUT request', () => {
       jsonStatham.put('/bla', {param: 'some data'})
-      expect(args().url).to.equal('http://test.com/api/bla')
-      expect(args().method).to.equal('PUT')
-      expect(args().data.param).to.equal('some data')
+      expect(getArgumentsPassedToSpy().url).to.equal('http://test.com/api/bla')
+      expect(getArgumentsPassedToSpy().method).to.equal('PUT')
+      expect(getArgumentsPassedToSpy().data.param).to.equal('some data')
     })
 
     it('builds POST request', () => {
       jsonStatham.post('/bla', {param: 'some data'})
-      expect(args().url).to.equal('http://test.com/api/bla')
-      expect(args().method).to.equal('POST')
-      expect(args().data.param).to.equal('some data')
+      expect(getArgumentsPassedToSpy().url).to.equal('http://test.com/api/bla')
+      expect(getArgumentsPassedToSpy().method).to.equal('POST')
+      expect(getArgumentsPassedToSpy().data.param).to.equal('some data')
     })
 
     it('builds delete request', () => {
       jsonStatham.delete('/bla', {param: 'some data'})
-      expect(args().url).to.equal('http://test.com/api/bla')
-      expect(args().method).to.equal('DELETE')
-      expect(args().data.param).to.equal('some data')
+      expect(getArgumentsPassedToSpy().url).to.equal('http://test.com/api/bla')
+      expect(getArgumentsPassedToSpy().method).to.equal('DELETE')
+      expect(getArgumentsPassedToSpy().data.param).to.equal('some data')
     })
 
     it('sets auth credentials', () => {
@@ -62,7 +62,7 @@ describe('jsonStatham', () => {
 
     it('sends post with auth credentials', () => {
       jsonStatham.post('/bla', {email: 'dude@dude.com'}, true)
-      expect(args().xhrFields.withCredentials).to.equal(true)
+      expect(getArgumentsPassedToSpy().xhrFields.withCredentials).to.equal(true)
     })
   })
 
