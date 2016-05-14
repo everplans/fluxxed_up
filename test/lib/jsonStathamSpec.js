@@ -1,9 +1,11 @@
+import assign from 'object-assign'
 import utils from '../../test/support/TestUtils'
 import jsonStatham from'../../src/lib/jsonStatham'
 import AjaxAdaptorBase from '../../src/lib/AjaxAdaptorBase'
 
 class TestAdaptor extends AjaxAdaptorBase {
   defaultHeaders() { return {yuri: 'orlov'} }
+  headers(additionalHeaders) { return assign(this.defaultHeaders(), additionalHeaders) }
   pathRoot() { return '/api' }
   serverBase() { return 'http://test.com' }
 }
@@ -63,10 +65,22 @@ describe('jsonStatham', () => {
       jsonStatham.post('/bla', {email: 'dude@dude.com'}, true)
       expect(getArgumentsPassedToSpy().xhrFields.withCredentials).to.equal(true)
     })
+  })
 
-    it('includes headers from the adaptor', () => {
-      jsonStatham.get('/bla')
-      expect(getArgumentsPassedToSpy().headers.yuri).to.equal('orlov')
+  describe('Headers:', () => {
+    it('includes default headers from the adaptor', () => {
+      const opts = jsonStatham.buildRequest('/bla', 'get', {}, false)  // Note: no need to pass additionalHeaders at all.
+      expect(opts.headers.yuri).to.equal('orlov')
+    })
+
+    it('adds additional headers passed to it', () => {
+      const opts = jsonStatham.buildRequest('/bla', 'get', {}, false, {stanley: 'goodspeed'})
+      expect(opts.headers.stanley).to.equal('goodspeed')
+    })
+
+    it('overwrites default headers with the same key', () => {
+      const opts = jsonStatham.buildRequest('/bla', 'get', {}, false, {yuri: 'goodspeed'})
+      expect(opts.headers.yuri).to.equal('goodspeed')
     })
   })
 
