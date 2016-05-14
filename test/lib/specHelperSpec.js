@@ -54,7 +54,7 @@ class TestComponent extends React.Component {
         <select className='select-input'>
           <option name='month'>Month</option>
           <option value='1'>January</option>
-          <option value="2">February</option>
+          <option value='2'>February</option>
         </select>
         <a onClick={this.handleSubmit.bind(this)}>Submit</a>
       </div>
