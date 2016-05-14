@@ -3,7 +3,6 @@ import jsonStatham from'../../src/lib/jsonStatham'
 import AjaxAdaptorBase from '../../src/lib/AjaxAdaptorBase'
 
 describe('jsonStatham', function() {
-  var listener
 var spy
 const args = () => spy.getCall(0).args[0]
 
