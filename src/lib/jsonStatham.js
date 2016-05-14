@@ -53,9 +53,6 @@ var jsonStatham = {
 
     return promise
   },
-  fetch(url) { // temporary backwards compatibility
-    return this.get(url)
-  },
   get(url, withCredentials) {
     return this.sendRequest(this.buildRequest(url, 'GET', null, withCredentials))
   },
