@@ -3,6 +3,7 @@ import jsonStatham from'../../src/lib/jsonStatham'
 import AjaxAdaptorBase from '../../src/lib/AjaxAdaptorBase'
 
 class TestAdaptor extends AjaxAdaptorBase {
+  headers() { return {yuri: 'orlov'} }
   pathRoot() { return '/api' }
   serverBase() { return 'http://test.com' }
 }
@@ -61,6 +62,11 @@ describe('jsonStatham', () => {
     it('sends post with auth credentials', () => {
       jsonStatham.post('/bla', {email: 'dude@dude.com'}, true)
       expect(getArgumentsPassedToSpy().xhrFields.withCredentials).to.equal(true)
+    })
+
+    it('includes headers from the adaptor', () => {
+      jsonStatham.get('/bla')
+      expect(getArgumentsPassedToSpy().headers.yuri).to.equal('orlov')
     })
   })
 
