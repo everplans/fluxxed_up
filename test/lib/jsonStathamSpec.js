@@ -17,10 +17,12 @@ class TestAdaptor extends AjaxAdaptorBase {
 
   beforeEach(function() {
     spy = sinon.spy($, 'ajax')
+    server = sinon.fakeServer.create()
   })
 
   afterEach(function() {
     $.ajax.restore()
+    server.restore()
   })
 
 
@@ -66,13 +68,6 @@ class TestAdaptor extends AjaxAdaptorBase {
   })
 
   describe('requests: ', function () {
-    beforeEach(function() {
-      server = sinon.fakeServer.create()
-    })
-
-     afterEach(function() {
-      server.restore()
-    })
 
     it('GET json', function(done) {
       utils.createServerAndMock('GET', '/api/test', JSON.stringify({fun: 'times'}), server, 200)
