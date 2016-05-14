@@ -28,8 +28,9 @@ export default class TestRig {
 
     this.screwOn = this.boltOn
     this.screwOff = this.boltOff
-    this.toggleCheckbox = this.toggleElement.bind(this)
-    this.toggleRadioButton = this.toggleElement.bind(this)
+    this.toggleCheckbox = this.toggleCheckbox.bind(this)
+    this.toggleElement = this.toggleElement.bind(this)
+    this.toggleRadioButton = this.toggleCheckbox.bind(this)
   }
   boltOn(TestComponent) {
     this.div = document.createElement('div')
@@ -59,10 +60,13 @@ export default class TestRig {
     var element = this.domNode.find(selector)
     this.fillInElement(element, value)
   }
-  toggleElement(selector) {
-    var element = this.domNode.find(selector)
+  toggleElement(element) {
     $(element)[0].checked = !($(element)[0].checked)
     TestUtils.Simulate.change(element[0])
+  }
+  toggleCheckbox(selector) {
+    var element = this.domNode.find(selector)
+    this.toggleElement(element)
   }
   setValue(selector, value) {
     var element = this.domNode.find(selector)
