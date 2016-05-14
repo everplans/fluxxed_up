@@ -3,6 +3,7 @@ Fluxxed_up
 
 [![Build Status](https://travis-ci.org/everplans/fluxxed_up.svg?branch=master)](https://travis-ci.org/everplans/fluxxed_up)
 [![Code Climate](https://codeclimate.com/repos/5735f40801a23449b30047d8/badges/3547178bd14ad420ae89/gpa.svg)](https://codeclimate.com/repos/5735f40801a23449b30047d8/feed)
+[![Dependency Status](https://gemnasium.com/badges/github.com/everplans/fluxxed_up.svg)](https://gemnasium.com/github.com/everplans/fluxxed_up)
 
 Fluxxed_up is a React.js & Flux utility belt that handles simple patterns around the unidirectional dataflow. It is of medium opinionation: you write less boilerplate and get to focus on the code specific to your application. That said, it will let you write as much code 'by hand' as you want.
 
