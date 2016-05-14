@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run clean && ./node_modules/.bin/babel src/ -d dist/",
+    "build-all": "npm run build && npm run build-min",
     "build-min": "./node_modules/.bin/webpack -p dist/index.min.js",
     "clean": "rimraf ./dist/*",
     "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
