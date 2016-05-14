@@ -103,29 +103,21 @@ describe('Fluxxed up test helpers', function() {
       rig.clickLink('Submit')
 
       rig.toggleCheckbox('#checkbox-input')
+      rig.toggleRadioButton('.radio-input')
+      rig.setValue('.select-input', '1')
 
       // Set the expectations:
       // (TODO: make these Chai DSL.)
       rig.setExpectationCallback(() => {
         expect(rig.domNode.find('.answer').text()).to.match(/new thing$/)
         expect(rig.domNode.find('#checkbox-input')[0].checked).to.match(/true/)
+        expect(rig.domNode.find('.radio-input')[0].checked).to.equal(true)
+        expect(rig.domNode.find('.select-input')[0].value).to.equal('1')
         done()
       })
 
       // Signal that test should be finished:
       rig.finish()
-    })
-
-    it('toggles the radio button', () => {
-      rig.toggleRadioButton('.radio-input')
-
-      expect(rig.domNode.find('.radio-input')[0].checked).to.equal(true)
-    })
-
-    it('selects the right value for the select box', () => {
-      rig.setValue('.select-input', '1')
-
-      expect(rig.domNode.find('.select-input')[0].value).to.equal('1')
     })
   })
 })
