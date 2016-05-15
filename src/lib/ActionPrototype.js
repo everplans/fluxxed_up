@@ -1,5 +1,5 @@
-import jsonStatham from '../lib/jsonStatham'
-import AppDispatcher from '../lib/fu-dispatcher'
+import jsonStatham from './jsonStatham'
+import AppDispatcher from './fu-dispatcher'
 import KeyMirror from 'keymirror'
 
 // TODOS:
