@@ -1,10 +1,4 @@
 {
-  "stage": 0,
-  "loose": "all"
+  "presets": ["es2015", "react", "stage-1"],
+  "plugins": ["add-module-exports", "transform-proto-to-assign"]
 }
-/* -- for babel 6
-{
-  "plugins": ["syntax-jsx"],
-  "presets": ["es2015", "react"]
-}
-*/

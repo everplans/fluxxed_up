@@ -12,7 +12,7 @@ module.exports = function(config) {
       './test/index.js'
     ],
     preprocessors: {
-      './test/index.js': ['webpack', 'sourcemap', 'babel']
+      './test/index.js': ['webpack', 'sourcemap']
     },
     reporters: ['progress'],
     port: 9876,
