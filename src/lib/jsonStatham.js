@@ -8,7 +8,7 @@ function cleanSlashes(path) {
 
 // TODO: Success data will only be a string if a test fixture returns it, and test side effects should not dictate the
 // structure of non-test code such as this. Remove this function and its invocation once this problem is fixed.
-const isNotWhitespaceString = data => typeof data === 'string' && data.trim().length > 0
+const isNotWhitespaceString = data => !(typeof data === 'string' && data.trim().length === 0)
 
 function ensureDataIsObject(data) {
   if (typeof data !== 'object' && isNotWhitespaceString(data))
