@@ -4,13 +4,13 @@ exports.__esModule = true;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _libJsonStatham = require('../lib/jsonStatham');
+var _jsonStatham = require('./jsonStatham');
 
-var _libJsonStatham2 = _interopRequireDefault(_libJsonStatham);
+var _jsonStatham2 = _interopRequireDefault(_jsonStatham);
 
-var _libFuDispatcher = require('../lib/fu-dispatcher');
+var _fuDispatcher = require('./fu-dispatcher');
 
-var _libFuDispatcher2 = _interopRequireDefault(_libFuDispatcher);
+var _fuDispatcher2 = _interopRequireDefault(_fuDispatcher);
 
 var _keymirror = require('keymirror');
 
@@ -63,9 +63,9 @@ var ActionPrototype = {
 
     // set default values
     var errorAction = options.errorAction ? options.errorAction : options.successAction;
-    _libJsonStatham2['default'][method](_libJsonStatham2['default'], url, data).then((function (successData) {
+    _jsonStatham2['default'][method](_jsonStatham2['default'], url, data).then((function (successData) {
       if (options.successAction) {
-        _libFuDispatcher2['default'].dispatch({
+        _fuDispatcher2['default'].dispatch({
           actionType: options.successAction,
           data: options.JSONHead ? successData[options.JSONHead] : successData
         });
@@ -73,7 +73,7 @@ var ActionPrototype = {
       if (options.onSuccess) options.onSuccess.apply();
 
       if (options.successMsg) {
-        _libFuDispatcher2['default'].dispatch({
+        _fuDispatcher2['default'].dispatch({
           actionType: _this3.specialTypes.GOT_MSG,
           data: options.successMsg
         });
@@ -81,7 +81,7 @@ var ActionPrototype = {
     }).bind(this)).fail(function (failureData) {
       var scopedErrors = options.JSONHead ? failureData[options.JSONHead] : failureData;
       var errors = scopedErrors ? scopedErrors.errors : failureData.errors;
-      _libFuDispatcher2['default'].dispatch({
+      _fuDispatcher2['default'].dispatch({
         actionType: errorAction,
         data: { errors: errors }
       });

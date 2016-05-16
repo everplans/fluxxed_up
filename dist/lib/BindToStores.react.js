@@ -16,9 +16,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _libContainer = require('../lib/Container');
+var _Container = require('./Container');
 
-var _libContainer2 = _interopRequireDefault(_libContainer);
+var _Container2 = _interopRequireDefault(_Container);
 
 var _StorePrototype = require('./StorePrototype');
 
@@ -54,12 +54,12 @@ function bindResources(Component, resources) {
     var resourceName = resourceConfig[resourceType];
 
     // Get the action class--previously registered with the Container--and action Type used to fetch the resource data:
-    var actionClass = _libContainer2['default'].getAction(resourceName);
+    var actionClass = _Container2['default'].getAction(resourceName);
     var actionType = actionClass.Types['GOT_' + resourceName.toUpperCase()];
 
     // Get or create the store used to hold the resource data:
-    var resourceStore = _libContainer2['default'].getStore(resourceName);
-    if (!resourceStore) resourceStore = _libContainer2['default'].registerStore(resourceName, _StorePrototype2['default'](actionType));
+    var resourceStore = _Container2['default'].getStore(resourceName);
+    if (!resourceStore) resourceStore = _Container2['default'].registerStore(resourceName, _StorePrototype2['default'](actionType));
 
     // Add the store to the list of store the BoundComponent will listen to:
     stores[resourceName] = resourceStore;

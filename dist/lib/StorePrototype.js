@@ -8,9 +8,9 @@ var _objectAssign = require('object-assign');
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var _libFuDispatcher = require('../lib/fu-dispatcher');
+var _fuDispatcher = require('./fu-dispatcher');
 
-var _libFuDispatcher2 = _interopRequireDefault(_libFuDispatcher);
+var _fuDispatcher2 = _interopRequireDefault(_fuDispatcher);
 
 // This factory method will return a fully-baked store. The following options are all optional:
 // * registerAction: this is an action type to auto-register with the app dispatcher. The callback will be the
@@ -87,12 +87,12 @@ function factory(registerAction, extendType, registerMessageAction) {
       this.emitChange();
     },
     registerReceiveCallback: function registerReceiveCallback(actionType) {
-      return _libFuDispatcher2['default'].register((function (action) {
+      return _fuDispatcher2['default'].register((function (action) {
         if (action.actionType === actionType) this.receiveData(action.data);
       }).bind(this));
     },
     registerMessageCallback: function registerMessageCallback(actionType) {
-      return _libFuDispatcher2['default'].register((function (action) {
+      return _fuDispatcher2['default'].register((function (action) {
         if (action.actionType === actionType) this.receiveMessage(action.data);
       }).bind(this));
     }

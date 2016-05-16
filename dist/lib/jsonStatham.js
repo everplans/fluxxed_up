@@ -6,6 +6,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 // funny little hack, sometimes it's in the global scope, sometimes it's maybe not...
 
+var _objectAssign = require('object-assign');
+
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
 var _AjaxAdaptorBase = require('./AjaxAdaptorBase');
 
 var _AjaxAdaptorBase2 = _interopRequireDefault(_AjaxAdaptorBase);
@@ -24,18 +28,17 @@ function ensureDataIsObject(data) {
   return data;
 }
 
-var fetcher = {
+var jsonStatham = {
   setAdaptor: function setAdaptor(adaptor) {
     this.adaptor = adaptor;
   },
   getAdaptor: function getAdaptor() {
     return this.adaptor ? this.adaptor : new _AjaxAdaptorBase2['default']();
   },
-  buildRequest: function buildRequest(path, method, data, withCredentials) {
-    var headers = {}; // TODO grab special header
+  buildRequest: function buildRequest(path, method, data, withCredentials, additionalHeaders) {
     var adaptor = this.getAdaptor();
     var opts = {
-      headers: headers,
+      headers: _objectAssign2['default'](adaptor.defaultHeaders(), additionalHeaders),
       url: adaptor.serverBase() + cleanSlashes(adaptor.pathRoot()) + cleanSlashes(path)
     };
     if (method) opts.method = method;
@@ -54,10 +57,6 @@ var fetcher = {
     });
 
     return promise;
-  },
-  fetch: function fetch(url) {
-    // temporary backwards compatibility
-    return this.get(url);
   },
   get: function get(url, withCredentials) {
     return this.sendRequest(this.buildRequest(url, 'GET', null, withCredentials));
@@ -82,5 +81,5 @@ var fetcher = {
   }
 };
 
-exports['default'] = fetcher;
+exports['default'] = jsonStatham;
 module.exports = exports['default'];
