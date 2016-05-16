@@ -1,4 +1,5 @@
 var jQuery = (typeof $ !== 'undefined') ? $ : require('jquery') // funny little hack, sometimes it's in the global scope, sometimes it's maybe not...
+import assign from 'object-assign'
 import defaultAdaptor from './AjaxAdaptorBase'
 
 function cleanSlashes(path) {
@@ -17,11 +18,10 @@ function ensureDataIsObject(data) {
 var jsonStatham = {
   setAdaptor(adaptor) { this.adaptor = adaptor },
   getAdaptor() { return (this.adaptor ? this.adaptor : new defaultAdaptor()) },
-  buildRequest(path, method, data, withCredentials) {
-    var headers = {} // TODO grab special header
+  buildRequest(path, method, data, withCredentials, additionalHeaders) {
     var adaptor = this.getAdaptor()
     var opts = {
-      headers,
+      headers: assign(adaptor.defaultHeaders(), additionalHeaders),
       url: adaptor.serverBase() + cleanSlashes(adaptor.pathRoot()) + cleanSlashes(path)
     }
     if (method)

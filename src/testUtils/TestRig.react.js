@@ -1,5 +1,6 @@
-import React from 'react/addons'
-var TestUtils = React.addons.TestUtils
+import React from 'react'
+import ReactDOM from 'react-dom'
+import TestUtils from 'react-addons-test-utils'
 
 export class TestRigComponent extends React.Component {
   constructor(props) {
@@ -31,11 +32,11 @@ export default class TestRig {
   }
   boltOn(TestComponent) {
     this.div = document.createElement('div')
-    this.component = React.render(<TestRigComponent>{TestComponent}</TestRigComponent>, this.div)
-    this.domNode = $(React.findDOMNode(this.component))
+    this.component = ReactDOM.render(<TestRigComponent>{TestComponent}</TestRigComponent>, this.div)
+    this.domNode = $(ReactDOM.findDOMNode(this.component))
   }
   boltOff() {
-    React.unmountComponentAtNode(this.div)
+    ReactDOM.unmountComponentAtNode(this.div)
   }
   setExpectationCallback(expectationCallback) {
     this.component.setState({expectationCallback})

@@ -2,7 +2,7 @@ Fluxxed_up
 ===========
 
 [![Build Status](https://travis-ci.org/everplans/fluxxed_up.svg?branch=master)](https://travis-ci.org/everplans/fluxxed_up)
-[![Code Climate](https://codeclimate.com/repos/5735f40801a23449b30047d8/badges/3547178bd14ad420ae89/gpa.svg)](https://codeclimate.com/repos/5735f40801a23449b30047d8/feed)
+[![Code Climate](https://codeclimate.com/repos/57361f9378bbd61943002b6b/badges/59cae8b81ec09ab798fb/gpa.svg)](https://codeclimate.com/repos/57361f9378bbd61943002b6b/feed)
 [![Dependency Status](https://gemnasium.com/badges/github.com/everplans/fluxxed_up.svg)](https://gemnasium.com/github.com/everplans/fluxxed_up)
 
 Fluxxed_up is a React.js & Flux utility belt that handles simple patterns around the unidirectional dataflow. It is of medium opinionation: you write less boilerplate and get to focus on the code specific to your application. That said, it will let you write as much code 'by hand' as you want.
@@ -16,6 +16,9 @@ This is a complete reboot of some earlier ideas that began in a Backbone app. If
 Right now, until we get some gulp scripts in place make sure to run the following before packaging and releasing a version:
 * `npm run build`
 * `npm run build-min`
+
+## Using: 
+* If you are using fluxxed_up from source, you'll need to have babel setup in your project, since the non-built code only exposes an es6 entry point. If you'd don't have babel, you'll need to run `npm run build` everytime you want to see your changes. 
 
 ## What's included: 
 

@@ -4,7 +4,7 @@ import StorePrototype from '../../src/lib/StorePrototype'
 import Dispatcher from '../../src/lib/fu-dispatcher'
 import assign from 'object-assign'
 import KeyMirror from 'keymirror'
-import React from 'react/addons'
+import React from 'react'
 import TestRig from '../../src/testUtils/TestRig.react'
 
 var TestAction = assign(ActionPrototype, {

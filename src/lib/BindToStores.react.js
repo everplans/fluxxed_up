@@ -1,7 +1,7 @@
 import invariant from 'invariant'
 import React from 'react'
 
-import Container from '../lib/Container'
+import Container from './Container'
 import storePrototype from './StorePrototype'
 
 export default function bindResources(Component, resources, onBoundUpdate = null, resourceId = null) {
