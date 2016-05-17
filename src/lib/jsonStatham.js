@@ -23,13 +23,16 @@ var jsonStatham = {
   buildRequest(path, method, data, withCredentials, additionalHeaders) {
     var adaptor = this.getAdaptor()
     var opts = {
-      headers: assign(adaptor.defaultHeaders(), additionalHeaders),
+      // Default to JSON content, but allow default or additional headers to override this:
+      headers: assign({contentType: 'application/json'}, adaptor.defaultHeaders(), additionalHeaders),
       url: adaptor.serverBase() + cleanSlashes(adaptor.pathRoot()) + cleanSlashes(path)
     }
     if (method)
       opts.method = method
+
+    // Stringify data if it exists and is JSON; pass it along as is if it exists and isn't JSON.
     if (data)
-      opts.data = data
+      opts.data = (opts.headers.contentType === 'application/json' ? JSON.stringify(data) : data)
     if (withCredentials === true)
       opts.xhrFields = {withCredentials: true}
     return opts
