@@ -32,11 +32,11 @@ var TestStore = StorePrototype(TestAction.Types.GOT_THING)
 class TestComponent extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {value: 'initial value'}
+    this.state = {value: 'initial value', formVal: []}
   }
   getVal(e) {
     e.preventDefault()
-    this.setState({formVal: e.target.value})
+    this.setState({formVal: this.state.formVal.concat(e.target.value)})
   }
   handleSubmit() {
     // Not that this is simulating some other side effect of clicking the button (like server response after a click),
@@ -48,8 +48,14 @@ class TestComponent extends React.Component {
       <div>
         <h1>Test Component</h1>
         <div className='answer'>Form Value: {this.state.value}</div>
-        <input ref='value' onChange={this.getVal.bind(this)} defaultValue={this.state.value} />
-        <input id='checkbox-input' type='checkbox' ref='checkValue' />
+        <input name='text-input' ref='value' onChange={this.getVal.bind(this)} defaultValue={this.state.value} />
+        <input id='checkbox-input' onChange={this.getVal.bind(this)} type='checkbox' ref='checkValue' />
+        <input className='radio-input' onChange={this.getVal.bind(this)} type='radio' />
+        <select className='select-input' onChange={this.getVal.bind(this)}>
+          <option name='month'>Month</option>
+          <option value='1'>January</option>
+          <option value='2'>February</option>
+        </select>
         <a onClick={this.handleSubmit.bind(this)}>Submit</a>
       </div>
     )
@@ -88,25 +94,51 @@ describe('Fluxxed up test helpers', function() {
 
 
     it('has a value in the page', () => {
-      expect(rig.domNode.find('.answer').text()).to.match(/initial value$/)
+      expect(rig.domNode.find('.answer').text()).to.match(/initial value/)
     })
 
     it('updates the form', (done) => {
       // Manipulate the DOM:
-      rig.fillIn('input', 'new thing')
-      rig.clickLink('Submit')
-      rig.toggleCheckbox('#checkbox-input')
+      rig.fillIn('input[name="text-input"]', 'new thing')
 
+      rig.toggleCheckbox('#checkbox-input')
+      rig.setValue('.select-input', '1')
+
+      rig.clickLink('Submit')
       // Set the expectations:
       // (TODO: make these Chai DSL.)
       rig.setExpectationCallback(() => {
-        expect(rig.domNode.find('.answer').text()).to.match(/new thing$/)
-        expect(rig.domNode.find('#checkbox-input')[0].checked).to.match(/true/)
+        expect(rig.domNode.find('.answer').text()).to.match(/new thing/)
+        expect(rig.domNode.find('.answer').text()).to.match(/on/)
+        expect(rig.domNode.find('.answer').text()).to.match(/1/)
         done()
       })
 
       // Signal that test should be finished:
       rig.finish()
+    })
+
+    it('updates the form when radio button is clicked', (done) => {
+      rig.toggleRadioButton('.radio-input')
+      rig.clickLink('Submit')
+
+      rig.setExpectationCallback(() => {
+        expect(rig.domNode.find('.answer').text()).to.match(/on/)
+        done()
+      })
+
+      rig.finish()
+    })
+
+    it('changes dom state of elements', () => {
+      rig.toggleCheckbox('#checkbox-input')
+      rig.setValue('.select-input', '1')
+      rig.toggleRadioButton('.radio-input')
+
+      expect(rig.domNode.find('#checkbox-input')[0].checked).to.match(/true/)
+      expect(rig.domNode.find('.select-input')[0].value).to.equal('1')
+      expect(rig.domNode.find('.radio-input')[0].checked).to.equal(true)
+
     })
   })
 })
