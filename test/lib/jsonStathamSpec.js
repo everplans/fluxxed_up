@@ -128,5 +128,14 @@ describe('jsonStatham', () => {
         done()
       })
     })
+
+    it('does not attempt to parse whitespace-only strings as JSON', done => {
+      const whitespaceOnly = '   '
+      utils.createServerAndMock('GET', '/api/test', whitespaceOnly, server, 200)
+      jsonStatham.get('/test').done(data => {
+        expect(data).to.equal(whitespaceOnly)
+        done()
+      })
+    })
   })
 })
