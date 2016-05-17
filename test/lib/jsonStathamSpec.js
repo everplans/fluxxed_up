@@ -46,6 +46,17 @@ describe('jsonStatham', () => {
       expect(JSON.parse(spyData.data).param).to.equal('some data')
     })
 
+    it('builds POST file request', () => {
+      jsonStatham.postFile('/bla', {param: 'some data'})
+      const spyData = getArgumentsPassedToSpy()
+      expect(spyData.cache).to.be.false
+      expect(spyData.processData).to.be.false
+      expect(spyData.contentType).to.be.false
+      expect(spyData.url).to.equal('http://test.com/api/bla')
+      expect(spyData.method).to.equal('POST')
+      expect(spyData.data.param).to.equal('some data')
+    })
+
     it('builds delete request', () => {
       jsonStatham.delete('/bla', {param: 'some data'})
       const spyData = getArgumentsPassedToSpy()
