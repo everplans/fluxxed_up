@@ -104,9 +104,6 @@ describe('Fluxxed up test helpers', function() {
       rig.toggleCheckbox('#checkbox-input')
       rig.setValue('.select-input', '1')
 
-      expect(rig.domNode.find('#checkbox-input')[0].checked).to.match(/true/)
-      expect(rig.domNode.find('.select-input')[0].value).to.equal('1')
-
       rig.clickLink('Submit')
       // Set the expectations:
       // (TODO: make these Chai DSL.)
@@ -125,14 +122,23 @@ describe('Fluxxed up test helpers', function() {
       rig.toggleRadioButton('.radio-input')
       rig.clickLink('Submit')
 
-     expect(rig.domNode.find('.radio-input')[0].checked).to.equal(true)
-
       rig.setExpectationCallback(() => {
         expect(rig.domNode.find('.answer').text()).to.match(/on/)
         done()
       })
 
       rig.finish()
+    })
+
+    it('changes dom state of elements', (){
+      rig.toggleCheckbox('#checkbox-input')
+      rig.setValue('.select-input', '1')
+      rig.toggleRadioButton('.radio-input')
+
+      expect(rig.domNode.find('#checkbox-input')[0].checked).to.match(/true/)
+      expect(rig.domNode.find('.select-input')[0].value).to.equal('1')
+      expect(rig.domNode.find('.radio-input')[0].checked).to.equal(true)
+
     })
   })
 })
