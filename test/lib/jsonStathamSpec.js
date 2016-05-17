@@ -51,7 +51,7 @@ describe('jsonStatham', () => {
       const spyData = getArgumentsPassedToSpy()
       expect(spyData.cache).to.be.false
       expect(spyData.processData).to.be.false
-      expect(spyData.contentType).to.be.false
+      expect(spyData['Content-Type']).to.be.undefined
       expect(spyData.url).to.equal('http://test.com/api/bla')
       expect(spyData.method).to.equal('POST')
       expect(spyData.data.param).to.equal('some data')
@@ -68,8 +68,9 @@ describe('jsonStatham', () => {
 
   describe('Headers:', () => {
     it('defaults to a contentType of application/json', () => {
+
       const opts = jsonStatham.buildRequest('/bla', 'get', {})  // Note: no need to pass additionalHeaders at all.
-      expect(opts.headers.contentType).to.equal('application/json')
+      expect(opts.headers['Content-Type']).to.equal('application/json')
     })
 
     it('includes default headers from the adaptor', () => {
@@ -78,12 +79,12 @@ describe('jsonStatham', () => {
     })
 
     it('adds additional headers passed to it', () => {
-      const opts = jsonStatham.buildRequest('/bla', 'get', {}, {stanley: 'goodspeed'})
+      const opts = jsonStatham.buildRequest('/bla', 'get', {}, {additionalHeaders: {stanley: 'goodspeed'}})
       expect(opts.headers.stanley).to.equal('goodspeed')
     })
 
     it('overwrites default headers with the same key', () => {
-      const opts = jsonStatham.buildRequest('/bla', 'get', {}, {yuri: 'goodspeed'})
+      const opts = jsonStatham.buildRequest('/bla', 'get', {}, {additionalHeaders: {yuri: 'goodspeed'}})
       expect(opts.headers.yuri).to.equal('goodspeed')
     })
   })
