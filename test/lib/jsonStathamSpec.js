@@ -32,52 +32,47 @@ describe('jsonStatham', () => {
 
     it('builds PUT request', () => {
       jsonStatham.put('/bla', {param: 'some data'})
-      expect(getArgumentsPassedToSpy().url).to.equal('http://test.com/api/bla')
-      expect(getArgumentsPassedToSpy().method).to.equal('PUT')
-      expect(getArgumentsPassedToSpy().data.param).to.equal('some data')
+      const spyData = getArgumentsPassedToSpy()
+      expect(spyData.url).to.equal('http://test.com/api/bla')
+      expect(spyData.method).to.equal('PUT')
+      expect(JSON.parse(spyData.data).param).to.equal('some data')
     })
 
     it('builds POST request', () => {
       jsonStatham.post('/bla', {param: 'some data'})
-      expect(getArgumentsPassedToSpy().url).to.equal('http://test.com/api/bla')
-      expect(getArgumentsPassedToSpy().method).to.equal('POST')
-      expect(getArgumentsPassedToSpy().data.param).to.equal('some data')
+      const spyData = getArgumentsPassedToSpy()
+      expect(spyData.url).to.equal('http://test.com/api/bla')
+      expect(spyData.method).to.equal('POST')
+      expect(JSON.parse(spyData.data).param).to.equal('some data')
     })
 
     it('builds delete request', () => {
       jsonStatham.delete('/bla', {param: 'some data'})
-      expect(getArgumentsPassedToSpy().url).to.equal('http://test.com/api/bla')
-      expect(getArgumentsPassedToSpy().method).to.equal('DELETE')
-      expect(getArgumentsPassedToSpy().data.param).to.equal('some data')
-    })
-
-    it('sets auth credentials', () => {
-      expect(jsonStatham.buildRequest('/bla', null, {}, true).xhrFields.withCredentials).to.equal(true)
-    })
-
-    it('does not set auth credentials', () => {
-      expect(jsonStatham.buildRequest('/bla').xhrFields).to.equal(undefined)
-    })
-
-    it('sends post with auth credentials', () => {
-      jsonStatham.post('/bla', {email: 'dude@dude.com'}, true)
-      expect(getArgumentsPassedToSpy().xhrFields.withCredentials).to.equal(true)
+      const spyData = getArgumentsPassedToSpy()
+      expect(spyData.url).to.equal('http://test.com/api/bla')
+      expect(spyData.method).to.equal('DELETE')
+      expect(JSON.parse(spyData.data).param).to.equal('some data')
     })
   })
 
   describe('Headers:', () => {
+    it('defaults to a contentType of application/json', () => {
+      const opts = jsonStatham.buildRequest('/bla', 'get', {})  // Note: no need to pass additionalHeaders at all.
+      expect(opts.headers.contentType).to.equal('application/json')
+    })
+
     it('includes default headers from the adaptor', () => {
-      const opts = jsonStatham.buildRequest('/bla', 'get', {}, false)  // Note: no need to pass additionalHeaders at all.
+      const opts = jsonStatham.buildRequest('/bla', 'get', {})
       expect(opts.headers.yuri).to.equal('orlov')
     })
 
     it('adds additional headers passed to it', () => {
-      const opts = jsonStatham.buildRequest('/bla', 'get', {}, false, {stanley: 'goodspeed'})
+      const opts = jsonStatham.buildRequest('/bla', 'get', {}, {stanley: 'goodspeed'})
       expect(opts.headers.stanley).to.equal('goodspeed')
     })
 
     it('overwrites default headers with the same key', () => {
-      const opts = jsonStatham.buildRequest('/bla', 'get', {}, false, {yuri: 'goodspeed'})
+      const opts = jsonStatham.buildRequest('/bla', 'get', {}, {yuri: 'goodspeed'})
       expect(opts.headers.yuri).to.equal('goodspeed')
     })
   })
