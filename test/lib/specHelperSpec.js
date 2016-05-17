@@ -130,7 +130,7 @@ describe('Fluxxed up test helpers', function() {
       rig.finish()
     })
 
-    it('changes dom state of elements', (){
+    it('changes dom state of elements', () => {
       rig.toggleCheckbox('#checkbox-input')
       rig.setValue('.select-input', '1')
       rig.toggleRadioButton('.radio-input')
