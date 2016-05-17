@@ -15,80 +15,64 @@ import AppDispatcher from './fu-dispatcher'
 
 function factory(registerAction, extendType, registerMessageAction) {
   var StorePrototype = assign(EventEmitter.prototype, {
+    data: {},
     errors: [],
     message: null,
-    data: {},
-    emitChange: function() {
-      this.emit('CHANGE')
-    },
-    addChangeListener: function(callback) {
-      this.on('CHANGE', callback)
-    },
-    removeChangeListener: function (callback) {
-      this.removeListener('CHANGE', callback)
-    },
-    getMessage: function() {
-      return this.message
-    },
-    setMessage: function(message) {
-      this.message = message
-    },
-    clearFlash: function() {
-      this.message = null
-      this.emitChange()
-    },
-    getErrors: function() {
-      return this.errors
-    },
-    pushError: function(error) {
-      this.errors.push(error)
-    },
-    setErrors: function(errors) {
-      this.errors = errors
-    },
-    clearErrors: function() {
-      this.errors = []
-    },
-    hasErrors: function() {
-      return (this.errors.length > 0)
-    },
-    setData: function(data) {
-      this.data = data
-    },
-    getData: function() {
-      return this.data
-    },
-    getState: function() {
-      return {data: this.data, errors: this.errors, message: this.message}
-    },
-    clearState: function() {
-      this.setData({})
-    },
-    receiveData: function(data) {
-      if (data.errors)
+    emitChange() { this.emit('CHANGE') },
+
+    // Listeners:
+    addChangeListener(callback) { this.on('CHANGE', callback) },
+    removeChangeListener (callback) { this.removeListener('CHANGE', callback) },
+
+    // Message:
+    getMessage() { return this.message },
+    setMessage(message) { this.message = message },
+
+    // Errors:
+    clearErrors() { this.errors = [] },
+    getErrors() { return this.errors },
+    hasErrors() { return (this.errors.length > 0) },
+    pushError(error) { this.errors.push(error) },
+    setErrors(errors) { this.errors = errors },
+
+    // State:
+    clearState() { this.setData({}) },
+    getState() { return {data: this.data, errors: this.errors, message: this.message} },
+
+    // Data:
+    getData() { return this.data },
+    receiveData(data) {
+      if (data.errors) {
         this.setErrors(data.errors)
-      else {
+      } else {
         this.setData(data)
         this.clearErrors()
       }
       this.emitChange()
     },
-    receiveMessage: function(message) {
+    registerReceiveCallback(actionType) {
+      return AppDispatcher.register(action => {
+        if (action.actionType === actionType)
+          this.receiveData(action.data)
+      })
+    },
+    setData(data) { this.data = data },
+
+    // Messages:
+    clearFlash() {
+      this.message = null
+      this.emitChange()
+    },
+    receiveMessage(message) {
       this.setMessage(message)
       this.clearErrors()
       this.emitChange()
     },
-    registerReceiveCallback: function(actionType) {
-      return AppDispatcher.register(function(action) {
-        if (action.actionType === actionType)
-          this.receiveData(action.data)
-      }.bind(this))
-    },
-    registerMessageCallback: function(actionType) {
-      return AppDispatcher.register(function(action) {
+    registerMessageCallback(actionType) {
+      return AppDispatcher.register(action => {
         if (action.actionType === actionType)
           this.receiveMessage(action.data)
-      }.bind(this))
+      })
     }
   })
 
