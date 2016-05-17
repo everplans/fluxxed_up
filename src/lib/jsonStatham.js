@@ -20,7 +20,7 @@ function ensureDataIsObject(data) {
 var jsonStatham = {
   setAdaptor(adaptor) { this.adaptor = adaptor },
   getAdaptor() { return (this.adaptor ? this.adaptor : new defaultAdaptor()) },
-  buildRequest(path, method, data, withCredentials, additionalHeaders) {
+  buildRequest(path, method, data, additionalHeaders) {
     var adaptor = this.getAdaptor()
     var opts = {
       // Default to JSON content, but allow default or additional headers to override this:
@@ -33,8 +33,6 @@ var jsonStatham = {
     // Stringify data if it exists and is JSON; pass it along as is if it exists and isn't JSON.
     if (data)
       opts.data = (opts.headers.contentType === 'application/json' ? JSON.stringify(data) : data)
-    if (withCredentials === true)
-      opts.xhrFields = {withCredentials: true}
     return opts
   },
   sendRequest(request) {
@@ -54,10 +52,10 @@ var jsonStatham = {
 
     return promise
   },
-  get(url, withCredentials) { return this.sendRequest(this.buildRequest(url, 'GET', null, withCredentials)) },
+  get(url) { return this.sendRequest(this.buildRequest(url, 'GET', null)) },
   put(url, data) { return this.sendRequest(this.buildRequest(url, 'PUT', data)) },
-  post(url, data, withCredentials) { return this.sendRequest(this.buildRequest(url, 'POST', data, withCredentials)) },
-  delete(url, data, withCredentials) { return this.sendRequest(this.buildRequest(url, 'DELETE', data, withCredentials)) },
+  post(url, data) { return this.sendRequest(this.buildRequest(url, 'POST', data)) },
+  delete(url, data) { return this.sendRequest(this.buildRequest(url, 'DELETE', data)) },
   postFile(url, data) {
     // Taken from: http://stackoverflow.com/questions/12431760/html5-formdata-file-upload-with-rubyonrails
     // and http://stackoverflow.com/questions/21234106/upload-file-using-reactjs-via-blueimp-fileupload-jquery-plugin
