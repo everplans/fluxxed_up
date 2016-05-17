@@ -59,7 +59,7 @@ var jsonStatham = {
   postFile(url, data) {
     // Taken from: http://stackoverflow.com/questions/12431760/html5-formdata-file-upload-with-rubyonrails
     // and http://stackoverflow.com/questions/21234106/upload-file-using-reactjs-via-blueimp-fileupload-jquery-plugin
-    var request = this.buildRequest(url, 'POST', data)
+    var request = this.buildRequest(url, 'POST', data, {contentType: false})
     request.cache = false
     request.processData = false
     request.contentType = false
