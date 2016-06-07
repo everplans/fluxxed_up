@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import TestUtils from 'react-addons-test-utils'
+import jq from 'jquery'  //don't necesarily need to have a global jquery hanging around -- we just use it for vanilla DOM stuff
 
 export class TestRigComponent extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ export default class TestRig {
   boltOn(TestComponent) {
     this.div = document.createElement('div')
     this.component = ReactDOM.render(<TestRigComponent>{TestComponent}</TestRigComponent>, this.div)
-    this.domNode = $(ReactDOM.findDOMNode(this.component))
+    this.domNode = jq(ReactDOM.findDOMNode(this.component))
   }
   boltOff() {
     ReactDOM.unmountComponentAtNode(this.div)
