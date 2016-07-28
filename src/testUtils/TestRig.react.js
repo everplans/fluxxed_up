@@ -44,11 +44,11 @@ export default class TestRig {
   }
   finish() { this.component.triggerFinalRender() }
   clickButton(buttonText) {
-    var element = this.domNode.find(`button:contains('${buttonText}')`)[0]
+    var element = this.domNode.find(`button:contains("${buttonText}")`)[0]
     this.clickElement(element)
   }
   clickLink(label) {
-    var element = this.domNode.find(`a:contains('${label}')`)[0]
+    var element = this.domNode.find(`a:contains("${label}")`)[0]
     this.clickElement(element)
   }
   // In the event of a gnarly css selector, just pass the element:
