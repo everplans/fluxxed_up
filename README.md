@@ -17,10 +17,10 @@ Right now, until we get some gulp scripts in place make sure to run the followin
 * `npm run build`
 * `npm run build-min`
 
-## Using: 
-* If you are using fluxxed_up from source, you'll need to have babel setup in your project, since the non-built code only exposes an es6 entry point. If you'd don't have babel, you'll need to run `npm run build` everytime you want to see your changes. 
+## Using:
+* If you are using fluxxed_up from source, you'll need to have babel setup in your project, since the non-built code only exposes an es6 entry point. If you'd don't have babel, you'll need to run `npm run build` everytime you want to see your changes.
 
-## What's included: 
+## What's included:
 
 * Action Prototype
 Based of off facebook patterns and intended to be used with flux. It works with a loose $.ajax wrapper to fire
