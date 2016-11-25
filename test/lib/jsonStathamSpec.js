@@ -31,6 +31,14 @@ describe('jsonStatham', () => {
       expect(getArgumentsPassedToSpy().url).to.equal('http://test.com/api/bla')
     })
 
+    it('builds PATCH request', () => {
+      jsonStatham.patch('/bla', {param: 'some data'})
+      const spyData = getArgumentsPassedToSpy()
+      expect(spyData.url).to.equal('http://test.com/api/bla')
+      expect(spyData.method).to.equal('PATCH')
+      expect(JSON.parse(spyData.data).param).to.equal('some data')
+    })
+
     it('builds PUT request', () => {
       jsonStatham.put('/bla', {param: 'some data'})
       const spyData = getArgumentsPassedToSpy()
@@ -109,6 +117,25 @@ describe('jsonStatham', () => {
       })
     })
 
+    describe('PATCH:', () => {
+      it('PATCH data', done => {
+        utils.createServerAndMock('PATCH', '/api/test', JSON.stringify({fun: 'times for patch'}), server, 200)
+
+        jsonStatham.patch('/test').done(data => {
+          expect(data.fun).to.equal('times for patch')
+          done()
+        })
+      })
+
+      it('PATCH data with error', done => {
+        utils.createServerAndMock('PATCH', '/api/test', JSON.stringify({error: {message: 'oops'}}), server, 422)
+        jsonStatham.patch('/test').done(function() {}).fail(data => {
+          expect(data.error.message).to.equal('oops')
+          done()
+        })
+      })
+    })
+
     describe('POST:', () => {
       it('POST data', done => {
         utils.createServerAndMock('POST', '/api/test', JSON.stringify({fun: 'times for post'}), server, 200)
@@ -126,7 +153,9 @@ describe('jsonStatham', () => {
           done()
         })
       })
+    })
 
+    describe('POST file:', () => {
       it('POST file', done => {
         utils.createServerAndMock('POST', '/api/test', JSON.stringify({fun: 'times for post'}), server, 200)
         var formData = new FormData()
