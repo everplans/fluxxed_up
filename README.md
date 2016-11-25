@@ -17,15 +17,15 @@ Right now, until we get some gulp scripts in place make sure to run the followin
 * `npm run build`
 * `npm run build-min`
 
-## Using: 
-* If you are using fluxxed_up from source, you'll need to have babel setup in your project, since the non-built code only exposes an es6 entry point. If you'd don't have babel, you'll need to run `npm run build` everytime you want to see your changes. 
+## Using:
+* If you are using fluxxed_up from source, you'll need to have babel setup in your project, since the non-built code only exposes an es6 entry point. If you'd don't have babel, you'll need to run `npm run build` everytime you want to see your changes.
 
-## What's included: 
+## What's included:
 
 * Action Prototype
 Based of off facebook patterns and intended to be used with flux. It works with a loose $.ajax wrapper to fire
 API calls to your server. It supplies a `fireApi` function to the action, so that you can use it when you define your
-own actions. You specific a REST actions (get, post, etc), and endpoint, and optional data payload (for a put or a post). You can optionally supply action types to dispatch based on a success or failure from the server. Here's an example of how to use:
+own actions. You specific a REST actions (`GET`, `POST`, etc), and endpoint, and optional data payload (for a `PATCH`, `POST`, or `PUT`). You can optionally supply action types to dispatch based on a success or failure from the server. Here's an example of how to use:
 
 ```
 //in MyActions.js
@@ -35,8 +35,8 @@ var TestAction = assign(ActionPrototype, {
   }),
   fetchUsers: function() {
      this.fireApi('get', 'assessment', null,
-      {successAction: this.Types.GOT_ASK_DOCUMENT_GROUPS, //Note that since no failureAction was specified, it will dispatch this action always. 
-      JSONHead: 'assessment'}) //head of the json coming back from the server. 
+      {successAction: this.Types.GOT_ASK_DOCUMENT_GROUPS, //Note that since no failureAction was specified, it will dispatch this action always.
+      JSONHead: 'assessment'}) //head of the json coming back from the server.
   }
 })
 ```
