@@ -52,7 +52,7 @@ var jsonStatham = {
           errorJSON = JSON.parse(error.responseText)
         else
           errorJSON = {errors: ["We're sorry, an unexpected error has occurred. Please try again; our engineers have been notified."]}
-        promise.reject(errorJSON)
+        promise.reject(errorJSON, error.status)
       })
 
     return promise
