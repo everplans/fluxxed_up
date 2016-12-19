@@ -176,5 +176,22 @@ describe('jsonStatham', () => {
         })
       })
     })
+    describe('Error handling', () => {
+      it('passes the status code to the failure callback', done => {
+        utils.createServerAndMock('GET', '/api/test', JSON.stringify({error: {message: 'oops'}}), server, 422)
+        jsonStatham.get('/test').fail((data, status) => {
+          expect(data.error.message).to.equal('oops')
+          expect(status).to.equal(422)
+          done()
+        })
+      })
+      it('parses a non json error string', done => {
+        utils.createServerAndMock('GET', '/api/test', "oops, it broke", server, 422)
+        jsonStatham.get('/test').fail((data, status) => {
+          expect(data.errors[0]).to.equal('oops, it broke')
+          done()
+        })
+      })
+    })
   })
 })
