@@ -64,6 +64,7 @@ var jsonStatham = {
     return promise
   },
   get(url) { return this.sendRequest(this.buildRequest(url, 'GET', null)) },
+  patch(url, data) { return this.sendRequest(this.buildRequest(url, 'PATCH', data)) },
   put(url, data) { return this.sendRequest(this.buildRequest(url, 'PUT', data)) },
   post(url, data) { return this.sendRequest(this.buildRequest(url, 'POST', data)) },
   delete(url, data) { return this.sendRequest(this.buildRequest(url, 'DELETE', data)) },
