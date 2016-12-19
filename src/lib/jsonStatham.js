@@ -46,17 +46,18 @@ var jsonStatham = {
       .done((data, result, response) => { promise.resolve(ensureDataIsObject(data), response.status) })
       .fail(error => {
         var errorJSON
-        if (error.responseJSON)
+        if (error.responseJSON) {
           errorJSON = error.responseJSON
-        else if (error.responseText)
+        } else if (error.responseText) {
           try {
             errorJSON = JSON.parse(error.responseText)
-          } catch(e) {
+          } catch (parseError) {
             // in the event there is an error message, but it's not JSON. Could be higher up server messages, etc..
             errorJSON = {errors: [error.responseText]}
           }
-        else
+        } else {
           errorJSON = {errors: ["We're sorry, an unexpected error has occurred. Please try again; our engineers have been notified."]}
+        }
         promise.reject(errorJSON, error.status)
       })
 
