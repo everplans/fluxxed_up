@@ -5,6 +5,11 @@ Fluxxed_up [![Build Status](https://travis-ci.org/everplans/fluxxed_up.svg?branc
 - [Releasing](#releasing)
 - [Build Process](#build-process)
 - [What's Included](#whats-included)
+  - [Action Prototype](#actionprototype)
+  - [Dispatcher](#dispatcher)
+  - [ExtraStorage](#extrastorage)
+  - [FeatureFlags](#featureflags)
+  - [jsonStatham](#jsonstatham)
 
 Fluxxed_up is a React.js and Flux utility belt that handles simple patterns around the unidirectional dataflow. It is of medium opinionation: you write less boilerplate and get to focus on the code specific to your application. That said, it will let you write as much code 'by hand' as you want.
 
@@ -21,9 +26,9 @@ Right now, until we get some gulp scripts in place make sure to run the followin
 ## Build Process
 If you are using fluxxed_up from source, you'll need to have Babel setup in your project since the unbuilt code only exposes an ES6 entry point. If you don't have Babel, you'll need to run `npm run build` every time you want to see your changes.
 
-## What's included
+## What's Included
 
-* Action Prototype
+##### ActionPrototype
 Based off of Facebook patterns and intended to be used with flux. It works with a loose $.ajax wrapper to fire
 API calls to your server. It supplies a `fireApi` function to the action, so that you can use it when you define your
 own actions. You specific a REST actions (`GET`, `POST`, etc), and endpoint, and optional data payload (for a `PATCH`, `POST`, or `PUT`). You can optionally supply action types to dispatch based on a success or failure from the server. Here's an example of how to construct an action with `ActionPrototype`:
@@ -51,18 +56,18 @@ const AssessmentActions = assign(
 )
 ```
 
-* Dispatcher
+##### Dispatcher
 Lightweight wrapper around the flux dispatcher. It will throw an exception if you try to dispatch an action with an undefined type. (You'd be surprised how many bugs you pre-emptively avoid doing this.)
 
-* ExtraStorage
+##### ExtraStorage
 This is a little module that wraps default browser local storage behavior. It has a small wrapper to simulate behavior for when a browser is in incognito mode.
 
-* FeatureFlags
+##### FeatureFlags
 Helper class to query if a feature flag is on or off based on some JSON config. We fetch this from the server and turn on/off features for a user based on the config. A flag not specified in the config will auto default to disabled. Example:
 ```javascript
 FeatureFlags.init({[{flag:'new_thing', status: 'ENABLED'}]})
 FeatureFlags.isEnabled('new_thing') // true
 ```
 
-* jsonStatham
+##### jsonStatham
 Lightweight wrapper around jQuery's ajax functionality. It assumes a simple RESTful api on the server side. It will fire success/failure callbacks based on server response. It has some extra settings to specify API keys and other auth.
