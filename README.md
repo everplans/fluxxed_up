@@ -49,12 +49,10 @@ Lightweight wrapper around jQuery's ajax functionality. It assumes a simple REST
 
 * FeatureFlags
 Little helper class to query if a feature flag is on or off based on some JSON config. We fetch this from the server and turn on/off features for a user based on the config. A flag not specified in the config will auto default to disabled. Example:
-```FeatureFlags.init({[{flag:'new_thing', status: 'ENABLED'}]})
-
+```
+FeatureFlags.init({[{flag:'new_thing', status: 'ENABLED'}]})
 FeatureFlags.isEnabled('new_thing') //true
 ```
 
 * ExtraStorage
 This is a little module that wraps default browser local storage behavior. It has a small wrapper to simulate behavior for when a browser is in incognito mode.
-
-
