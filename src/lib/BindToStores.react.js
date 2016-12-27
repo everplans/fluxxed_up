@@ -43,6 +43,7 @@ export default function bindResources(Component, resources, onBoundUpdate = null
 
   const BoundComponent = React.createClass({
     contextTypes: {router: React.PropTypes.object},
+    itemLoaders: [],
     getInitialState() {
       return {
         loading: true,
@@ -72,13 +73,26 @@ export default function bindResources(Component, resources, onBoundUpdate = null
         // Choose which ID--if any--is passed to the GET request to identify the resource:
         switch (bootObject.resourceType) {
           case 'item':  // One specific item that MUST have an ID included in the GET request.
-            var idParam = this.props.params[bootObject.resourceId]
-            if (!idParam) { // Skip bootAction for items requiring ID if no ID URL param is available.
-              loadingStates[bootObject.loadingName] = false
-              break
+            const checkId = nextProps => { // Set up a function that reloads the resource if the ID in the params changes
+              if (nextProps && nextProps.params[resourceId] === this.props.params[resourceId])
+                return
+
+              loadingStates[loadingName] = true
+              let idParam = nextProps ? nextProps.params[resourceId] : this.props.params[resourceId]
+
+              if (!idParam) { // Skip bootAction for items requiring ID if no ID URL param is available.
+                loadingStates[loadingName] = false
+                return
+              }
+              bootObject.actionClass[bootAction](idParam)
+
+              // Update the previous loading state if it is present:
+              if (this.state && typeof this.state[Object.keys(loadingStates)[0]] !== 'undefined')
+                this.setState(loadingStates)
             }
 
-            bootObject.actionClass[bootObject.bootAction](idParam)
+            checkId()
+            this.itemLoaders.push(checkId)
             break
           case 'itemAllParams':  // One specific item with a more-complex API endpoint URL as constructed in the action.
             bootObject.actionClass[bootObject.bootAction](this.props.params)
@@ -93,6 +107,9 @@ export default function bindResources(Component, resources, onBoundUpdate = null
         /* eslint-enable indent */
       }, this)
       this.setState(loadingStates)
+    },
+    componentWillReceiveProps(nextProps) { // Reload any resource if the associated route ID changes
+      this.itemLoaders.forEach(checkId => checkId(nextProps))
     },
     componentWillUnmount() {  // Kill all listeners when component is unmounting.
       storeNames().forEach(store => stores[store].removeChangeListener(this[`handle${store}Change`]))
