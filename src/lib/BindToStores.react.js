@@ -1,15 +1,12 @@
 import invariant from 'invariant'
 import React from 'react'
 
+import { capitalize } from './tools'
 import Container from './Container'
 import storePrototype from './StorePrototype'
 
 export default function bindResources(Component, resources, onBoundUpdate = null, resourceId = null) {
   const stores = {}
-
-  function capitalize(word, pascal = true) {
-    return (pascal ? word.charAt(0).toUpperCase() : word.charAt(0)) + word.slice(1).replace(/(\_\w)/g, match => match[1].toUpperCase())
-  }
   function storeNames() { return Object.getOwnPropertyNames(stores) }
 
   var resourceConfigs = (Array.isArray(resources) ? resources : [resources])  // Handle old, one-resource pattern too.
