@@ -6,7 +6,7 @@ import Container from './Container'
 import storePrototype from './StorePrototype'
 
 export default function bindResources(Component, resources, onBoundUpdate = null, resourceId = null) {
-  const stores = {}
+  let stores = {}
   function storeNames() { return Object.getOwnPropertyNames(stores) }
 
   let resourceConfigs = (Array.isArray(resources) ? resources : [resources])  // Handle old, one-resource pattern too.
