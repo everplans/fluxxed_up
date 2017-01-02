@@ -2,7 +2,7 @@
 var storage = {}
 
 var extra_storage = {
-  getItem: function(key) {
+  getItem(key) {
     try {
       window.sessionStorage.setItem('__extra_storage-flag__', 'test')
       return window.sessionStorage.getItem(key)
@@ -10,14 +10,14 @@ var extra_storage = {
       return storage[key]
     }
   },
-  setItem: function(key, value) {
+  setItem(key, value) {
     try {
       window.sessionStorage.setItem(key, value)
     } catch (error) {
       storage[key] = value
     }
   },
-  removeItem: function(key) {
+  removeItem(key) {
     try {
       return window.sessionStorage.removeItem(key)
     } catch (error) {

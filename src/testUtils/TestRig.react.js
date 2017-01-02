@@ -8,7 +8,7 @@ export class TestRigComponent extends React.Component {
     super(props)
     this.state = {keyVal: Math.random(), testComplete: false}
   }
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (this.state.testComplete === true)
       this.state.expectationCallback()
   }
