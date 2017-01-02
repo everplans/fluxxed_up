@@ -1,37 +1,33 @@
 import invariant from 'invariant'
 import React from 'react'
 
+import { capitalize } from './tools'
 import Container from './Container'
 import storePrototype from './StorePrototype'
 
 export default function bindResources(Component, resources, onBoundUpdate = null, resourceId = null) {
-  const stores = {}
-
-  function capitalize(word, pascal = true) {
-    return (pascal ? word.charAt(0).toUpperCase() : word.charAt(0)) + word.slice(1).replace(/(\_\w)/g, match => match[1].toUpperCase())
-  }
+  let stores = {}
   function storeNames() { return Object.getOwnPropertyNames(stores) }
 
-  var resourceConfigs = (Array.isArray(resources) ? resources : [resources])  // Handle old, one-resource pattern too.
+  let resourceConfigs = (Array.isArray(resources) ? resources : [resources])  // Handle old, one-resource pattern too.
 
-  var bootObjects = []  // Objects containing all necessary information for firing the bootAction of each resource
+  let bootObjects = []  // Objects containing all necessary information for firing the bootAction of each resource
     // and the tracking of the loading state of each resource.
     // Example of the bootObject for an 'item' resource:
        // {bootAction: 'fetchClient', actionClass: 'ClientActions', resourceType: 'item', resourceId: '12'}
 
   // Construct a bootObject for every resource:
   resourceConfigs.forEach(resourceConfig => {
-    const resourceType = Object.getOwnPropertyNames(resourceConfig)[0]
-    const resourceName = resourceConfig[resourceType]
+    let resourceType = Object.getOwnPropertyNames(resourceConfig)[0]
+    let resourceName = resourceConfig[resourceType]
 
-    // Get the action class--previously registered with the Container--and action Type used to fetch the resource data:
-    const actionClass = Container.getAction(resourceName)
-    const actionType = actionClass.Types[`GOT_${resourceName.toUpperCase()}`]
+    // Get the action class--previously registered with the Container--used to fetch the resource data:
+    let actionClass = Container.getAction(resourceName)
 
     // Get or create the store used to hold the resource data:
-    var resourceStore = Container.getStore(resourceName)
+    let resourceStore = Container.getStore(resourceName)
     if (!resourceStore)
-      resourceStore = Container.registerStore(resourceName, storePrototype(actionType))
+      resourceStore = Container.registerStore(resourceName, storePrototype(actionClass.Types[`GOT_${resourceName.toUpperCase()}`]))
 
     // Add the store to the list of store the BoundComponent will listen to:
     stores[resourceName] = resourceStore
@@ -47,6 +43,7 @@ export default function bindResources(Component, resources, onBoundUpdate = null
 
   const BoundComponent = React.createClass({
     contextTypes: {router: React.PropTypes.object},
+    itemLoaders: [],
     getInitialState() {
       return {
         loading: true,
@@ -56,27 +53,46 @@ export default function bindResources(Component, resources, onBoundUpdate = null
     componentWillMount() {
       // Create a listener for each resource store:
       storeNames().forEach(store => {
-        const onChangeHandlerName = `handle${store}Change`
+        let onChangeHandlerName = `handle${store}Change`
         this[onChangeHandlerName] = this.onChangeFactory(store)
         stores[store].addChangeListener(this[onChangeHandlerName])
       })
 
       // Fire the bootAction to fetch each resource:
-      var loadingStates = {}
+      let loadingStates = {}
+
       bootObjects.forEach(bootObject => {
         loadingStates[bootObject.loadingName] = true
 
-        /* eslint-disable indent */
+        // Need to hoist these values when called again from componentWillReceiveProps (BJK):
+        let resourceId = bootObject.resourceId
+        let loadingName = bootObject.loadingName
+        let bootAction = bootObject.bootAction
+
+        /* eslint-disable indent */ // Fix ESLint complaining about our preferred switch syntax.
         // Choose which ID--if any--is passed to the GET request to identify the resource:
         switch (bootObject.resourceType) {
           case 'item':  // One specific item that MUST have an ID included in the GET request.
-            var idParam = this.props.params[bootObject.resourceId]
-            if (!idParam) { // Skip bootAction for items requiring ID if no ID URL param is available.
-              loadingStates[bootObject.loadingName] = false
-              break
+            const checkId = nextProps => { // Set up a function that reloads the resource if the ID in the params changes
+              if (nextProps && nextProps.params[resourceId] === this.props.params[resourceId])
+                return
+
+              loadingStates[loadingName] = true
+              let idParam = nextProps ? nextProps.params[resourceId] : this.props.params[resourceId]
+
+              if (!idParam) { // Skip bootAction for items requiring ID if no ID URL param is available.
+                loadingStates[loadingName] = false
+                return
+              }
+              bootObject.actionClass[bootAction](idParam)
+
+              // Update the previous loading state if it is present:
+              if (this.state && typeof this.state[Object.keys(loadingStates)[0]] !== 'undefined')
+                this.setState(loadingStates)
             }
 
-            bootObject.actionClass[bootObject.bootAction](idParam)
+            checkId()
+            this.itemLoaders.push(checkId)
             break
           case 'itemAllParams':  // One specific item with a more-complex API endpoint URL as constructed in the action.
             bootObject.actionClass[bootObject.bootAction](this.props.params)
@@ -92,6 +108,9 @@ export default function bindResources(Component, resources, onBoundUpdate = null
       }, this)
       this.setState(loadingStates)
     },
+    componentWillReceiveProps(nextProps) { // Reload any resource if the associated route ID changes
+      this.itemLoaders.forEach(checkId => checkId(nextProps))
+    },
     componentWillUnmount() {  // Kill all listeners when component is unmounting.
       storeNames().forEach(store => stores[store].removeChangeListener(this[`handle${store}Change`]))
     },
@@ -100,10 +119,10 @@ export default function bindResources(Component, resources, onBoundUpdate = null
     },
 
     onChangeFactory(store) {  // Create a custom listener identifier so loading states can be tracked independently for each resource.
-      var myStore = store
+      let myStore = store
       return () => {
-        var newState = {loading: false}  // Backwards-compatability for single-resource bindings.
-        var newStoreState = stores[myStore].getState()
+        let newState = {loading: false}  // Backwards-compatability for single-resource bindings.
+        let newStoreState = stores[myStore].getState()
         newState[myStore] = newStoreState
         newState[`loading${capitalize(store)}`] = false
 
@@ -117,5 +136,6 @@ export default function bindResources(Component, resources, onBoundUpdate = null
 
     render() { return <Component {...this.props} {...this.state} /> }
   })
+
   return BoundComponent
 }
