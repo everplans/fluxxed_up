@@ -31,7 +31,7 @@ var ActionPrototype = {
   fireApi(method, url, data, options) {
     // set default values
     var errorAction = options.errorAction ? options.errorAction : options.successAction
-    jsonStatham[method](jsonStatham, url, data)
+    jsonStatham[method].call(jsonStatham, url, data)
       .then(successData => {
         if (options.successAction) {
           AppDispatcher.dispatch({
