@@ -64,6 +64,5 @@
     "rimraf": "^2.5.2",
     "sinon": "^1.15.4",
     "webpack": "^1.5.3"
-  },
-  "dependencies": {}
+  }
 }
