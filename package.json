@@ -58,11 +58,12 @@
     "mocha": "^2.2.5",
     "object-assign": "^3.0.0",
     "phantomjs": "^1.9.17",
-    "react": "^0.14.2",
-    "react-addons-test-utils": "^0.14.2",
-    "react-dom": "^0.14.2",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "rimraf": "^2.5.2",
     "sinon": "^1.15.4",
     "webpack": "^1.5.3"
-  }
+  },
+  "dependencies": {}
 }
