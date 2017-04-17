@@ -1,14 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import TestUtils from 'react-addons-test-utils'
-import jq from 'jquery'  //don't necesarily need to have a global jquery hanging around -- we just use it for vanilla DOM stuff
+import TestUtils from 'react-dom/test-utils'
+import jq from 'jquery'
 
 export class TestRigComponent extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {keyVal: Math.random(), testComplete: false}
+  constructor() {
+    super()
+
+    this.state = {
+      keyVal: Math.random(),
+      testComplete: false
+    }
   }
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     if (this.state.testComplete === true)
       this.state.expectationCallback()
   }
