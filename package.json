@@ -44,7 +44,7 @@
     "chai": "^3.2.0",
     "flux": "^2.0.3",
     "invariant": "^2.1.0",
-    "jquery": "^2.1.4",
+    "jquery": "^3.0.0",
     "karma": "^0.12.31",
     "karma-chai-plugins": "^0.6.0",
     "karma-chrome-launcher": "^0.2.0",

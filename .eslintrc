@@ -135,7 +135,6 @@
         ],
         "no-proto": [2],  // Disallow use of deprecated __proto__ property in favor of getPrototypeOf
         "no-redeclare": [2],  // Disallow the declaring (e.g., by using var) more than once
-        "no-return-assign": [2],  // "Disallow Assignment in return Statement"
         "no-return-assign": [  // Disallow the usage of assignments in return statements
             2,
             "always"
