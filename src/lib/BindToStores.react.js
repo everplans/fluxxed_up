@@ -1,5 +1,6 @@
 import invariant from 'invariant'
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { capitalize } from './tools'
 import Container from './Container'
@@ -42,7 +43,7 @@ export default function bindResources(Component, resources, onBoundUpdate = null
   })
 
   const BoundComponent = React.createClass({
-    contextTypes: {router: React.PropTypes.object},
+    contextTypes: {router: PropTypes.object},
     itemLoaders: [],
     getInitialState() {
       return {
