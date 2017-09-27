@@ -19,6 +19,7 @@
     "eslint:recommended"
   ],
   "globals": {
+    "__DEV__": false,
     "__TEST__": false,
     "API_HOST": false,
     "API_KEY": false,
@@ -26,7 +27,10 @@
     "CONTENT_HOST": false,
     "expect": false,
     "INTERNAL_ONLY": false,
+    "Rollbar": false,
+    "ROLLBAR_POST_CLIENT_ITEM_ACCESS_TOKEN": false,
     "sinon": false,
+    "STRIPE_PUBLISHABLE_KEY": false,
     "WEBAPPS_HOST": false
   },
   "parser": "babel-eslint",
@@ -106,6 +110,10 @@
       }
     ],
     "guard-for-in": [2], // Require for-in loops over objects to filter the items
+    "multiline-ternary": [
+      2,
+      "always-multiline"
+    ],
     "no-alert": [2], // Disallow alert, confirm, and prompt
     "no-caller": [2], // Disallow the use of arguments.caller and arguments.callee
     "no-div-regex": [2], // "[D]isallow division operators explicitly at beginning of regular expression"
@@ -119,7 +127,7 @@
     "no-implicit-coercion": [ //  "[...][F]lag shorter notations for the type conversion, then suggest a more self-explanatory notation"
       2,
       {
-        "boolean": true,
+        "boolean": false,
         "number": true,
         "string": true
       }
@@ -263,10 +271,20 @@
         "allowArrowFunctions": true
       }
     ],
-    "id-length": [1], // Warn about identifier names (e.g., variable names) that are not at least two characters long (default value)
+    "id-length": [ // Warn about identifier names (e.g., variable names) that are not at least two characters long (default value)
+      1,
+      {
+        "exceptions": ["$"],
+        "min": 2
+      }
+    ],
     "indent": [
       2,
-      2
+      2,
+      {
+        "MemberExpression": 0,
+        "SwitchCase": 1
+      }
     ],
     "jsx-quotes": [ // Prefer single quotes for JSX attribute values (e.g., `<a b="c" />` warns but `<a b='c' />` does not)
       1,
@@ -295,7 +313,22 @@
       1, // Only warning
       5  // TODO: I have no idea what this value should be. Update later if it's too low
     ],
-    "babel/new-cap": [1], // Warn when `new` is followed by an uncapitalized identifier or a capitalized function is called directly without `new`
+    "babel/new-cap": [ // Warn when `new` is followed by an uncapitalized identifier or a capitalized function is called directly without `new`
+      1,
+      {
+        "capIsNewExceptions": [
+          "apiV2.DELETE",
+          "apiV2.GET",
+          "apiV2.PATCH",
+          "apiV2.POST",
+          "apiV2.PUT",
+          "List",
+          "Map",
+          "OrderedSet",
+          "Set"
+        ]
+      }
+    ],
     "new-parens": [2], // Require the use of parentheses when calling a constructor with `new` even if it has no arguments
     "no-array-constructor": [1], // Warn about the use of the `Array` constructor instead of the array literal `[]`
     "no-continue": [1], // Warn about the use of `continue` in loops
@@ -446,6 +479,10 @@
       2,
       "never"
     ],
+    "react/jsx-first-prop-new-line": [ // Warn about unpreferred prop line breaks and arrangement. See docs for details.
+      1,
+      "multiline"
+    ],
     "react/jsx-handler-names": [0], // Don't warn about inconsistent event-handler prefixes.
     "react/jsx-indent-props": [ // Error on incorrect indentation of props.
       2,
@@ -454,20 +491,33 @@
     "react/jsx-key": [2], // Error if components that probably need `key`s don't have them.
     "react/jsx-max-props-per-line": [0], // Don't warn about max. number of props on a line.
     "react/jsx-no-bind": [1], // Warn about uses of `bind` and arrow functions that lead to a new function on every re-render.
+    "react/jsx-no-comment-textnodes": [1], // Warn about comments being inserted as text nodes.
     "react/jsx-no-duplicate-props": [2], // Error if duplicate props are passed.
     "react/jsx-no-literals": [0], // Do not warn about the use of unwrapped JSX string literals.
     "react/jsx-no-undef": [2], // Error if an undeclared variable is used.
     "react/jsx-pascal-case": [2], // Error if PascalCase is not used for user-defined components.
     "react/jsx-sort-prop-types": [0], // Don't warn if `propTypes` are not sorted alphabetically.
     "react/jsx-sort-props": [0], // Don't warn if props are not sorted alphabetically.
+    "react/jsx-no-target-blank": [1], // Warn if target='_blank' is used without rel='noreferrer noopener'.\
+    "react/jsx-tag-spacing": [ // Error on certain spacing with respect to opening and closing tag angle brackets.
+      2,
+      {
+        "closingSlash": "never", // Error on: <Hello / >, <Testing>< /Testing>
+        "beforeSelfClosing": "always", // Error on: <Hello/>
+        "afterOpening": "allow-multiline" // See docs for description. Basically: error on space after <
+      }
+    ],
     "react/jsx-uses-react": [0], // Ignore issue related to `@jsx` pragma.
     "react/jsx-uses-vars": [1], // ESLint ignores variables used in JSX leading to them being marked as unused. Mark such variables as used to limit warnings. Pairs with `no-unused-vars` rule.
+    "react/jsx-wrap-multilines": [1], // Warn if multiline arrow bodies, assignments, declarations, or returns are not wrapped in parens.
+    "react/no-children-prop": [0], // Do not warn about the explicit usage of a children key in the rendering of a component using a self-closing tag.
     "react/no-danger": [1], // Warn about usage of dangerous properties (e.g., `dangerouslySetInnerHTML`).
     "react/no-did-mount-set-state": [1], // Warn about the usage of `setState` in `componentDidMount`.
     "react/no-did-update-set-state": [1], // Warn about the usage of `setState` in `componentDidUpdate`.
     "react/no-direct-mutation-state": [2], // Error if state is mutated directly and not through `setState`.
     "react/no-multi-comp": [0], // Do not warn about multiple component definitions in a single file.
     "react/no-set-state": [0], // Do not warn about the usage of `setState`.
+    "react/no-unescaped-entities": [1], // Warn about invalid characters that may have been meant as JSX escape characters.
     "react/no-unknown-property": [2], // Error if unknown DOM property (e.g., `class` vs. `className`) is used.
     "react/prefer-es6-class": [1], // Warn about usage of non-ES6 class bodies.
     "react/prop-types": [
@@ -479,9 +529,8 @@
     "react/react-in-jsx-scope": [0], // Ignore issue related to `@jsx` pragma.
     "react/require-extension": [0], // Don't warn about weird file-extension issues with `require`.
     "react/self-closing-comp": [2], // Error is non-self-closing component has no children.
-    "react/sort-comp": [0], // Warn if component functions do not appear in this order: lifecycle methods, custom methods, and then the `render` method.
-    "react/jsx-wrap-multilines": [2]  // Error if multiline JSX isn't wrapped in parentheses.
-    },
+    "react/sort-comp": [0] // Warn if component functions do not appear in this order: lifecycle methods, custom methods, and then the `render` method.
+  },
 
   // Choose environments for which predefined global variables should be included:
   "env": {
