@@ -1,2 +1,2 @@
-export ChaiAddons from './ChaiAddons'
-export TestRig from './TestRig.react'
+export {ChaiAddons} from './ChaiAddons'
+export {TestRig} from './TestRig.react'
