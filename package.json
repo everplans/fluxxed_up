@@ -57,7 +57,7 @@
     "keymirror": "^0.1.1",
     "mocha": "^2.2.5",
     "object-assign": "^3.0.0",
-    "phantomjs": "^1.9.17",
+    "phantomjs": "^2.1.7",
     "react": "^0.14.2",
     "react-addons-test-utils": "^0.14.2",
     "react-dom": "^0.14.2",
