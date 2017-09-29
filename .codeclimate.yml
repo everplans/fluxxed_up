@@ -7,6 +7,7 @@ engines:
       - javascript
   eslint:
     enabled: true
+    channel: "eslint-4"
 ratings:
   paths:
   - "**.js"

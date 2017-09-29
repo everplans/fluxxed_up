@@ -14,496 +14,550 @@
 
 
 {
-    // Choose base rules:
-    "extends": "eslint:recommended",
-    "globals": {
-      "__TEST__": false,
-      "API_HOST": false,
-      "API_KEY": false,
-      "ASSET_HOST": false,
-      "chai": false,
-      "CONTENT_HOST": false,
-      "expect": false,
-      "NODE_APP_HOST": false,
-      "runKarma": false,
-      "sinon": false,
-      "WEBAPPS_HOST": false
-    },
-    "parser": "babel-eslint",
+  // Choose base rules:
+  "extends": [
+    "eslint:recommended"
+  ],
+  "globals": {
+    "chai": false,
+    "expect": false,
+    "sinon": false,
+  },
+  "parser": "babel-eslint",
 
-    // Choose rule updates/changes/additions:
-      // Note: 0 implies the rule is disabled, 1 sets it to generate
-      // warnings, and 2 sets it to generate errors
+  // Choose rule updates/changes/additions:
+    // Note: 0 implies the rule is disabled, 1 sets it to generate
+    // warnings, and 2 sets it to generate errors
 
-      // To override the overall settings in a specific file:
-      // `/*eslint eqeqeq:0, curly: 2*/`
-    "rules": {
+    // To override the overall settings in a specific file:
+    // `/*eslint eqeqeq:0, curly: 2*/`
+  "rules": {
 
-        ///////////////////////////////////////////////////////////////////////
-        // POSSIBLE ERRORS:
+    ///////////////////////////////////////////////////////////////////////
+    // POSSIBLE ERRORS:
 
-        "comma-dangle": [
-            1,
-            "never"
-        ],
-        "no-console": [1],  // Warn about the use of console
-        "no-constant-condition": [1],  // Warn about conditions that are unchanging
-        "no-control-regex": [1],  // Warn about control characters in regex
-        "no-debugger": [1],  // Warn about debugger statements
-        "no-dupe-args": [2],  // Disallow duplicate arguments in functions
-        "no-dupe-keys": [2],  // Disallow duplicate keys in object literals
-        "no-duplicate-case": [2],  // Disallow duplicate cases in switches
-        "no-empty-character-class": [2],  // Disallow empty character classes (e.g., `[]`) in regex
-        "no-empty": [1],  // Warn about empty statements
-        "no-ex-assign": [2],  // Disallow the overwriting of the exception in a catch block
-        "no-extra-boolean-cast": [1],  // Warn about unnecessary double-negation boolean casts
-        "no-func-assign": [2],  // "[D]isallow overwriting functions written as function declarations"
-        "no-inner-declarations": [  // "[D]isallow overwriting functions written as function declarations"
-            2,
-            "functions"
-        ],
-        "no-invalid-regexp": [2],  // Disallow invalid regex strings
-        "no-irregular-whitespace": [2],  // Disallow irregular whitespace characters
-        "no-negated-in-lhs": [2],  // Disallow the (probably-accidental) negation of left-hand-side arguments
-        "no-obj-calls": [2],  // "[D]isallow the use of object properties of the global object (Math and JSON) as functions"
-        "no-regex-spaces": [2],  // Disallow the use of multiple consecutive spaces in regex strings
-        "no-sparse-arrays": [2],  // Disallow extra commas in arrays
-        "no-unreachable": [2],  // Disallow unreachable code (e.g., code right after a return)
-        "use-isnan": [2],  // Require the use of `isNaN`
-        "valid-typeof": [2],  // "Ensure that the results of typeof are compared against a valid string"
+    "comma-dangle": [
+      1,
+      "never"
+    ],
+    "no-console": [1], // Warn about the use of console
+    "no-control-regex": [1], // Warn about control characters in regex
+    "no-debugger": [1], // Warn about debugger statements
+    "no-dupe-args": [2], // Disallow duplicate arguments in functions
+    "no-dupe-keys": [2], // Disallow duplicate keys in object literals
+    "no-duplicate-case": [2], // Disallow duplicate cases in switches
+    "no-empty-character-class": [2], // Disallow empty character classes (e.g., `[]`) in regex
+    "no-empty": [1], // Warn about empty statements
+    "no-ex-assign": [2], // Disallow the overwriting of the exception in a catch block
+    "no-extra-boolean-cast": [1], // Warn about unnecessary double-negation boolean casts
+    "no-func-assign": [2], // "[D]isallow overwriting functions written as function declarations"
+    "no-inner-declarations": [ // "[D]isallow overwriting functions written as function declarations"
+      2,
+      "functions"
+    ],
+    "no-invalid-regexp": [2], // Disallow invalid regex strings
+    "no-irregular-whitespace": [2], // Disallow irregular whitespace characters
+    "no-negated-in-lhs": [2], // Disallow the (probably-accidental) negation of left-hand-side arguments
+    "no-obj-calls": [2], // "[D]isallow the use of object properties of the global object (Math and JSON) as functions"
+    "no-regex-spaces": [2], // Disallow the use of multiple consecutive spaces in regex strings
+    "no-sparse-arrays": [2], // Disallow extra commas in arrays
+    "no-unreachable": [2], // Disallow unreachable code (e.g., code right after a return)
+    "use-isnan": [2], // Require the use of `isNaN`
+    "valid-typeof": [2], // "Ensure that the results of typeof are compared against a valid string"
 
 
-        ///////////////////////////////////////////////////////////////////////
-        // BEST PRACTICES:
+    ///////////////////////////////////////////////////////////////////////
+    // BEST PRACTICES:
 
-        "accessor-pairs": [2],  // Require a getter method for any property with a setter method
-        "block-scoped-var": [2],  // Disallow the use of var-defined variables outside of the scope in which they are defined
-        "curly": [  // Allow omission of curly braces when block contains one indented, single-line statement--you're welcome, Bernie
-            2,
-            "multi-or-nest"
-        ],
-        "default-case": [1],  // Warn about switches that don't have a default case
-        "dot-location": [  // Require dots to be on the same line as the property rather than the object
-            2,
-            "property"
-        ],
-        "dot-notation": [  // Prefer dot notation except when accessing a snake_cased property (see documentation for reasoning)
-            1,
-            {"allowPattern": "^[a-z]+(_[a-z]+)+$"}
-        ],
-        "eqeqeq": [  // Require === and !== except when: Comparing two literal values; Evaluating the value of typeof; or, Comparing against null
-            2,
-            "smart"
-        ],
-        "guard-for-in": [2],  // Require for-in loops over objects to filter the items
-        "no-alert": [2],  // Disallow alert, confirm, and prompt
-        "no-caller": [2],  // Disallow the use of arguments.caller and arguments.callee
-        "no-div-regex": [2],  // "[D]isallow division operators explicitly at beginning of regular expression"
-        "no-else-return": [2],  // Disallow else when all ifs have returns
-        "no-empty-label": [2],  // Disallow empty lables
-                                // ^^ Note: no-labels is also applied in this file, so this is redundant.
-        "no-eq-null": [2],  // "[D]isallow comparisons to null without a type-checking operator"
-        "no-eval": [2],  // Disallow eval
-        "no-extend-native": [2],  // Disallow the extension of native types
-        "no-extra-bind": [2],  // Require the use of this in bound functions
-        "no-fallthrough": [1],  // Warn about lack of a break or a comment indicating intentional fallthrough in every case of a switch
-        "no-floating-decimal": [2],  // Disallow leading and trailing decimal points in numeric literals
-        "no-implicit-coercion": [  //  "[...][F]lag shorter notations for the type conversion, then suggest a more self-explanatory notation"
-            2,
-            {"boolean": true,
-             "number": true,
-             "string": true}
-        ],
-        "no-implied-eval": [2],  // Disallow implied-eval usage of setTimeout, setInterval, and execScript
-        "no-invalid-this": [2],  // "Disallow this keywords outside of classes or class-like objects"
-                                 // ^^ Note: only in strict mode; ES2015 modules/classes are always strict
-        "no-iterator": [2],  // Disallow obsolete usage of __iterator__ property
-        "no-labels": [2],  // Disallow the usage of labels
-        "no-lone-blocks": [2],  // Disallow unnecessary blocks
-                                // ^^ Note: Allows ES6 block scope if strict mode is on and ecmaFeatures: { blockBindings: true }
-        "no-loop-func": [2],  // Disallow creation of functions in loops
-        "no-multi-spaces": [2],  // Disallow multiple spaces unnecessarily (see documentation for how to set up exceptions)
-        "no-native-reassign": [2],  // "Disallow Reassignment of Native Objects"
-        "no-new-func": [2],  // "Disallow Function Constructor" (e.g., `var x = new Function('a', 'b', 'return a + b')`)
-        "no-new-wrappers": [2],  // "Disallow Primitive Wrapper Instances" (e.g., `var x = new String('Hello, world')`)
-        "no-new": [2],  // "Disallow new For Side Effects" (e.g., calling `new Person()` without saving the result)
-        "no-octal-escape": [2],  // Disallow octal escapes--use Unicode or hexadecimal escapes instead
-        "no-octal": [2],  // Disallow the usage of octal literals
-        "no-param-reassign": [  // "Disallow Reassignment of Function Parameters"
-            2,
-            {"props": false}
-        ],
-        "no-proto": [2],  // Disallow use of deprecated __proto__ property in favor of getPrototypeOf
-        "no-redeclare": [2],  // Disallow the declaring (e.g., by using var) more than once
-        "no-return-assign": [  // Disallow the usage of assignments in return statements
-            2,
-            "always"
-        ],
-        "no-script-url": [2],  // Disallow Script URLs (e.g., `location.href = "javascript:void(0)"`)
-        "no-self-compare": [2],  //  Disallow comparisons where both sides are completely the same
-        "no-sequences": [2],  // Disallow the use of the comma operator
-        "no-throw-literal": [2],  // "Restrict what can be thrown as an exception" (Note: this has known limitations; see documentation for examples)
-        "no-unused-expressions": [
-            2,
-            {"allowShortCircuit": true,
-             "allowTernary": true }
-        ],  // Disallow expressions that evaluate to a value but are never used
-        "no-useless-call": [2],  // "Disallow unnecessary .call() and .apply()"
-        "no-useless-concat": [2],  // "Disallow unncessary concatenation of strings"
-        "no-void": [2],  // "Disallow use of the void operator"
-        "no-warning-comments": [  // Warn about comments indicating code not ready for production
-            1,
-            {"terms": ["todo", "note"],  // Match only comments with these terms (case insensitive)
-             "location": "start"}  // Match only when comments begin with any of the given terms
-        ],
-        "no-with": [1],  // Warn about the usage of the `with` statement
-        "radix": [1],  // Warn about missing radix terms when using `parseInt`
-        "vars-on-top": [0],  // Do not warn about usage of var below the top of the scope in which var is called
-        "wrap-iife": [  // "Require IIFEs to be Wrapped" in parentheses
-            2,
-            "outside"
-        ],
-        "yoda": [  // Require the variable to come first and the literal to come second in a condition
-            2,
-            "never"
-        ],
-
-
-        ///////////////////////////////////////////////////////////////////////
-        // VARIABLES:
-
-        "no-catch-shadow": [2],  // "Disallow Shadowing of Variables Inside of catch"
-        "no-delete-var": [2],  // Disallow the deletion of variables
-        "no-label-var": [2],  // "Disallow labels that are variable names"
-                              // ^^ Note: no-labels is also applied in this file, so this is redundant.
-        "no-shadow-restricted-names": [2],  // "Disallow Shadowing of Restricted Names" (e.g., `NaN`, `Infinity`, or `undefined`)
-        "no-shadow": [  // "[D]isallow declaration of variables already declared in the outer scope"
-            2,
-            {"builtinGlobals": false,
-             "hoist": "all"}
-        ],
-        "no-undef-init": [1],  // "Disallow Initializing to undefined"
-        "no-undefined": [2],  // "Disallow Use of undefined Variable" because it is a property of the global object
-        "no-unused-vars": [1],  // Warn about unused variables
-        "no-use-before-define": [1],  // Warn about variables used before they are defined even though hoisting may mean the code is valid
-
-
-        ///////////////////////////////////////////////////////////////////////
-        // NODE.JS AND COMMONJS:
-
-        "callback-return": [2],  // "Enforce Callback After Return"
-        "global-require": [1],  // Warn about usage of `require()` outside the global scope
-        "handle-callback-err": [1],  // Warn about unhandled errors in callbacks
-        "no-new-require": [1],  // Warn about possibly-flawed usage of `new` with `require` (e.g., `new require('app-header')`)
-        "no-path-concat": [2],  // "Disallow string concatenation when using _dirname and _filename"
-        "no-process-exit": [2],  // "Disallow process.exit()"
-        "no-restricted-modules": [  // "Disallow Node modules"
-            2,
-            "os"  // Comma-separated--not an array--of the modules to be disallowed in the app
-        ],
-        "no-sync": [1],  // Warn about usage of synchronous methods
+    "accessor-pairs": [2], // Require a getter method for any property with a setter method
+    "arrow-parens": [ // Warn about unnecessary parentheses around single arrow function parameters. (e.g., prefer `a => a` over `(a) => a`)
+      1,
+      "as-needed"
+    ],
+    "block-scoped-var": [2], // Disallow the use of var-defined variables outside of the scope in which they are defined
+    "curly": [ // Allow omission of curly braces when block contains one indented, single-line statement--you're welcome, Bernie
+      2,
+      "multi-or-nest"
+    ],
+    "default-case": [1], // Warn about switches that don't have a default case
+    "dot-location": [ // Require dots to be on the same line as the property rather than the object
+      2,
+      "property"
+    ],
+    "dot-notation": [ // Prefer dot notation except when accessing a snake_cased property (see documentation for reasoning)
+      1,
+      {"allowPattern": "^[a-z]+(_[a-z]+)+$"}
+    ],
+    "eqeqeq": [ // Require === and !== except when: Comparing two literal values; Evaluating the value of typeof; or, Comparing against null
+      2,
+      "smart"
+    ],
+    "generator-star-spacing": [ // Warn about missing space on either side of the `*` in definition of a generator function.
+      1,
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "guard-for-in": [2], // Require for-in loops over objects to filter the items
+    "multiline-ternary": [
+      2,
+      "always-multiline"
+    ],
+    "no-alert": [2], // Disallow alert, confirm, and prompt
+    "no-caller": [2], // Disallow the use of arguments.caller and arguments.callee
+    "no-div-regex": [2], // "[D]isallow division operators explicitly at beginning of regular expression"
+    "no-else-return": [2], // Disallow else when all ifs have returns
+    "no-eq-null": [2], // "[D]isallow comparisons to null without a type-checking operator"
+    "no-eval": [2], // Disallow eval
+    "no-extend-native": [2], // Disallow the extension of native types
+    "no-extra-bind": [2], // Require the use of this in bound functions
+    "no-fallthrough": [1], // Warn about lack of a break or a comment indicating intentional fallthrough in every case of a switch
+    "no-floating-decimal": [2], // Disallow leading and trailing decimal points in numeric literals
+    "no-implicit-coercion": [ //  "[...][F]lag shorter notations for the type conversion, then suggest a more self-explanatory notation"
+      2,
+      {
+        "boolean": false,
+        "number": true,
+        "string": true
+      }
+    ],
+    "no-implied-eval": [2], // Disallow implied-eval usage of setTimeout, setInterval, and execScript
+    "no-invalid-this": [2], // "Disallow this keywords outside of classes or class-like objects"
+                             // ^^ Note: only in strict mode; ES2015 modules/classes are always strict
+    "no-iterator": [2], // Disallow obsolete usage of __iterator__ property
+    "no-labels": [2], // Disallow the usage of labels
+    "no-lone-blocks": [2], // Disallow unnecessary blocks
+                            // ^^ Note: Allows ES6 block scope if strict mode is on and ecmaFeatures: { blockBindings: true }
+    "no-loop-func": [2], // Disallow creation of functions in loops
+    "no-multi-spaces": [2], // Disallow multiple spaces unnecessarily (see documentation for how to set up exceptions)
+    "no-native-reassign": [2], // "Disallow Reassignment of Native Objects"
+    "no-new-func": [2], // "Disallow Function Constructor" (e.g., `var x = new Function('a', 'b', 'return a + b')`)
+    "no-new-wrappers": [2], // "Disallow Primitive Wrapper Instances" (e.g., `var x = new String('Hello, world')`)
+    "no-new": [2], // "Disallow new For Side Effects" (e.g., calling `new Person()` without saving the result)
+    "no-octal-escape": [2], // Disallow octal escapes--use Unicode or hexadecimal escapes instead
+    "no-octal": [2], // Disallow the usage of octal literals
+    "no-param-reassign": [ // "Disallow Reassignment of Function Parameters"
+      2,
+      {
+        "props": false
+      }
+    ],
+    "no-proto": [2], // Disallow use of deprecated __proto__ property in favor of getPrototypeOf
+    "no-redeclare": [2], // Disallow the declaring (e.g., by using var) more than once
+    "no-return-assign": [ // Disallow the usage of assignments in return statements
+      2,
+      "always"
+    ],
+    "no-script-url": [2], // Disallow Script URLs (e.g., `location.href = "javascript:void(0)"`)
+    "no-self-compare": [2], //  Disallow comparisons where both sides are completely the same
+    "no-sequences": [2], // Disallow the use of the comma operator
+    "no-throw-literal": [2], // "Restrict what can be thrown as an exception" (Note: this has known limitations; see documentation for examples)
+    "no-unused-expressions": [
+      2,
+      {
+        "allowShortCircuit": true,
+        "allowTernary": true
+      }
+    ], // Disallow expressions that evaluate to a value but are never used
+    "no-useless-call": [2], // "Disallow unnecessary .call() and .apply()"
+    "no-useless-concat": [2], // "Disallow unncessary concatenation of strings"
+    "no-void": [2], // "Disallow use of the void operator"
+    "no-warning-comments": [ // Warn about comments indicating code not ready for production
+      1,
+      {
+        "terms": ["todo", "note"], // Match only comments with these terms (case insensitive)
+        "location": "start" // Match only when comments begin with any of the given terms
+      }
+    ],
+    "no-with": [1], // Warn about the usage of the `with` statement
+    "radix": [1], // Warn about missing radix terms when using `parseInt`
+    "vars-on-top": [0], // Do not warn about usage of var below the top of the scope in which var is called
+    "wrap-iife": [ // "Require IIFEs to be Wrapped" in parentheses
+      2,
+      "outside"
+    ],
+    "yoda": [ // Require the variable to come first and the literal to come second in a condition
+      2,
+      "never"
+    ],
 
 
-        ///////////////////////////////////////////////////////////////////////
-        // STYLISTIC ISSUES:
+    ///////////////////////////////////////////////////////////////////////
+    // VARIABLES:
 
-        "array-bracket-spacing": [  // Disallow spaces inside of brackets (e.g., `[ 'foo', 'bar' ]` errors but `['foo', 'bar']` does not)
-            2,
-            "never"
-        ],
-        "block-spacing": [  // Disallow spaces inside of single-line blocks (e.g., `function foo() { return true; }` errors but `function foo() {return true;}` does not)
-            2,
-            "always"
-        ],
-        "brace-style": [  // Require one-true brace style block formatting
-            2,
-            "1tbs",  // Require the opening curly brace of a block to be on the same line as its corresponding statement or declaration
-            { "allowSingleLine": true }  // Allow opening and closing braces to be on the same line
-        ],
-        "comma-spacing": [  // Disallow spaces before commas and require them after commas
-            2,
-            {"before": false,
-             "after": true}
-        ],
-        "comma-style": [  // Require commas to be at the ends of lines, not the beginnings
-            2,
-            "last"
-        ],
-        "computed-property-spacing": [  // Disallow spaces inside computed properties (e.g., `obj[foo ]` errors but `object[foo]` does not)
-            2,
-            "never"
-        ],
-        "eol-last": [2],  // "Require file to end with single newline"
-        "func-style": [  // Prefer functions to be written as declarations rather than expressions (i.e., written so they are hoisted)
-            1,
-            "declaration",
-            {"allowArrowFunctions": true}
-        ],
-        "id-length": [1],  // Warn about identifier names (e.g., variable names) that are not at least two characters long (default value)
-        "indent": [
-            2,
-            2
-        ],
-        "jsx-quotes": [  // Prefer single quotes for JSX attribute values (e.g., `<a b="c" />` warns but `<a b='c' />` does not)
-            1,
-            "prefer-single"
-        ],
-        "key-spacing": [  // Disallow space before colon and require only one space after colon in object literal property definitions
-            2,
-            {"beforeColon": false,
-             "afterColon": true,
-             "mode": "strict"}
-        ],
-        "linebreak-style": [
-            2,
-            "unix"
-        ],
-        "max-nested-callbacks": [  // "Set Maximum Depth of Nested Callbacks"
-            1,  // Only warning
-            5  // TODO: I have no idea what this value should be. Update later if it's too low
-        ],
-        "babel/new-cap": [1],  // Warn when `new` is followed by an uncapitalized identifier or a capitalized function is called directly without `new`
-        "new-parens": [2],  // Require the use of parentheses when calling a constructor with `new` even if it has no arguments
-        "no-array-constructor": [1],  // Warn about the use of the `Array` constructor instead of the array literal `[]`
-        "no-continue": [1],  // Warn about the use of `continue` in loops
-        "no-lonely-if": [2],  // Disallow the usage of an `if` as the only block inside an `else` block
-        "no-mixed-spaces-and-tabs": [2],  // Disallow the mixing of spaces and tabs
-        "no-multiple-empty-lines": [  // Disallow too many consecutive empty lines
-            2,
-            {"max": 2}  // Set the maximum number of acceptable consecutive empty lines
-        ],
-        "no-nested-ternary": [2],  // Disallow the nesting of ternary expressions
-        "no-new-object": [2],  // Disallow the use of the `Object` constructor
-        "no-spaced-func": [1],  // Warn about spaces between function name and the parentheses that execute it
-        "no-trailing-spaces": [  // Disallow trailing whitespace at the end of lines
-            2,
-            {"skipBlankLines": false}  // Don't ignore lines composed of only whitespace
-        ],
-        "no-underscore-dangle": [1],  // Warn about dangling underscores in identifiers (e.g., `var _foo`)
-        "no-unneeded-ternary": [  // "[D]isallow conditional expressions that can be implemented using simpler language constructs"
-            2,
-            {"defaultAssignment": true}  // Allow the usage of code such as `var a = x ? x : 1`
-        ],
-        "one-var": [  // Require multiple variable declarations per scope (i.e., no combining `var`, `let`, or `const` statements)
-            2,
-            "never"  // Don't allow one variable declaration per scope
-        ],
-        "operator-assignment": [  // Require use of operator assignment shorthand (e.g., use `x += y` rather than `x = x + y`)
-            2,
-            "always"
-        ],
-        "operator-linebreak": [  // Require linebreak to be after the operator in statement that spans multiple lines
-            2,
-            "after"
-        ],
-        "padded-blocks": [  // Warn when blocks begin or end with a blank line
-            1,
-            "never"
-        ],
-        "quote-props": [  // Configure the quoting style for property names
-            2,
-            "as-needed",  // Error when quotes are needed and not present
-            {"keywords": true,  // Disallow unquoted reserved words as properties
-             "numbers": true,  // Disallow unquoted numeric literals as properties
-             "unnecessary": true}  // Unnecessarily-quoted properties cause errors
-        ],
-        "quotes": [  // Require use of single quotes, though backticks are also allowed
-            2,
-            "single",
-            "avoid-escape"  // Do not error when a string is using incorrect quotes as long as the string contains a quote that would have to be escaped
-        ],
-        "semi": [  // Disallow semicolons at the end of lines in favor of automatic semicolon insertion
-            2,
-            "never"
-        ],
-        "space-after-keywords": [  // Require a space after certain keywords (e.g., `if`, `else`, `for`, etc.)
-            2,
-            "always"
-        ],
-        "space-before-keywords": [  // Require a space before certain keywords (e.g., `else`, `catch`, `finally`, etc.)
-            2,
-            "always"
-        ],
-        "space-before-blocks": [  // Require space before any block that does not begin on a new line
-            2,
-            "always"
-        ],
-        "space-before-function-paren": [0],  // Warn when there is no space between `function` or function name and opening parenthesis in definition
-        "space-in-parens": [  // Disallow spaces to the right of `(` and to the left of `)`
-            2,
-            "never"
-        ],
-        "space-infix-ops": [2],  // Require spaces around infix operators (e.g., `a+b` errors but `a + b` does not)
-        "space-return-throw-case": [2],  // "Require spaces following `return`, `throw`, and `case`"
-        "space-unary-ops": [  // Require spaces before/after unary word operators (e.g., `new`) and disallow for nonwords (e.g., `bar++`)
-            2,
-            {
-              "words": true,
-              "nonwords": false
-            }
-        ],
-        "spaced-comment": [  // Require space after `//` or `/*` at the start of comments
-            2,
-            "always"
-        ],
-        "wrap-regex": [2],  // Require parentheses around regex for clarity (e.g., `/foo/.test("bar")` could look like a division operator)
+    "no-catch-shadow": [2], // "Disallow Shadowing of Variables Inside of catch"
+    "no-delete-var": [2], // Disallow the deletion of variables
+    "no-label-var": [2], // "Disallow labels that are variable names"
+                          // ^^ Note: no-labels is also applied in this file, so this is redundant.
+    "no-shadow-restricted-names": [2], // "Disallow Shadowing of Restricted Names" (e.g., `NaN`, `Infinity`, or `undefined`)
+    "no-shadow": [ // "[D]isallow declaration of variables already declared in the outer scope"
+      2,
+      {
+        "builtinGlobals": false,
+        "hoist": "all"
+      }
+    ],
+    "no-undef-init": [1], // "Disallow Initializing to undefined"
+    "no-undefined": [2], // "Disallow Use of undefined Variable" because it is a property of the global object
+    "no-unused-vars": [1], // Warn about unused variables
+    "no-use-before-define": [1], // Warn about variables used before they are defined even though hoisting may mean the code is valid
 
 
-        ///////////////////////////////////////////////////////////////////////
-        // ECMASCRIPT 6
+    ///////////////////////////////////////////////////////////////////////
+    // NODE.JS AND COMMONJS:
 
-        "arrow-body-style": [  // Warn about unnecessary braces around arrow function bodies.
-            1,
-            "as-needed"
-        ],
-        "babel/arrow-parens": [  // Warn about unnecessary parentheses around single arrow function parameters. (e.g., prefer `a => a` over `(a) => a`)
-            1,
-            "as-needed"
-        ],
-        "arrow-spacing": [  // Require spaces on both sides of the => in arrow functions.
-            2,
-            {
-              "before": true,
-              "after": true
-            }
-        ],
-        "constructor-super": [1],  // Warn about missing and unnecessary calls to `super()`
-        "babel/generator-star-spacing": [  // Warn about missing space on either side of the `*` in definition of a generator function.
-            1,
-            {
-              "before": false,
-              "after": true
-            }
-        ],
-        "no-arrow-condition": [1], // Warn about ambiguous or possibly-mistaken uses of arrow functions when the auther intended to use a comparison operator.
-        "no-class-assign": [1],  // Warn about the modification of variables of class declarations. (e.g., given the declaration `class A { }`, warn about usage of `A = 0` after.)
-        "no-const-assign": [2],  // Disallow the redefinition of variables declared using `const`.
-        "no-dupe-class-members": [2],  // Disallow duplicate names for class members
-        "no-this-before-super": [2],  // Disallow the usage of `this` before `super()` in constructors.
-        "no-var": [0],  // Do not warn about the usage of `var` instead of `let` or `const`.
-        "babel/object-curly-spacing": [  // Disallow interior padding within curly braces--does not apply to function braces.
-            2,
-            "never"
-        ],
-        "babel/object-shorthand": [  // Prefer ES6 object shorthand notation
-            1,
-            "always"
-        ],
-        "prefer-arrow-callback": [1],  // Warn about the usage of function expressions instead of arrow functions as callbacks.
-        "prefer-const": [1],  // Warn about the usage of `let` to define a variable when it is never changed after definition.
-        "prefer-reflect": [1],  // Suggest using `Reflect` methods where applicable, as they, "somewhat deprecate methods on old constructors".
-        "prefer-spread": [1],  // Suggest using the spread operator instead of `.apply()` when calling variadic functions.
-        "prefer-template": [1],  // Prefer template strings over concatenation
-        "require-yield": [1],  // Warn about generator functions that do not have the `yield` keyword.
+    "callback-return": [2], // "Enforce Callback After Return"
+    "global-require": [1], // Warn about usage of `require()` outside the global scope
+    "handle-callback-err": [1], // Warn about unhandled errors in callbacks
+    "no-new-require": [1], // Warn about possibly-flawed usage of `new` with `require` (e.g., `new require('app-header')`)
+    "no-path-concat": [2], // "Disallow string concatenation when using _dirname and _filename"
+    "no-process-exit": [2], // "Disallow process.exit()"
+    "no-restricted-modules": [ // "Disallow Node modules"
+      2,
+      "os" // Comma-separated--not an array--of the modules to be disallowed in the app
+    ],
+    "no-sync": [1], // Warn about usage of synchronous methods
 
 
-        ///////////////////////////////////////////////////////////////////////
-        // ESLINT-PLUGIN-REACT
+    ///////////////////////////////////////////////////////////////////////
+    // STYLISTIC ISSUES:
 
-        "react/display-name": [  // Warn if no `displayName`is given or provided by the transpiler.
-            1,
-            {"acceptTranspilerName": true}
-        ],
-        "react/forbid-prop-types": [1],  // Warn if vague `propTypes` are used. (`any` shouldn't be used, `array` should be `arrayOf`, and `object` should be `shape`.)
-        "react/jsx-boolean-value": [0],  // Don't warn about explicit passing of `true` as a prop value.
-        "react/jsx-closing-bracket-location": [  // Warn about improperly-placed closing tags.
-            1,
-            {
-              "nonEmpty": "after-props",  // Keep closing tag on same line as last prop if tag has children.
-              "selfClosing": "tag-aligned"  // Align closing tag with opening tag if tag is self-closing.
-            }
-        ],
-        "react/jsx-curly-spacing": [  // Error if there are any padding spaces inside the curly braces around JSX attributes (e.g., `<Fake value={ 12 } />` would error.).
-            2,
-            "never"
-        ],
-        "react/jsx-handler-names": [0],  // Don't warn about inconsistent event-handler prefixes.
-        "react/jsx-indent-props": [  // Error on incorrect indentation of props.
-            2,
-            2  // Number of spaces.
-        ],
-        "react/jsx-key": [2],  // Error if components that probably need `key`s don't have them.
-        "react/jsx-max-props-per-line": [0],  // Don't warn about max. number of props on a line.
-        "react/jsx-no-bind": [1],  // Warn about uses of `bind` and arrow functions that lead to a new function on every re-render.
-        "react/jsx-no-duplicate-props": [2],  // Error if duplicate props are passed.
-        "react/jsx-no-literals": [0],  // Do not warn about the use of unwrapped JSX string literals.
-        "react/jsx-no-undef": [2],  // Error if an undeclared variable is used.
-        "react/jsx-pascal-case": [2],  // Error if PascalCase is not used for user-defined components.
-        "react/jsx-sort-prop-types": [0],  // Don't warn if `propTypes` are not sorted alphabetically.
-        "react/jsx-sort-props": [0],  // Don't warn if props are not sorted alphabetically.
-        "react/jsx-uses-react": [0],  // Ignore issue related to `@jsx` pragma.
-        "react/jsx-uses-vars": [1],  // ESLint ignores variables used in JSX leading to them being marked as unused. Mark such variables as used to limit warnings. Pairs with `no-unused-vars` rule.
-        "react/no-danger": [1],  // Warn about usage of dangerous properties (e.g., `dangerouslySetInnerHTML`).
-        "react/no-did-mount-set-state": [1],  // Warn about the usage of `setState` in `componentDidMount`.
-        "react/no-did-update-set-state": [1],  // Warn about the usage of `setState` in `componentDidUpdate`.
-        "react/no-direct-mutation-state": [2],  // Error if state is mutated directly and not through `setState`.
-        "react/no-multi-comp": [0],  // Do not warn about multiple component definitions in a single file.
-        "react/no-set-state": [0],  // Do not warn about the usage of `setState`.
-        "react/no-unknown-property": [2],  // Error if unknown DOM property (e.g., `class` vs. `className`) is used.
-        "react/prefer-es6-class": [1],  // Warn about usage of non-ES6 class bodies.
-        "react/prop-types": [1],  // Warn if a prop is used for which there is no defined `propType`.
-        "react/react-in-jsx-scope": [0],  // Ignore issue related to `@jsx` pragma.
-        "react/require-extension": [0],  // Don't warn about weird file-extension issues with `require`.
-        "react/self-closing-comp": [2],  // Error is non-self-closing component has no children.
-        "react/sort-comp": [0],  // Warn if component functions do not appear in this order: lifecycle methods, custom methods, and then the `render` method.
-        "react/wrap-multilines": [2]  // Error if multiline JSX isn't wrapped in parentheses.
-    },
+    "array-bracket-spacing": [ // Disallow spaces inside of brackets (e.g., `[ 'foo', 'bar' ]` errors but `['foo', 'bar']` does not)
+      2,
+      "never"
+    ],
+    "block-spacing": [ // Require spaces inside of single-line blocks (e.g., `function foo() { return true }` is fine but `function foo() {return true}` errors.)
+      2,
+      "always"
+    ],
+    "brace-style": [ // Require one-true brace style block formatting
+      2,
+      "1tbs", // Require the opening curly brace of a block to be on the same line as its corresponding statement or declaration
+      {
+        "allowSingleLine": true // Allow opening and closing braces to be on the same line
+      }
+    ],
+    "comma-spacing": [ // Disallow spaces before commas and require them after commas
+      2,
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "comma-style": [ // Require commas to be at the ends of lines, not the beginnings
+      2,
+      "last"
+    ],
+    "computed-property-spacing": [ // Disallow spaces inside computed properties (e.g., `obj[foo ]` errors but `object[foo]` does not)
+      2,
+      "never"
+    ],
+    "eol-last": [2], // "Require file to end with single newline"
+    "func-style": [ // Prefer functions to be written as declarations rather than expressions (i.e., written so they are hoisted)
+      1,
+      "declaration",
+      {
+        "allowArrowFunctions": true
+      }
+    ],
+    "id-length": [ // Warn about identifier names (e.g., variable names) that are not at least two characters long (default value)
+      1,
+      {
+        "exceptions": ["$"],
+        "min": 2
+      }
+    ],
+    "indent": [
+      2,
+      2,
+      {
+        "MemberExpression": 0,
+        "SwitchCase": 1
+      }
+    ],
+    "jsx-quotes": [ // Prefer single quotes for JSX attribute values (e.g., `<a b="c" />` warns but `<a b='c' />` does not)
+      1,
+      "prefer-single"
+    ],
+    "key-spacing": [ // Disallow space before colon and require only one space after colon in object literal property definitions
+      2,
+      {
+        "beforeColon": false,
+        "afterColon": true,
+        "mode": "strict"
+      }
+    ],
+    "keyword-spacing": [ // Require a space after certain keywords (e.g., `if`, `else`, `for`, etc.)
+      2,
+      {
+        "after": true,
+        "before": true
+      }
+    ],
+    "linebreak-style": [
+      2,
+      "unix"
+    ],
+    "max-nested-callbacks": [ // "Set Maximum Depth of Nested Callbacks"
+      1, // Only warning
+      5  // TODO: I have no idea what this value should be. Update later if it's too low
+    ],
+    "babel/new-cap": [ // Warn when `new` is followed by an uncapitalized identifier or a capitalized function is called directly without `new`
+      1,
+      {
+        "capIsNewExceptions": [
+          "apiV2.DELETE",
+          "apiV2.GET",
+          "apiV2.PATCH",
+          "apiV2.POST",
+          "apiV2.PUT",
+          "List",
+          "Map",
+          "OrderedSet",
+          "Set"
+        ]
+      }
+    ],
+    "new-parens": [2], // Require the use of parentheses when calling a constructor with `new` even if it has no arguments
+    "no-array-constructor": [1], // Warn about the use of the `Array` constructor instead of the array literal `[]`
+    "no-continue": [1], // Warn about the use of `continue` in loops
+    "no-lonely-if": [2], // Disallow the usage of an `if` as the only block inside an `else` block
+    "no-mixed-spaces-and-tabs": [2], // Disallow the mixing of spaces and tabs
+    "no-multiple-empty-lines": [ // Disallow too many consecutive empty lines
+      2,
+      {
+        "max": 2 // Set the maximum number of acceptable consecutive empty lines
+      }
+    ],
+    "no-nested-ternary": [2], // Disallow the nesting of ternary expressions
+    "no-new-object": [2], // Disallow the use of the `Object` constructor
+    "no-spaced-func": [1], // Warn about spaces between function name and the parentheses that execute it
+    "no-trailing-spaces": [ // Disallow trailing whitespace at the end of lines
+      2,
+      {
+        "skipBlankLines": false // Don't ignore lines composed of only whitespace
+      }
+    ],
+    "no-underscore-dangle": [1], // Warn about dangling underscores in identifiers (e.g., `var _foo`)
+    "no-unneeded-ternary": [ // "[D]isallow conditional expressions that can be implemented using simpler language constructs"
+      2,
+      {
+        "defaultAssignment": true // Allow the usage of code such as `var a = x ? x : 1`
+      }
+    ],
+    "one-var": [ // Require multiple variable declarations per scope (i.e., no combining `var`, `let`, or `const` statements)
+      2,
+      "never" // Don't allow one variable declaration per scope
+    ],
+    "operator-assignment": [ // Require use of operator assignment shorthand (e.g., use `x += y` rather than `x = x + y`)
+      2,
+      "always"
+    ],
+    "operator-linebreak": [ // Require linebreak to be after the operator in statement that spans multiple lines
+      2,
+      "after"
+    ],
+    "padded-blocks": [ // Warn when blocks begin or end with a blank line
+      1,
+      "never"
+    ],
+    "quote-props": [ // Configure the quoting style for property names
+      2,
+      "as-needed", // Error when quotes are needed and not present
+      {
+        "keywords": true, // Disallow unquoted reserved words as properties
+        "numbers": true, // Disallow unquoted numeric literals as properties
+        "unnecessary": true // Unnecessarily-quoted properties cause errors
+      }
+    ],
+    "quotes": [ // Require use of single quotes, though backticks are also allowed
+      2,
+      "single",
+      "avoid-escape" // Do not error when a string is using incorrect quotes as long as the string contains a quote that would have to be escaped
+    ],
+    "semi": [ // Disallow semicolons at the end of lines in favor of automatic semicolon insertion
+      2,
+      "never"
+    ],
+    "space-before-blocks": [ // Require space before any block that does not begin on a new line
+      2,
+      "always"
+    ],
+    "space-before-function-paren": [0], // Warn when there is no space between `function` or function name and opening parenthesis in definition
+    "space-in-parens": [ // Disallow spaces to the right of `(` and to the left of `)`
+      2,
+      "never"
+    ],
+    "space-infix-ops": [2], // Require spaces around infix operators (e.g., `a+b` errors but `a + b` does not)
+    "space-unary-ops": [ // Require spaces before/after unary word operators (e.g., `new`) and disallow for nonwords (e.g., `bar++`)
+      2,
+      {
+        "words": true,
+        "nonwords": false
+      }
+    ],
+    "spaced-comment": [ // Require space after `//` or `/*` at the start of comments
+      2,
+      "always"
+    ],
+    "wrap-regex": [2], // Require parentheses around regex for clarity (e.g., `/foo/.test("bar")` could look like a division operator)
 
-    // Choose environments for which predefined global variables should be included:
-    "env": {
-        "amd": false,
-        "applescript": false,
-        "browser": true,
-        "commonjs": false,
-        "embertest": false,
-        "es6": true,
-        "jasmine": false,
-        "jest": false,
-        "jquery": true,
-        "meteor": false,
-        "mocha": true,
-        "mongo": true,
-        "node": true,
-        "phantomjs": false,
-        "prototypejs": false,
-        "protractor": false,
-        "qunit": false,
-        "serviceworker": false,
-        "shelljs": false,
-        "worker": false
-    },
 
-    // Choose ES6 features to be included:
+    ///////////////////////////////////////////////////////////////////////
+    // ECMASCRIPT 6
+
+    "arrow-body-style": [ // Warn about unnecessary braces around arrow function bodies.
+      1,
+      "as-needed"
+    ],
+    "arrow-spacing": [ // Require spaces on both sides of the => in arrow functions.
+      2,
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "constructor-super": [1], // Warn about missing and unnecessary calls to `super()`
+    "no-class-assign": [1], // Warn about the modification of variables of class declarations. (e.g., given the declaration `class A { }`, warn about usage of `A = 0` after.)
+    "no-confusing-arrow": [ // Warn about confusing arrow method bodies
+      1,
+      {
+        "allowParens": true // Allow parentheses to 'clarify' the confusion (e.g., around a ternary)
+      }
+    ],
+    "no-const-assign": [2], // Disallow the redefinition of variables declared using `const`.
+    "no-constant-condition": [2], // Error when condition is unchanging
+    "no-dupe-class-members": [2], // Disallow duplicate names for class members
+    "no-this-before-super": [2], // Disallow the usage of `this` before `super()` in constructors.
+    "no-var": [0], // Do not warn about the usage of `var` instead of `let` or `const`.
+    "babel/object-curly-spacing": [ // Disallow interior padding within curly braces--does not apply to function braces.
+      2,
+      "never"
+    ],
+    "object-shorthand": [ // Prefer ES6 object shorthand notation
+      2,
+      "always"
+    ],
+    "prefer-arrow-callback": [1], // Warn about the usage of function expressions instead of arrow functions as callbacks.
+    "prefer-const": [1], // Warn about the usage of `let` to define a variable when it is never changed after definition.
+    "prefer-reflect": [1], // Suggest using `Reflect` methods where applicable, as they, "somewhat deprecate methods on old constructors".
+    "prefer-spread": [1], // Suggest using the spread operator instead of `.apply()` when calling variadic functions.
+    "prefer-template": [1], // Prefer template strings over concatenation
+    "require-yield": [1], // Warn about generator functions that do not have the `yield` keyword.
+
+
+    ///////////////////////////////////////////////////////////////////////
+    // ESLINT-PLUGIN-REACT
+
+    "react/display-name": [ // Warn if no `displayName`is given or provided by the transpiler.
+      1,
+      {
+        "ignoreTranspilerName": false
+      }
+    ],
+    "react/forbid-prop-types": [0], // Don't warn if vague `propTypes` are used. (`any` shouldn't be used, `array` should be `arrayOf`, and `object` should be `shape`.)
+    "react/jsx-boolean-value": [0], // Don't warn about explicit passing of `true` as a prop value.
+    "react/jsx-closing-bracket-location": [ // Warn about improperly-placed closing tags.
+      1,
+      {
+        "nonEmpty": "after-props", // Keep closing tag on same line as last prop if tag has children.
+        "selfClosing": "tag-aligned" // Align closing tag with opening tag if tag is self-closing.
+      }
+    ],
+    "react/jsx-curly-spacing": [ // Error if there are any padding spaces inside the curly braces around JSX attributes (e.g., `<Fake value={ 12 } />` would error.).
+      2,
+      "never"
+    ],
+    "react/jsx-first-prop-new-line": [ // Warn about unpreferred prop line breaks and arrangement. See docs for details.
+      1,
+      "multiline"
+    ],
+    "react/jsx-handler-names": [0], // Don't warn about inconsistent event-handler prefixes.
+    "react/jsx-indent-props": [ // Error on incorrect indentation of props.
+      2,
+      2  // Number of spaces.
+    ],
+    "react/jsx-key": [2], // Error if components that probably need `key`s don't have them.
+    "react/jsx-max-props-per-line": [0], // Don't warn about max. number of props on a line.
+    "react/jsx-no-bind": [1], // Warn about uses of `bind` and arrow functions that lead to a new function on every re-render.
+    "react/jsx-no-comment-textnodes": [1], // Warn about comments being inserted as text nodes.
+    "react/jsx-no-duplicate-props": [2], // Error if duplicate props are passed.
+    "react/jsx-no-literals": [0], // Do not warn about the use of unwrapped JSX string literals.
+    "react/jsx-no-undef": [2], // Error if an undeclared variable is used.
+    "react/jsx-pascal-case": [2], // Error if PascalCase is not used for user-defined components.
+    "react/jsx-sort-prop-types": [0], // Don't warn if `propTypes` are not sorted alphabetically.
+    "react/jsx-sort-props": [0], // Don't warn if props are not sorted alphabetically.
+    "react/jsx-no-target-blank": [1], // Warn if target='_blank' is used without rel='noreferrer noopener'.\
+    "react/jsx-tag-spacing": [ // Error on certain spacing with respect to opening and closing tag angle brackets.
+      2,
+      {
+        "closingSlash": "never", // Error on: <Hello / >, <Testing>< /Testing>
+        "beforeSelfClosing": "always", // Error on: <Hello/>
+        "afterOpening": "allow-multiline" // See docs for description. Basically: error on space after <
+      }
+    ],
+    "react/jsx-uses-react": [0], // Ignore issue related to `@jsx` pragma.
+    "react/jsx-uses-vars": [1], // ESLint ignores variables used in JSX leading to them being marked as unused. Mark such variables as used to limit warnings. Pairs with `no-unused-vars` rule.
+    "react/jsx-wrap-multilines": [1], // Warn if multiline arrow bodies, assignments, declarations, or returns are not wrapped in parens.
+    "react/no-children-prop": [0], // Do not warn about the explicit usage of a children key in the rendering of a component using a self-closing tag.
+    "react/no-danger": [1], // Warn about usage of dangerous properties (e.g., `dangerouslySetInnerHTML`).
+    "react/no-did-mount-set-state": [1], // Warn about the usage of `setState` in `componentDidMount`.
+    "react/no-did-update-set-state": [1], // Warn about the usage of `setState` in `componentDidUpdate`.
+    "react/no-direct-mutation-state": [2], // Error if state is mutated directly and not through `setState`.
+    "react/no-multi-comp": [0], // Do not warn about multiple component definitions in a single file.
+    "react/no-set-state": [0], // Do not warn about the usage of `setState`.
+    "react/no-unescaped-entities": [1], // Warn about invalid characters that may have been meant as JSX escape characters.
+    "react/no-unknown-property": [2], // Error if unknown DOM property (e.g., `class` vs. `className`) is used.
+    "react/prefer-es6-class": [1], // Warn about usage of non-ES6 class bodies.
+    "react/prop-types": [
+      1, // Warn if a prop is used for which there is no defined `propType`.
+      {
+        "ignore": ["children", "className", "loading"]
+      }
+    ],
+    "react/react-in-jsx-scope": [0], // Ignore issue related to `@jsx` pragma.
+    "react/require-extension": [0], // Don't warn about weird file-extension issues with `require`.
+    "react/self-closing-comp": [2], // Error is non-self-closing component has no children.
+    "react/sort-comp": [0] // Warn if component functions do not appear in this order: lifecycle methods, custom methods, and then the `render` method.
+  },
+
+  // Choose environments for which predefined global variables should be included:
+  "env": {
+    "amd": false,
+    "applescript": false,
+    "browser": true,
+    "commonjs": false,
+    "embertest": false,
+    "es6": true,
+    "jasmine": false,
+    "jest": false,
+    "jquery": true,
+    "meteor": false,
+    "mocha": true,
+    "mongo": true,
+    "node": true,
+    "phantomjs": true,
+    "prototypejs": false,
+    "protractor": false,
+    "qunit": false,
+    "serviceworker": false,
+    "shelljs": false,
+    "worker": false
+  },
+
+  "parserOptions": {
+    "ecmaVersion": 6,
+
     "ecmaFeatures": {
-        "arrowFunctions": true,
-        "binaryLiterals": false,
-        "blockBindings": true,  // Enable `let` and `const`
-        "classes": true,
-        "defaultParams": true,  // E.g., in `function makeRequest(url, timeout = 2000, callback = function() {}) {}` only `url` must be passed
-        "destructuring": true,  // Lots of features and a gotcha. See https://leanpub.com/understandinges6/read#leanpub-auto-destructuring
-        "experimentalObjectRestSpread": true,  // Rest: `let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 }  // x is 1, y is 2, z is {a: 3, b: 4}`
-                                               // Spread (given above variables): `let n = { x, y, ...z }  // n is { x: 1, y: 2, a: 3, b: 4 }`
-        "forOf": false,
-        "generators": false,
-        "globalReturn": false,
-        "jsx": true,
-        "modules": true,
-        "objectLiteralComputedProperties": true,
-        "objectLiteralDuplicateProperties": false,  // Don't allow duplicate properties in which the final one overwrites all others
-        "objectLiteralShorthandMethods": true,
-        "objectLiteralShorthandProperties": true,
-        "octalLiterals": false,
-        "regexUFlag": true,  // Extends Unicode support in regex (e.g., `"ஷ".match(/./u)[0].length == 2` isn't confused by surrogate pair character)
-        "regexYFlag": true,  // Allows sticky flag, which starts matching at the position specified by its `lastIndex` property
-        "restParams": true,  // Precede param with `...` and it becomes an Array containing any remaining params not already assigned to another named param
-        "spread": true,  // E.g., `Math.max(...values, 0)`
-        "superInFunctions": true,
-        "templateStrings": true,
-        "unicodeCodePointEscapes": true  // Extends Unicode escape support into hexadecimal numbers (e.g., `console.log("\u{20BB7}");  // "ஷ"`)
-
-    },
-    "plugins": [
-        "babel",
-        "react"
-    ]
+      "experimentalObjectRestSpread": true, // Rest: `let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 }  // x is 1, y is 2, z is {a: 3, b: 4}`
+                                             // Spread (given above variables): `let n = { x, y, ...z }  // n is { x: 1, y: 2, a: 3, b: 4 }`
+      "globalReturn": false,
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "babel",
+    "react"
+  ]
 }
