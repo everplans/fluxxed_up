@@ -3,8 +3,8 @@
 
 
 abbrev@1:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
 
 accepts@1.3.3:
   version "1.3.3"
@@ -925,25 +925,25 @@ center-align@^0.1.1:
     align-text "^0.1.3"
     lazy-cache "^1.0.3"
 
-chai-as-promised@^5.1.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/chai-as-promised/-/chai-as-promised-5.3.0.tgz#09d7a402908aa70dfdbead53e5853fc79d3ef21c"
+chai-as-promised@5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/chai-as-promised/-/chai-as-promised-5.1.0.tgz#a95e7b5465123db538ddb36e3163c7be3a63f4ff"
 
-chai-dom@^1.2.2:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/chai-dom/-/chai-dom-1.5.0.tgz#bc1ca85f8b3f6ac024515e4a9c4c40f6888e2f17"
+chai-dom@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/chai-dom/-/chai-dom-1.2.2.tgz#2f4fd8e2b6aec143e086a31eb33a79a40fae3d64"
 
-chai-jquery@^2.0.0:
+chai-jquery@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/chai-jquery/-/chai-jquery-2.0.0.tgz#0f43042308dd746332bd98164aaef4a4f45ba167"
 
-chai-things@^0.2.0:
+chai-things@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/chai-things/-/chai-things-0.2.0.tgz#c55128378f9bb399e994f00052151984ed6ebe70"
 
-chai@^3.4.1:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/chai/-/chai-3.5.0.tgz#4d02637b067fe958bdbfdd3a40ec56fef7373247"
+chai@3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/chai/-/chai-3.4.1.tgz#330ae2f819124c26182036fa5e43a88ea4e1bd85"
   dependencies:
     assertion-error "^1.0.1"
     deep-eql "^0.1.3"
@@ -1571,6 +1571,12 @@ form-data@~2.1.1:
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
 
+formatio@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/formatio/-/formatio-1.1.1.tgz#5ed3ccd636551097383465d996199100e86161e9"
+  dependencies:
+    samsam "~1.1"
+
 formatio@1.2.0, formatio@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/formatio/-/formatio-1.2.0.tgz#f3b2167d9068c4698a8d51f4f760a39a54d818eb"
@@ -2078,17 +2084,17 @@ just-extend@^1.1.22:
   version "1.1.22"
   resolved "https://registry.yarnpkg.com/just-extend/-/just-extend-1.1.22.tgz#3330af756cab6a542700c64b2e4e4aa062d52fff"
 
-karma-chai-plugins@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/karma-chai-plugins/-/karma-chai-plugins-0.9.0.tgz#b2a1a7e807f0b1bb19fb66c4744963ba5c31aa7d"
+karma-chai-plugins@^0.6.0:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/karma-chai-plugins/-/karma-chai-plugins-0.6.1.tgz#8d1435751096c1e94c21b543055aa0cba9f9e68f"
   dependencies:
-    chai "^3.4.1"
-    chai-as-promised "^5.1.0"
-    chai-dom "^1.2.2"
-    chai-jquery "^2.0.0"
-    chai-things "^0.2.0"
-    sinon "^2.1.0"
-    sinon-chai "^2.8.0"
+    chai "3.4.1"
+    chai-as-promised "5.1.0"
+    chai-dom "1.2.2"
+    chai-jquery "2.0.0"
+    chai-things "0.2.0"
+    sinon "1.17.2"
+    sinon-chai "2.8.0"
 
 karma-chrome-launcher@^2.2.0:
   version "2.2.0"
@@ -2272,6 +2278,10 @@ log4js@^0.6.31:
   dependencies:
     readable-stream "~1.0.2"
     semver "~4.3.3"
+
+lolex@1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/lolex/-/lolex-1.3.2.tgz#7c3da62ffcb30f0f5a80a2566ca24e45d8a01f31"
 
 lolex@^1.6.0:
   version "1.6.0"
@@ -2680,9 +2690,9 @@ phantomjs-prebuilt@^2.1.7:
     request-progress "~2.0.1"
     which "~1.2.10"
 
-phantomjs@^1.9.17:
-  version "1.9.20"
-  resolved "https://registry.yarnpkg.com/phantomjs/-/phantomjs-1.9.20.tgz#4424aca20e14d255c0b0889af6f6b8973da10e0d"
+phantomjs@^2.1.7:
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/phantomjs/-/phantomjs-2.1.7.tgz#c6910f67935c37285b6114329fc2f27d5f3e3134"
   dependencies:
     extract-zip "~1.5.0"
     fs-extra "~0.26.4"
@@ -3017,9 +3027,17 @@ safe-buffer@^5.0.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
+samsam@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/samsam/-/samsam-1.1.2.tgz#bec11fdc83a9fda063401210e40176c3024d1567"
+
 samsam@1.x, samsam@^1.1.3:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/samsam/-/samsam-1.2.1.tgz#edd39093a3184370cb859243b2bdf255e7d8ea67"
+
+samsam@~1.1:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/samsam/-/samsam-1.1.3.tgz#9f5087419b4d091f232571e7fa52e90b0f552621"
 
 semver@^5.3.0:
   version "5.4.1"
@@ -3053,22 +3071,18 @@ signal-exit@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
-sinon-chai@^2.8.0:
-  version "2.14.0"
-  resolved "https://registry.yarnpkg.com/sinon-chai/-/sinon-chai-2.14.0.tgz#da7dd4cc83cd6a260b67cca0f7a9fdae26a1205d"
+sinon-chai@2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/sinon-chai/-/sinon-chai-2.8.0.tgz#432a9bbfd51a6fc00798f4d2526a829c060687ac"
 
-sinon@^2.1.0:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/sinon/-/sinon-2.4.1.tgz#021fd64b54cb77d9d2fb0d43cdedfae7629c3a36"
+sinon@1.17.2:
+  version "1.17.2"
+  resolved "https://registry.yarnpkg.com/sinon/-/sinon-1.17.2.tgz#c1ea67b84a1e7b3350f6c4713efacef8e4ae8b71"
   dependencies:
-    diff "^3.1.0"
-    formatio "1.2.0"
-    lolex "^1.6.0"
-    native-promise-only "^0.8.1"
-    path-to-regexp "^1.7.0"
-    samsam "^1.1.3"
-    text-encoding "0.6.4"
-    type-detect "^4.0.0"
+    formatio "1.1.1"
+    lolex "1.3.2"
+    samsam "1.1.2"
+    util ">=0.10.3 <1"
 
 sinon@^4.0.0:
   version "4.0.0"
@@ -3425,7 +3439,7 @@ util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
 
-util@0.10.3, util@^0.10.3:
+util@0.10.3, "util@>=0.10.3 <1", util@^0.10.3:
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/util/-/util-0.10.3.tgz#7afb1afe50805246489e3db7fe0ed379336ac0f9"
   dependencies:
