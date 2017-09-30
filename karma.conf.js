@@ -1,6 +1,5 @@
-var webpackConfig = Object.create(require('./webpack.config.js'))
+const webpackConfig = require('./webpack.config.js')
 webpackConfig.devtool = 'inline-source-map'
-webpackConfig.entry = {}
 webpackConfig.watch = true
 
 module.exports = function(config) {
@@ -14,7 +13,7 @@ module.exports = function(config) {
     preprocessors: {
       './test/index.js': ['webpack', 'sourcemap']
     },
-    reporters: ['progress'],
+    reporters: ['mocha'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
