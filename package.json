@@ -8,7 +8,7 @@
     "build-all": "npm run build && npm run build-min",
     "build-min": "./node_modules/.bin/webpack -p dist/index.min.js",
     "clean": "rimraf ./dist/*",
-    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
+    "test": "PHANTOMJS_BIN=\"$(which phantomjs)\" ./node_modules/.bin/karma start --single-run --browsers PhantomJS",
     "test-watch": "./node_modules/.bin/karma start --browsers Chrome"
   },
   "repository": {
@@ -44,7 +44,7 @@
     "invariant": "^2.1.0",
     "jquery": "^3.0.0",
     "karma": "^1.7.1",
-    "karma-chai-plugins": "^0.9.0",
+    "karma-chai-plugins": "^0.6.0",
     "karma-mocha-reporter": "^2.2.4",
     "karma-chrome-launcher": "^2.2.0",
     "karma-es5-shim": "^0.0.4",
