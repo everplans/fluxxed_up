@@ -26,9 +26,11 @@
     "ASSET_HOST": false,
     "CONTENT_HOST": false,
     "expect": false,
+    "GTM_ID": false,
     "INTERNAL_ONLY": false,
     "Rollbar": false,
     "ROLLBAR_POST_CLIENT_ITEM_ACCESS_TOKEN": false,
+    "ROLLBAR_VERBOSE_MODE": false,
     "sinon": false,
     "STRIPE_PUBLISHABLE_KEY": false,
     "WEBAPPS_HOST": false
@@ -87,7 +89,8 @@
     "block-scoped-var": [2], // Disallow the use of var-defined variables outside of the scope in which they are defined
     "curly": [ // Allow omission of curly braces when block contains one indented, single-line statement--you're welcome, Bernie
       2,
-      "multi-or-nest"
+      "multi-or-nest",
+      "consistent" // If the `if` has braces the `else` should too.
     ],
     "default-case": [1], // Warn about switches that don't have a default case
     "dot-location": [ // Require dots to be on the same line as the property rather than the object
@@ -117,7 +120,7 @@
     "no-alert": [2], // Disallow alert, confirm, and prompt
     "no-caller": [2], // Disallow the use of arguments.caller and arguments.callee
     "no-div-regex": [2], // "[D]isallow division operators explicitly at beginning of regular expression"
-    "no-else-return": [2], // Disallow else when all ifs have returns
+    "no-else-return": [0], // Allow else when all ifs have returns
     "no-eq-null": [2], // "[D]isallow comparisons to null without a type-checking operator"
     "no-eval": [2], // Disallow eval
     "no-extend-native": [2], // Disallow the extension of native types
@@ -282,7 +285,7 @@
       2,
       2,
       {
-        "MemberExpression": 0,
+        "MemberExpression": 1,
         "SwitchCase": 1
       }
     ],
@@ -517,7 +520,7 @@
     "react/no-direct-mutation-state": [2], // Error if state is mutated directly and not through `setState`.
     "react/no-multi-comp": [0], // Do not warn about multiple component definitions in a single file.
     "react/no-set-state": [0], // Do not warn about the usage of `setState`.
-    "react/no-unescaped-entities": [1], // Warn about invalid characters that may have been meant as JSX escape characters.
+    "react/no-unescaped-entities": [0], // Do not warn about invalid characters that may have been meant as JSX escape characters.
     "react/no-unknown-property": [2], // Error if unknown DOM property (e.g., `class` vs. `className`) is used.
     "react/prefer-es6-class": [1], // Warn about usage of non-ES6 class bodies.
     "react/prop-types": [
