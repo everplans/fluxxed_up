@@ -4,10 +4,10 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test: /\.js$/, exclude: [/dist/, /node_modules/], loader: 'babel'}
+      {test: /\.js$/, exclude: [/dist/, /node_modules/], loader: 'babel-loader'}
     ]
   },
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['.js']
   }
 }
