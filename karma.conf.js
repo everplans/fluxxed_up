@@ -1,6 +1,5 @@
-var webpackConfig = Object.create(require('./webpack.config.js'))
+const webpackConfig = require('./webpack.config.js')
 webpackConfig.devtool = 'inline-source-map'
-webpackConfig.entry = {}
 webpackConfig.watch = true
 
 module.exports = function(config) {
