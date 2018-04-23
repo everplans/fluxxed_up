@@ -1,12 +1,12 @@
 language: node_js
 node_js:
 - '6.9'
-install:
-- npm install
 cache:
+  yarn: true
   directories:
   - node_modules
   - bower_components
 notifications:
   slack:
     secure: hA801rSo3a/ECnlViPFBqiTG1NgS1sMEExNb/MG+cTipQCAZ0Wx8baeHCC28bjv+6VZFTIrDcrIBdfPXmbgrIPm3xgmQWuhO2jLzYofPU0xol8dczlxpxBvTKwqz7oniL3nXTOfBLn5wsh0cW+lOCd+w2s5wz5hjQyGrtuOwmFo=
+sudo: false
