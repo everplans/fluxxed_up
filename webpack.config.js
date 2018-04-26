@@ -3,8 +3,14 @@ module.exports = {
     app: ['./src/index.js']
   },
   module: {
-    loaders: [
-      {test: /\.js$/, exclude: [/dist/, /node_modules/], loader: 'babel-loader'}
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: [/dist/, /node_modules/],
+        use: [
+          {loader: 'babel-loader'}
+        ]
+      }
     ]
   },
   resolve: {
