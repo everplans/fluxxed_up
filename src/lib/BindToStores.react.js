@@ -1,12 +1,12 @@
 import invariant from 'invariant'
-import React from 'react'
+import {Component} from 'react'
 import PropTypes from 'prop-types'
 
 import { capitalize } from './tools'
 import Container from './Container'
 import storePrototype from './StorePrototype'
 
-export default function bindResources(Component, resources, onBoundUpdate = null, resourceId = null) {
+export default function bindResources(ComponentToBeWrapped, resources, onBoundUpdate = null, resourceId = null) {
   let stores = {}
   function storeNames() { return Object.getOwnPropertyNames(stores) }
 
@@ -42,15 +42,17 @@ export default function bindResources(Component, resources, onBoundUpdate = null
     })
   })
 
-  const BoundComponent = React.createClass({
-    contextTypes: {router: PropTypes.object},
-    itemLoaders: [],
-    getInitialState() {
-      return {
+  class BoundComponent extends Component {
+    constructor() {
+      super()
+
+      this.itemLoaders = []
+      this.state = {
         loading: true,
         processing: false
       }
-    },
+    }
+
     componentWillMount() {
       // Create a listener for each resource store:
       storeNames().forEach(store => {
@@ -108,21 +110,24 @@ export default function bindResources(Component, resources, onBoundUpdate = null
         /* eslint-enable indent */
       }, this)
       this.setState(loadingStates)
-    },
+    }
+
     componentWillReceiveProps(nextProps) { // Reload any resource if the associated route ID changes
       this.itemLoaders.forEach(checkId => checkId(nextProps))
-    },
-    componentWillUnmount() {  // Kill all listeners when component is unmounting.
-      storeNames().forEach(store => stores[store].removeChangeListener(this[`handle${store}Change`]))
-    },
-    goToThere(targetObject) {  // Push new router path if requested to do so in onBoundUpdate.
-      this.context.router.push(targetObject)
-    },
+    }
 
-    onChangeFactory(store) {  // Create a custom listener identifier so loading states can be tracked independently for each resource.
+    componentWillUnmount() { // Kill all listeners when component is unmounting.
+      storeNames().forEach(store => stores[store].removeChangeListener(this[`handle${store}Change`]))
+    }
+
+    goToThere(targetObject) { // Push new router path if requested to do so in onBoundUpdate.
+      this.context.router.push(targetObject)
+    }
+
+    onChangeFactory(store) { // Create a custom listener identifier so loading states can be tracked independently for each resource.
       let myStore = store
       return () => {
-        let newState = {loading: false}  // Backwards-compatability for single-resource bindings.
+        let newState = {loading: false} // Backwards-compatability for single-resource bindings.
         let newStoreState = stores[myStore].getState()
         newState[myStore] = newStoreState
         newState[`loading${capitalize(store)}`] = false
@@ -133,10 +138,12 @@ export default function bindResources(Component, resources, onBoundUpdate = null
         else
           this.setState(newState)
       }
-    },
+    }
 
-    render() { return <Component {...this.props} {...this.state} /> }
-  })
+    render() { return <ComponentToBeWrapped {...this.props} {...this.state} /> }
+  }
+
+  BoundComponent.contextTypes = {router: PropTypes.object}
 
   return BoundComponent
 }
