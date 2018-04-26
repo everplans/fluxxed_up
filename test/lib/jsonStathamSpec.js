@@ -1,5 +1,5 @@
 import utils from '../../test/support/TestUtils'
-import jsonStatham from'../../src/lib/jsonStatham'
+import jsonStatham from '../../src/lib/jsonStatham'
 import AjaxAdaptorBase from '../../src/lib/AjaxAdaptorBase'
 
 class TestAdaptor extends AjaxAdaptorBase {
@@ -78,7 +78,7 @@ describe('jsonStatham', () => {
   describe('Headers:', () => {
     it('defaults to a contentType of application/json', () => {
 
-      const opts = jsonStatham.buildRequest('/bla', 'get', {})  // Note: no need to pass additionalHeaders at all.
+      const opts = jsonStatham.buildRequest('/bla', 'get', {}) // Note: no need to pass additionalHeaders at all.
       expect(opts.headers['Content-Type']).to.equal('application/json')
     })
 

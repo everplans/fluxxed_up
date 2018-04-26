@@ -19,6 +19,7 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['PhantomJS'],
+    plugins: ['karma-*'],
     singleRun: false,
     client: {
       mocha: {
