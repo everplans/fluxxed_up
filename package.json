@@ -62,8 +62,8 @@
     "mocha": "^2.2.5",
     "object-assign": "^3.0.0",
     "prop-types": "^15.5.8",
-    "react": "^15.6.2",
-    "react-dom": "^15.6.2",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "rimraf": "^2.5.2",
     "sinon": "^1.15.4",
     "webpack": "^3.10.0"
