@@ -7,7 +7,6 @@ Fluxxed_up [![Build Status](https://travis-ci.org/everplans/fluxxed_up.svg?branc
 - [What's Included](#whats-included)
   - [Action Prototype](#actionprototype)
   - [Dispatcher](#dispatcher)
-  - [FeatureFlags](#featureflags)
   - [jsonStatham](#jsonstatham)
 
 Fluxxed_up is a React.js and Flux utility belt that handles simple patterns around the unidirectional dataflow. It is of medium opinionation: you write less boilerplate and get to focus on the code specific to your application. That said, it will let you write as much code 'by hand' as you want.
@@ -58,13 +57,6 @@ const AssessmentActions = assign(
 #### Dispatcher
 Lightweight wrapper around the flux dispatcher. It will throw an exception if you try to dispatch an action with an undefined type. (You'd be surprised how many bugs you pre-emptively avoid doing this.)
 
-
-#### FeatureFlags
-Helper class to query if a feature flag is on or off based on some JSON config. We fetch this from the server and turn on/off features for a user based on the config. A flag not specified in the config will auto default to disabled. Example:
-```javascript
-FeatureFlags.init({[{flag:'new_thing', status: 'ENABLED'}]})
-FeatureFlags.isEnabled('new_thing') // true
-```
 
 #### jsonStatham
 Lightweight wrapper around jQuery's ajax functionality. It assumes a simple RESTful api on the server side. It will fire success/failure callbacks based on server response. It has some extra settings to specify API keys and other auth.
