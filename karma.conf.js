@@ -6,7 +6,7 @@ module.exports = function(config) {
   config.set({
     basePath: '',
     webpack: webpackConfig,
-    frameworks: ['es5-shim', 'mocha', 'chai', 'sinon-chai', 'chai-jquery', 'jquery-2.1.0'],
+    frameworks: ['es5-shim', 'mocha', 'chai', 'sinon-chai', 'chai-jquery', 'jquery-3.3.1'],
     files: [
       './test/index.js'
     ],

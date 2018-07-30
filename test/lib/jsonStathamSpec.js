@@ -13,16 +13,15 @@ let spy
 const getArgumentsPassedToSpy = () => spy.getCall(0).args[0]
 
 describe('jsonStatham', () => {
-
   before(() => jsonStatham.setAdaptor(new TestAdaptor()))
 
   beforeEach(() => {
-    spy = sinon.spy($, 'ajax')
     server = sinon.fakeServer.create()
+    spy = sinon.spy($, 'ajax')
   })
   afterEach(() => {
-    $.ajax.restore()
     server.restore()
+    spy.restore()
   })
 
   describe('mechanics: ', () => {
