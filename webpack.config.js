@@ -2,6 +2,7 @@ module.exports = {
   entry: {
     app: ['./src/index.js']
   },
+  mode: 'development',
   module: {
     rules: [
       {
