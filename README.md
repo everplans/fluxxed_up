@@ -7,7 +7,6 @@ Fluxxed_up [![Build Status](https://travis-ci.org/everplans/fluxxed_up.svg?branc
 - [What's Included](#whats-included)
   - [Action Prototype](#actionprototype)
   - [Dispatcher](#dispatcher)
-  - [ExtraStorage](#extrastorage)
   - [FeatureFlags](#featureflags)
   - [jsonStatham](#jsonstatham)
 
@@ -59,8 +58,6 @@ const AssessmentActions = assign(
 #### Dispatcher
 Lightweight wrapper around the flux dispatcher. It will throw an exception if you try to dispatch an action with an undefined type. (You'd be surprised how many bugs you pre-emptively avoid doing this.)
 
-#### ExtraStorage
-This is a little module that wraps default browser local storage behavior. It has a small wrapper to simulate behavior for when a browser is in incognito mode.
 
 #### FeatureFlags
 Helper class to query if a feature flag is on or off based on some JSON config. We fetch this from the server and turn on/off features for a user based on the config. A flag not specified in the config will auto default to disabled. Example:
