@@ -38,7 +38,6 @@
     "babel-plugin-syntax-function-bind": "^6.8.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.3.16",
     "babel-plugin-transform-proto-to-assign": "^6.3.13",
-    "babel-polyfill": "^6.3.14",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
