@@ -8,6 +8,7 @@ module.exports = function(config) {
     webpack: webpackConfig,
     frameworks: ['es5-shim', 'mocha', 'chai', 'sinon-chai', 'chai-jquery', 'jquery-3.3.1'],
     files: [
+      './node_modules/es6-shim/es6-shim.js',
       './test/index.js'
     ],
     preprocessors: {
