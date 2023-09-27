@@ -86,4 +86,4 @@ function factory(registerAction, extendType, registerMessageAction) {
   return store
 }
 
-module.exports = factory
+export default factory
