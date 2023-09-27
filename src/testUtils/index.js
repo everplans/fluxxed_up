@@ -1,5 +1,5 @@
 import ChaiAddons from './ChaiAddons'
-import TestRig from './TestRig.react'
+import TestRig from './TestRig'
 
 export {
   ChaiAddons,
