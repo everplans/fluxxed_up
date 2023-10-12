@@ -1,6 +1,8 @@
-var jQuery = (typeof $ !== 'undefined') ? $ : require('jquery') // funny little hack, sometimes it's in the global scope, sometimes it's maybe not...
 import assign from 'object-assign'
+import jquery from 'jquery'
 import defaultAdaptor from './AjaxAdaptorBase'
+
+var jQuery = (typeof $ !== 'undefined') ? $ : jquery // funny little hack, sometimes it's in the global scope, sometimes it's maybe not...
 
 function cleanSlashes(path) {
   return `${path.indexOf('/') === 0 ? '' : '/'}${path}`
